@@ -1,0 +1,7 @@
+# LaTeX stuff
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.llt
+*.log

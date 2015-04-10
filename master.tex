@@ -1,0 +1,312 @@
+\documentclass{aa}
+\usepackage[varg]{txfonts}
+\usepackage{siunitx}
+\usepackage[version=3]{mhchem}
+
+\begin{document}
+
+
+\title{NIR spectroscopy of the Sun and HD20010}
+\subtitle{Compiling a new linelist in the NIR}
+
+\subtitle{}
+
+\author{Andreasen, D. T.\inst{\ref{inst1}, \ref{inst2}} \and
+        Santos, N.\inst{\ref{inst1}} \and
+        Sousa, S.\inst{\ref{inst1}} \and
+        Delgado-Mena, E.\inst{\ref{inst1}}}
+
+\institute{%
+    Centro de Astrofísica da Universidade do Porto,
+    Rua das Estrelas, 4150-762 Porto, Portugal
+    \email{daniel.andreasen@astro.up.pt}\label{inst1}
+        \and
+    Departamento de F\'iseca e Astronomia, Faculdade de Ci\^encias, Universidade do Porto,
+    Rua do Campro Alegre, 4169-007 Porto, Portugal\label{inst2}
+}
+
+
+\date{\today}
+
+\abstract{}{}{}{}
+
+
+
+\keywords{data reduction: high resolution spectra -- data reduction: low
+    resolution spectra -- stars individual: HD20010 -- stars individual: Sun}
+\maketitle
+
+
+
+\section{Introduction}
+\label{sec:introduction}
+Effective surface temperature ($T_\mathrm{eff}$), surface gravity ($\log g$),
+and metallicity ([Fe/H], where iron is used as a proxy) are fundamental
+atmospheric parameters necessary to characterise a star, as well to determine
+other inderict fundamental parameters, such as mass, radius, and age from
+stellar evolutionary models \citep{Girardi2000}.
+
+Precise and accurate stellar parameters are also essential in exoplanet
+searches. Planetary radius, and mass are found from lightcurve analysis and
+radial velocity analysis, respectively. These parameters are related to the
+stellar parameters.
+
+
+
+
+% In this seminar I will explore the use of NIR spectroscopy towards the
+% derivation of precise parameters for FGK dwarfs. This work will serve as a
+% first approach to the determination of parameters in this spectral domain,
+% using well known FGK dwarfs as benchmarks. NIR stellar spectra are
+% significantly less blended, thus allowing for a precise line-by-line analysis
+% \citep{Woolf2006,2012Onehag}. The NIR domain will then be key to solve the
+% problem of M-dwarf parameter estimation. Note that the IR part of the spectrum
+% is preferred over the optical for M-dwarfs because there is less photospheric
+% molecular line blending and continuum depression.
+%
+% For the determination of stellar parameters we need to choose our approach. In
+% general there is two widely used approaches to analyse spectra, 1: The
+% spectral synthesis method, and 2: The equivalent method. I will use the latter
+% approach.
+
+\section{The method}
+\label{sec:the_method}
+Generally speaking there are two methods for determining parameters from a
+spectrum.  One is the spectral synthesis method, where a synthetic spectrum is
+created and by minimization procedure a best fit is found bewteen the synthetic
+spectrum and the real spectrum. The stellar parameters are give from the input
+to the synthetic spectrum.
+
+The other method is the equivalent width (EW) method, which we use in this
+work.  With this method the EW are measured for all lines in a line list. The
+EW is given as
+\begin{align}
+    \label{eq:EW}
+    EW = \int_0^\infty \left(1 - \frac{F_\lambda}{F_0}\right) d\lambda,
+\end{align}
+where $F_0$ is the continuum level and $F_\lambda$ is is the flux as a function
+of wavelength. In other words, the EW width is the area from a spectral line up
+to the normalized continuum level.
+
+With the EW the abundance for individual lines can be found with a code like
+MOOG\footnote{The MOOG code can be downloaded free at
+\url{http://www.as.utexas.edu/~chris/moog.html}}. By changing atmospheric
+parameters as input for MOOG, similar abundances will be achieved for similar
+elements when the right atmospheric parameters are chosen. Here we use neutral
+iron and single ionized iron: FeI and FeII, respectively.
+
+A disadvantage for this method, and a general problem with spectroscopy, is the
+determination of the continuum flux level. Misplacement of the continuum leads
+to wrong measurements of the EW. Many spectroscopic features make it difficult
+to determine the continuum. This is especially true for cool stars in the
+optical where molecular depression and line blending is an issue. By moving the
+analysis to the NIR, we reduce the molecular depression, and cooler stars line
+M-dwarfs emit more in this spectral region, why the continuum is at least
+easier to determine.
+
+We look at the spectral region covered by the J, H, and K bands, which cover a
+spectral region larger than $\SI{15000}{\AA}$.
+
+
+
+% The final stellar parameters are obtained when no correlation is present
+% \citep{Gray2006}. The iron abundance is derived in this process, computed by
+% the mean abundance given by all lines analysed.
+
+
+
+
+\subsection{Compiling the line list}
+All iron lines with atomic line data were downloaded from the VALD
+database\footnote{The VALD database can be found here:
+\url{http://vald.astro.univie.ac.at/~vald3/php/vald.php}}. In total 78537 lines
+were present in the spectral region (both FeI: 50198 and FeII: 28339). Many of
+these lines to faint to see in a spectrum. To select the lines for the line
+list a spectrum of the Sun is used downloaded from the BASS2000 web
+page\footnote{The web page can be found here:
+\url{bass2000.obspm.fr/solar_spect.php}}. The spectrum were downloaded in the
+highest possible resolution. Since the resolution is not constant the entire
+spectrum were interpolated to a regular grid with constant wavelength step. The
+wavelength step in the analysis is $\SI{0.01}{\AA}$.
+
+After the spectrum is on a regular wavelength grid we measured the EW for all
+the lines using the ARES software\footnote{The ARES software can be found here:
+\url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007}. This software
+can measure EW automatically and thus saved us a lot of time. For a given line
+ARES output the wavelength of the line, the number of lines fitted for the end
+result, the depth of the line, the FWHM of the line, the EW of the line, and
+last Gaussians coefficients for the line.
+
+We wort the line list based on the EW and the number of lines fitted for the
+end result.
+\begin{itemize}
+    \item If the number of fitted lines for a given line is higher than 10,
+        this line is rejected because it is believed to be severely blended.
+    \item If the EW is lower than $\SI{5}{m\AA}$ for a given line, the strength
+        is too low and may be difficult to see in spectra with low S/N or a
+        spectrum with many spectral features.
+    \item If the EW is higher than $\SI{200}{m\AA}$ for a give line, the strength
+        is too high and non-LTE effects is present in the core of the line, and
+        therefore rejected.
+    \item If the fitted central wavelength is more than $\SI{0.05}{\AA}$ away
+        from the wavelength provided by VALD, the line will also be rejected to
+        avoid false identification.
+\end{itemize}
+
+
+
+
+\subsection{Manually removal of lines}
+\label{sub:manually_selection_of_lines}
+At this step we reduced the number of lines to 6060 and 2735 for FeI and FeII
+respectively. A manual inspection of the lines is necessary at this point in
+order to sort bad lines.  We only removed lines where we were certain they did
+not belong to either FeI or FeII from our list. The rest were kept as they
+would appear as outliers later on in the analysis.
+
+For the remaining iron lines, all lines from all elements in a small window
+where downloaded. Again iron lines were removed from the list, if another
+element fitted the absorption line better. Some iron lines were marked for
+further investigation while the rest was kept in the line list.
+
+\subsubsection{Synthesis of selected lines}
+\label{sub:synthesis_of_selected_lines}
+
+
+
+
+
+
+
+
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/Fe1.pdf}
+    \caption{Here is shown an abundance against EW\@. All the points a re
+        individual $\ce{FeI}$ lines. The green line is the Solar abundance,
+7.47. The
+        red lines are the mean abundance with the standard deviation. It is
+        clear that we need to recalibrate the line list, so we in the end will
+        measure the same abundance.}
+\label{fig:Fe1}
+\end{figure}
+
+
+\subsubsection{Recalibrating the $\log gf$ values}
+\label{ssub:recalibrating_the_log_gf_values}
+The oscillator strength are know to be notorious difficult to measure or
+calculate. Even though we have values for $\log gf$ values it is common to
+recalibrate them for a star we know well \citep{2012Onehag}. For this purpose I
+use the Sun. The recalibration is done line by line and follows these small
+steps:
+\begin{enumerate}
+    \item Use MOOG to calculate the abundance for a single line with the given
+        data as described in
+        Section~\ref{ssub:combining_everything_in_one_file}.
+    \item Calculate the difference between the abundance from MOOG with the
+        known abundance for the star, in this case I use 7.47 for the Sun as
+        \citet{Gonzales2000}.
+    \item If the difference is not zero, then the $\log gf$ value is changed.
+\end{enumerate}
+This procedure is done iteratively until we reach convergence.
+
+For finding the zero point, which this problem with recalibrating the $\log gf$
+boils down to, I use the bisector method. This method repeatedly bisects an
+interval and then selects a subinterval in which the root must lie for further
+processing. The iteration follows this simple steps, where $a$, $b$, and $c$
+are $\log gf$ values, and the function $f$ is the difference between the
+abundance from MOOG and the fixed value (in the case of Sun, I use 7.47):
+\begin{enumerate}
+    \item The interval is from $a$ to $b$ (by default I set this values to -10
+        and 10).
+    \item Calculate the midpoint of the interval $c=(a+b)/2$.\footnote{If $c=0$
+            then a small amount (relative to the interval size) is added to
+            $c$, since the abundance at $\log gf$ gives strange values.}
+    \item If $a-c$ is sufficiently small, i.e.\ the interval is small, or $f(c)$
+        is sufficiently small, then return $c$ and stop the iteration.
+    \item Else the sign of $f(c)$ should be examined. If $f$ have different
+        signs at $a$ and $c$, then the upper bound ($b$) should be replaced
+        with the midpoint $c$. Else the lower bound ($a$) should be replaced
+        with the midpoint.
+\end{enumerate}
+
+In Figure~\ref{fig:recalFe1} is shown a run with recalibration for a single line. We
+see how the difference in abundance is converging towards zero, when changing
+the $\log gf$ value.
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/recalFeI.pdf}
+    \caption{Here is shown graphically how recalibration of the $\log gf$
+        works. By changing the $\log gf$ value the difference in abundance,
+        that is the abundance derived from MOOG and the reference abundance,
+        is converging towards zero.}
+\label{fig:recalFe1}
+\end{figure}
+
+
+
+\subsection{MOOG}
+\label{sub:moog}
+MOOG is best described with a few lines from the website,
+\url{www.as.utexas.edu/~chris/moog.html}:
+\begin{quote}
+    MOOG is a code that performs a variety of LTE line analysis and spectrum
+    synthesis tasks. The typical use of MOOG is to assist in the determination
+    of the chemical composition of a star.
+\end{quote}
+MOOG can perform different task, where I use \emph{abfind}. This task
+``force-fits abundances of species to yield computed equivalent widths that
+agree with observed ones previously measured with other software
+packages.''\footnote{From \url{http://www.as.utexas.edu/~chris/moog.html}}
+
+
+
+\section{Summary}
+\label{sec:conclusion}
+It is a lengthy process to compile a final good line list for spectral
+analysis, and with a high possibility to make errors along the way. E.g.\ the
+data that was first used from the \url{vso.nso.edu} was not corrected in radial
+velocity was used. This was only discovered by an accident after many of the
+above steps were already taken. Therefore all the steps needed to be done
+again, after switching to the BASS2000 dataset.
+
+Now the solar spectrum are ready for analysis. All the neutral and first
+ionized iron lines in a wide wavelength coverage in the NIR have been
+downloaded from the VALD database. With the lines follows the excitation
+potential and the oscillator strength. The latter has to be recalibrated for
+all the lines before an analysis can take place.
+
+Far from all the lines from the VALD database are useful for a spectral
+analysis in the NIR domain. Therefore many of the lines have been removed
+following the selection criteria in Section~\ref{ssec:compiling_the_line_list}.
+
+\subsubsection{The future work}
+\label{ssub:the_future_work}
+At the moment of writing the next step is to remove ``false-positive'' lines,
+which are lines there are found in the VALD database and seems to hit a
+spectral line, but in reality the spectral line belongs to another element.
+This step has to be done before recalibrating the $\log gf$ values makes sense.
+Even though yet another somewhat lengthy process awaits ahead, the
+recalibration software is ready, as it was already shown in
+Figure~\ref{fig:recalFe1}.
+
+The recalibration will be done with respect to the Sun, the star we know best.
+The goal is to characterise M-dwarfs, but since the Sun (G2V by definition,
+\citet{Gray2006}) is not far away in spectral class, it should be save to use
+the Sun as a starting point. However, for benchmarking the line list a sample
+of FGK-dwarfs will be analysed. These stars will have well known stellar
+parameters in order to test the line list. After the benchmarking some small
+corrections might be made to the line list, in order to have consistent
+results.
+
+This will be the final step before the determination of stellar parameters
+using iron lines in the NIR combined with the equivalent method on M-dwarfs,
+and the characterisation of this cool planet hosts.
+
+
+\newpage
+\bibliography{thesis}
+\bibliographystyle{astron}
+\nocite*{}
+
+\end{document}
