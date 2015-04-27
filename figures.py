@@ -4,10 +4,12 @@
 # My imports
 from __future__ import division, print_function
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set_style('white')
 sns.set_context('paper')
+# sns.set_context('poster')
 from glob import glob
 
 
@@ -21,27 +23,23 @@ def fig_abundance(fout=None):
 
     p = '../../../programs/moog/results/'
     fouts = ('figures/EWvsEP', 'figures/EWvsEP_cut')
-    before = np.loadtxt(p + 'Fe1_PreSynth_rec.log', skiprows=1)
-    after = np.loadtxt(p + 'Fe1_PostSynth_cut.log', skiprows=1)
+    b = np.loadtxt(p + 'Fe1_PreSynth_rec.log', skiprows=1)
+    b = np.c_[b[:, 0], b[:, 1], b[:, 2], b[:, 3], b[:, 5]]
+    dfB = pd.DataFrame(b, columns=['w', 'Excitation potential', 'log gf', 'EW', 'Abundance'])
 
-    for data, fout in zip([before, after], fouts):
-        ax = sns.jointplot(data[:, 1], data[:, 3], stat_func=None)
-        # ax.set_axis_labels(xlabel='Excitation potential (eV)',
-                           # ylabel=r'Equivalent width (Å)')
-        plt.tight_layout()
-        plt.savefig(fout + '.pdf', format='pdf')
+    a = np.loadtxt(p + 'Fe1_PostSynth_cut.log', skiprows=1)
 
-    ax = sns.jointplot(before[:, 1], before[:, 5], stat_func=None)
-    ax.set_axis_labels(xlabel='Excitation potential (eV)',
-                       ylabel='Abundance')
-    plt.tight_layout()
-    # plt.savefig('figures/abundance_all.pdf', format='pdf')
+    sns.interactplot('Excitation potential', 'EW', 'Abundance', dfB,
+                     filled=True, levels=100)
+    plt.savefig('%s.pdf' % fouts[0], format='pdf')
 
-    sns.interactplot(before[:, 1], before[:, 3], before[:, 5], filled=True,
-                     levels=100)
+    ax = sns.jointplot(a[:, 1], a[:, 3], stat_func=None)
+    ax.set_axis_labels(xlabel='Excitation potential',
+                       ylabel='\nEW')
+    plt.savefig('%s.pdf' % fouts[1], format='pdf')
 
-    print('All plots saved in fig_abundance')
-    plt.show()
+
+    # plt.show()
 
 
 def fig_EPcut_sun(fout=None):
@@ -130,7 +128,7 @@ def main():
     :returns: TODO
     """
     fig_abundance()
-    fig_EPcut_sun()
+    # fig_EPcut_sun()
 
 
 if __name__ == '__main__':
