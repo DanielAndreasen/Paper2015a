@@ -26,8 +26,8 @@ def fig_abundance(fout=None):
 
     for data, fout in zip([before, after], fouts):
         ax = sns.jointplot(data[:, 1], data[:, 3], stat_func=None)
-        ax.set_axis_labels(xlabel='Excitation potential (eV)',
-                           ylabel=r'Equivalent width (Å)')
+        # ax.set_axis_labels(xlabel='Excitation potential (eV)',
+                           # ylabel=r'Equivalent width (Å)')
         plt.tight_layout()
         plt.savefig(fout + '.pdf', format='pdf')
 
@@ -35,13 +35,13 @@ def fig_abundance(fout=None):
     ax.set_axis_labels(xlabel='Excitation potential (eV)',
                        ylabel='Abundance')
     plt.tight_layout()
-    plt.savefig('figures/abundance_all.pdf', format='pdf')
+    # plt.savefig('figures/abundance_all.pdf', format='pdf')
 
     sns.interactplot(before[:, 1], before[:, 3], before[:, 5], filled=True,
                      levels=100)
 
     print('All plots saved in fig_abundance')
-    # plt.show()
+    plt.show()
 
 
 def fig_EPcut_sun(fout=None):
@@ -114,7 +114,7 @@ def fig_EPcut_sun(fout=None):
     _plot_result(data=(epcut, feh), xlabel=True, ylabel='[Fe/H]')
     plt.hlines(0.0, 4.5, 5.5)
 
-    # plt.savefig('solar_parameters_10runs.pdf')
+    plt.savefig('figures/solar_parameters_10runs.pdf')
     plt.show()
 
 
@@ -129,7 +129,7 @@ def main():
     """Main function
     :returns: TODO
     """
-    # fig_abundance()
+    fig_abundance()
     fig_EPcut_sun()
 
 
