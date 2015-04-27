@@ -47,7 +47,7 @@ other inderict fundamental parameters, such as mass, radius, and age from
 stellar evolutionary models \citep{Girardi2000}.
 
 Precise and accurate stellar parameters are also essential in exoplanet
-searches. Planetary radius, and mass are found from lightcurve analysis and
+searches. Planetary radius, and mass are mainly found from lightcurve analysis and
 radial velocity analysis, respectively. These parameters are related to the
 stellar parameters.
 
@@ -117,28 +117,29 @@ spectral region larger than $\SI{15000}{\AA}$.
 
 
 \subsection{Compiling the line list}
-All iron lines with atomic line data were downloaded from the VALD
-database\footnote{The VALD database can be found here:
-\url{http://vald.astro.univie.ac.at/~vald3/php/vald.php}}. In total 78537 lines
-were present in the spectral region (both FeI: 50198 and FeII: 28339). Many of
-these lines to faint to see in a spectrum. To select the lines for the line
-list a spectrum of the Sun is used downloaded from the BASS2000 web
-page\footnote{The web page can be found here:
-\url{bass2000.obspm.fr/solar_spect.php}}. The spectrum were downloaded in the
-highest possible resolution. Since the resolution is not constant the entire
-spectrum were interpolated to a regular grid with constant wavelength step. The
-wavelength step in the analysis is $\SI{0.01}{\AA}$.
+All iron lines with atomic line data were downloaded from the
+VALD database\footnote{The VALD database can be found here:
+\url{http://vald.astro.univie.ac.at/~vald3/php/vald.php}}. In total
+78537 lines of FeI and FeII are present in the spectral region (FeI:
+50198 and FeII: 28339). Many of these lines are to faint to see in a
+spectrum. To select the lines for the line list a spectrum of the Sun
+is used downloaded from the BASS2000 web page\footnote{The web page can
+be found here: \url{bass2000.obspm.fr/solar_spect.php}}. The spectrum
+were downloaded in the highest possible resolution. Since the resolution
+is not constant the entire spectrum were interpolated to a regular grid
+with constant wavelength step of $\SI{0.01}{\AA}$.
 
-After the spectrum is on a regular wavelength grid we measured the EW for all
-the lines using the ARES software\footnote{The ARES software can be found here:
-\url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007}. This software
-can measure EW automatically and thus saved us a lot of time. For a given line
-ARES output the wavelength of the line, the number of lines fitted for the end
-result, the depth of the line, the FWHM of the line, the EW of the line, and
-last Gaussians coefficients for the line.
+With the spectrum on a regular wavelength grid the
+EW for all the lines were measured using the ARES
+software\footnote{The ARES software can be found here:
+\url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007}. This
+software can measure EW automatically by fitting a Gaussian profile to
+a spectral line. For a given line ARES output the central wavelength of
+the line, the number of lines fitted for the end result, the depth of
+the line, the FWHM of the line, the EW of the line, and last Gaussians
+coefficients for the line.
 
-We wort the line list based on the EW and the number of lines fitted for the
-end result.
+We remove lines from the line list based criteria listed below:
 \begin{itemize}
     \item If the number of fitted lines for a given line is higher than 10,
         this line is rejected because it is believed to be severely blended.
@@ -146,8 +147,7 @@ end result.
         is too low and may be difficult to see in spectra with low S/N or a
         spectrum with many spectral features.
     \item If the EW is higher than $\SI{200}{m\AA}$ for a give line, the strength
-        is too high and non-LTE effects is present in the core of the line, and
-        therefore rejected.
+        is too high and non-LTE effects is present in the core of the line.
     \item If the fitted central wavelength is more than $\SI{0.05}{\AA}$ away
         from the wavelength provided by VALD, the line will also be rejected to
         avoid false identification.
@@ -157,7 +157,7 @@ end result.
 
 
 \subsection{Manually removal of lines}
-\label{sub:manually_selection_of_lines}
+\label{sub:manually_removal_of_lines}
 At this step we reduced the number of lines to 6060 and 2735 for FeI and FeII
 respectively. A manual inspection of the lines is necessary at this point in
 order to sort bad lines.  We only removed lines where we were certain they did
@@ -167,12 +167,50 @@ would appear as outliers later on in the analysis.
 For the remaining iron lines, all lines from all elements in a small window
 where downloaded. Again iron lines were removed from the list, if another
 element fitted the absorption line better. Some iron lines were marked for
-further investigation while the rest was kept in the line list.
+further investigation while the rest were kept in the line list.
+
+
 
 \subsubsection{Synthesis of selected lines}
 \label{sub:synthesis_of_selected_lines}
+Lines from all elements in a small window around an iron line marked
+for further investigation were used to make a synthetic spectra.
+The synthetic spectra were made with MOOG. We used 3 different iron
+abundances for the synthesis. One with solar iron abundance, and
+then two $\pm0.2$ dex. If the synthetic spectra shows variation at
+the absorption line of interest with respect to the different iron
+abundances, then it's likely to be an iron line. We also changed
+abundances of other elements in the proximity to see if our line is
+blended with other elements.
+
+Sometimes more than 1 iron line might be present with very similar
+wavelengths. In order to find the iron line which is creating the
+absorption line, one of the two were removed from the line list for
+the synthetic spectra. If this removed (either fully or partially) the
+absorption line in the synthetic spectra, then it will be the cause for
+the real absorption line.
+
+A few times two iron lines had similar wavelengths and excitation
+potential. In those cases the $\log \mathrm{gf}$ were combined. First
+converted to $\mathrm{gf}$, then an average value, and finally back to
+$\log \mathrm{gf}$.
 
 
+\subsubsection{Recalibrating the atomic data}
+\label{ssub:Recalibrating-the-atomic-data}
+The abundances were calculated for all lines with a atmosphere model
+characterised by $T_\mathrm{eff}=\SI{5777}{K}$, $\log g = 4.438$,
+$[Fe/H] = 0.0$, and $\xi_\mathrm{micro} = \SI{1.0}{km/s}$. If they
+deviate by more than 1 dex, the lines were discarded. At this point we
+are down to 319 and 12 lines, respectively for Fe I and Fe II. We only
+removed Fe I lines here, since the Fe II lines are sparse and important
+to determine the surface gravity.
+
+After the removal of lines from the complete VALD line list we only need
+to recalibrate the lines. Here we calculate the abundance for line to line.
+If the abundance does not match the Solar abundance, the $\log \mathrm{gf}$
+were changed until it does. The abundance varies more or less linearly with
+$\log \mathrm{gf}$
 
 
 
