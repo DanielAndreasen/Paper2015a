@@ -27,12 +27,25 @@ def fig_abundance(fout=None):
     b = np.c_[b[:, 0], b[:, 1], b[:, 2], b[:, 3], b[:, 5]]
     dfB = pd.DataFrame(b, columns=['w', 'Excitation potential', 'log gf', 'EW', 'Abundance'])
 
-    a = np.loadtxt(p + 'Fe1_PostSynth_cut.log', skiprows=1)
 
+    idx = dfB.Abundance < 8.47
     sns.interactplot('Excitation potential', 'EW', 'Abundance', dfB,
-                     filled=True, levels=100)
+                     filled=True, levels=100,
+                     scatter_kws={'ms': 0})
+
+    sns.interactplot('Excitation potential', 'EW', 'Abundance', dfB[idx],
+                     filled=True, levels=100, colorbar=False,
+                     scatter_kws={'label': 'Good abundance'})
+
+    sns.interactplot('Excitation potential', 'EW', 'Abundance', dfB[~idx],
+                     filled=True, levels=100, colorbar=False,
+                     scatter_kws={'alpha': 0.3, 'ms': 4,
+                                  'label': 'Bad abundance',
+                                  'color': 'r'})
+    plt.legend(loc='best')
     plt.savefig('%s.pdf' % fouts[0], format='pdf')
 
+    a = np.loadtxt(p + 'Fe1_PostSynth_cut.log', skiprows=1)
     ax = sns.jointplot(a[:, 1], a[:, 3], stat_func=None)
     ax.set_axis_labels(xlabel='Excitation potential',
                        ylabel='\nEW')
