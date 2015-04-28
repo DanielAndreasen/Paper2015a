@@ -200,31 +200,48 @@ $\log \mathrm{gf}$.
 \label{ssub:Recalibrating-the-atomic-data}
 The abundances were calculated for all lines with a atmosphere model
 characterised by $T_\mathrm{eff}=\SI{5777}{K}$, $\log g = 4.438$,
-$[Fe/H] = 0.0$, and $\xi_\mathrm{micro} = \SI{1.0}{km/s}$. Lines
-which have abundances that deviates more than 1 dex were discarded
-For the Sun an iron abundance at 7.47 is considered according to
-\citet{Gonzales2000}. At this point we are down to 319 and 12 lines,
+$[Fe/H] = 0.0$, and $\xi_\mathrm{micro} = \SI{1.0}{km/s}$ to resemble
+the Sun. Lines which have abundances that deviates more than 1 dex were
+discarded For the Sun an iron abundance at 7.47 is considered according
+to \citet{Gonzales2000}. At this point we are down to 319 and 12 lines,
 respectively for Fe I and Fe II. We only removed Fe I lines here, since
 the Fe II lines are sparse and important to determine the surface
 gravity.
 
-After the removal of lines from the complete VALD line list we only need
-to recalibrate the lines. Here we calculate the abundance for line to line.
-If the abundance does not match the Solar abundance, the $\log \mathrm{gf}$
-were changed until it does. The abundance varies more or less linearly with
-$\log \mathrm{gf}$. Therefore the recalibrated $\log \mathrm{gf}$ can be found
-with few iterations. In Figure~\ref{fig:Fe1_before_recal}
+After the removal of lines from the complete VALD line list we
+only need to recalibrate the lines. This is a common thing to do
+for a star we know well \citep{2012Onehag}. Here we calculate the
+abundance for line to line. If the abundance does not match the
+Solar abundance, the $\log \mathrm{gf}$ were changed until it does.
+The abundance varies more or less linearly with $\log \mathrm{gf}$.
+Therefore the recalibrated $\log \mathrm{gf}$ can be found with few
+iterations. In Figure~\ref{fig:Fe1_before_recal} the EW of the Fe I
+lines are plotted with respect to the excitation potential. On top
+of that, the color scale represent the abundance calculated before
+the recalibration of $\log \mathrm{gf}$. A similar plot is seen in
+Figure\ref{fig:Fe1_after_recal} but after the recalibration. Here the
+abundance of all the lines are 7.47, why there is no color scale over
+plotted.
 
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.9\linewidth]{figures/EWvsEP.pdf}
     \caption{The distribution of Fe I lines with. At the x axis is the
     excitation potential, while the measure EW is shown at the y axis. The
-    colorscale indicates the abundance before recalibration.    }
+    color scale indicates the abundance before recalibration.}
     \label{fig:Fe1_before_recal}
 \end{figure}
 
 
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/EWvsEP_cut.pdf}
+    \caption{The distribution of Fe I lines with. At the x axis is the
+    excitation potential, while the measure EW is shown at the y axis.
+    The histograms at the top and to the right of the plot, show the
+    distribution of the respective axis.}
+    \label{fig:Fe1_after_recal}
+\end{figure}
 
 
 
