@@ -6,3 +6,6 @@
 *.llt
 *.log
 *.pdf
+
+# Python stuff
+*.pyc
