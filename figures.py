@@ -46,7 +46,7 @@ def fig_abundance(fout=None):
     plt.savefig('%s.pdf' % fouts[0], format='pdf')
 
     a = np.loadtxt(p + 'Fe1_PostSynth_cut.log', skiprows=1)
-    ax = sns.jointplot(a[:, 1], a[:, 3], stat_func=None)
+    ax = sns.jointplot(a[:, 1], a[:, 3], stat_func=None, kind='kde')
     ax.set_axis_labels(xlabel='Excitation potential',
                        ylabel='\nEW')
     plt.savefig('%s.pdf' % fouts[1], format='pdf')
@@ -95,7 +95,8 @@ def fig_EPcut_sun(fout=None):
     files = glob(p + 'Out_moog_*')
     parameters = np.zeros((len(files) - 1, 5))
 
-    for i, file in enumerate(files):
+    i = 0
+    for file in files:
         if 'Poisson' not in file:
             solar = _get_params(file)
         else:
@@ -109,6 +110,7 @@ def fig_EPcut_sun(fout=None):
             parameters[i, 2] = vt
             parameters[i, 3] = feh
             parameters[i, 4] = epcut
+            i += 1
 
     T, logg, vt, feh, epcut = parameters.T
     ax1 = plt.subplot(221)
@@ -143,8 +145,8 @@ def main():
     """Main function
     :returns: TODO
     """
-    # fig_abundance()
-    fig_EPcut_sun()
+    fig_abundance()
+    # fig_EPcut_sun()
 
 
 if __name__ == '__main__':
