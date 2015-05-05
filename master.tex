@@ -264,10 +264,23 @@ parameters without noise added to the EW.
     \label{fig:solar_parameters}
 \end{figure}
 
-By adding noise to the EW measurements and calculate the atmospheric parameters
-with different cuts in EP we see how we over estimate all the parameters except
-the iron abundance. This suggest that it might be necessary to do a cut in the
-line list for other stars. This is indeed the case for HD20010.
+We calculate the atmospheric parameters, $\{T_\mathrm{eff}, \log
+g, \xi_\mathrm{micro}, [\mathrm{Fe/H}]\}$, by adding noise to the
+calibrated line list. This is done 10 times, and for each time, we use
+the full line list, a line list with a cut in EP at $\SI{5.5}{eV}$, and
+a line list with a cut in EP at $\SI{5.0}{eV}$. This gives a total of
+31 line list for which we calculate the atmospheric parameters given
+above. This are all plotted in Figure~\ref{fig:solar_parameters}. The
+horizontal black line corresponds to the calibrated line list with no
+noise added, i.e. the true solar parameters.
+
+
+By adding noise to the EW measurements and calculate the atmospheric
+parameters with different cuts in EP, we see how we over estimate all
+the parameters except the iron abundance, when a cut in EP is not
+applied. This suggest that it might be necessary to do a cut in the line
+list for other stars to get reliable parameters. This is indeed the case
+for HD20010.
 
 
 

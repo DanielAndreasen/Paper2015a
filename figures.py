@@ -80,8 +80,11 @@ def fig_EPcut_sun(fout=None):
 
     def _plot_result(data, xlabel=None, ylabel=None, solar=None):
         x, y = data
+        # No EP cut
         sns.regplot(x[x==4.5], y[x==4.5], x_estimator=np.median, fit_reg=False)
-        sns.regplot(x[x!=4.5], y[x!=4.5], x_estimator=np.median, truncate=True)
+        # EP cut
+        sns.regplot(x[x!=4.5], y[x!=4.5], x_estimator=np.median, truncate=True,
+                label='EP cut')
         plt.xticks([4.5, 5.0, 5.5], ['No cut', '5.0', '5.5'])
         if ylabel:
             plt.ylabel(ylabel)
@@ -125,7 +128,7 @@ def fig_EPcut_sun(fout=None):
     _plot_result(data=(epcut, feh), xlabel=True, ylabel='[Fe/H]')
     plt.hlines(0.0, 4.5, 5.5)
 
-    plt.savefig('figures/solar_parameters_10runs.pdf')
+    # plt.savefig('figures/solar_parameters_10runs.pdf')
     plt.show()
 
 
@@ -140,8 +143,8 @@ def main():
     """Main function
     :returns: TODO
     """
-    fig_abundance()
-    # fig_EPcut_sun()
+    # fig_abundance()
+    fig_EPcut_sun()
 
 
 if __name__ == '__main__':
