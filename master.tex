@@ -260,7 +260,11 @@ parameters without noise added to the EW.
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.9\linewidth]{figures/solar_parameters_10runs.pdf}
-    \caption{Solar parameters in an awesome plot}
+    \caption{Derived atmospheric parameters for the Sun. The horizontal black
+    line is the parameters for the calibrated line list. The three points shows
+    the median value of 10 runs with random noise added. The blue point is the
+    result for the whole line list, while the two green points is the result
+    from line lists cutted in EP as given on the x-axis.}
     \label{fig:solar_parameters}
 \end{figure}
 
@@ -274,13 +278,60 @@ above. This are all plotted in Figure~\ref{fig:solar_parameters}. The
 horizontal black line corresponds to the calibrated line list with no
 noise added, i.e. the true solar parameters.
 
-
 By adding noise to the EW measurements and calculate the atmospheric
 parameters with different cuts in EP, we see how we over estimate all
 the parameters except the iron abundance, when a cut in EP is not
 applied. This suggest that it might be necessary to do a cut in the line
 list for other stars to get reliable parameters. This is indeed the case
 for HD20010.
+
+
+
+\section{Derived parameters of HD20010}
+\label{sec:derived_parameters_of_hd20010}
+
+HD20010 is a well studied F8 subgiant, see e.g.
+\cite{Mortier2013,lebzelter2012}. Therefore it is a prime object for our
+studies, since we want to benchmark results from our new line list with
+literature values.
+
+
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/HD20010_parameters_cuts.pdf}
+    \caption{atmospheric parameters for HD20010. In the top panel is the
+    effective temperature. The middle panel is the iron abundance, and the
+    bottom panel is the micro turbulence. The parameters are derived with
+    different cuts in EP. The parameters for the full line list is plotted
+    to the right for all three plots.}
+    \label{fig:HD20010_parameters_cuts}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\bibliography{thesis}
+\bibliographystyle{astron}
+\nocite*{}
+
+\end{document}
+
+
+
+
+
+
+
+
 
 
 
@@ -335,9 +386,3 @@ using iron lines in the NIR combined with the equivalent method on M-dwarfs,
 and the characterisation of this cool planet hosts.
 
 
-\newpage
-\bibliography{thesis}
-\bibliographystyle{astron}
-\nocite*{}
-
-\end{document}
