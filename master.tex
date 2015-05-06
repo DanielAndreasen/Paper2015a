@@ -339,7 +339,41 @@ for HD20010.
 HD20010 is a well studied F8 subgiant, see e.g.
 \cite{Mortier2013,lebzelter2012}. Therefore it is a prime object for our
 studies, since we want to benchmark results from our new line list with
-literature values.
+literature values. The data is from the CRIRES-POP \citep{lebzelter2012}.
+At the time of writing the data is not yet fully reduced. This is a task
+the CRIRES-POP team is working on. However, the data can still be used as
+it is after the pipeline reduction. It is already known by the CRIRES-POP
+team that the pipeline reduced form is not of very high quality. Especially
+bad is the wavelength calibration. Most of the spectra are stretched compared
+to e.g. a model or a solar spectrum in the same region. The data comes in
+pieces of $\SI{50}{\angstrom}$ to $\SI{120}{\angstrom}$.
+
+In order to measure the EW of the lines in our line list, the correct
+absorption lines need to be identified. This was done by plotting
+the spectra for HD20010, a solar spectrum (the parameters are close
+enough so we can use the Sun as a reference), an observed telluric
+spectrum from the TAPAS web page \citep{TAPAS}, and the lines from our
+line list in the region we are looking at. The pieces of spectra are
+shifted in radial velocity as well. A software were developed that plots
+everything and calculate the cross correlation function of the model
+(in this case the Sun), and the telluric spectra\footnote{The software
+(plot\textunderscore{}fits) is open source and can be found here:
+\url{https://github.com/DanielAndreasen/astro_scripts}}. The two CCFs
+are fitted with a Gaussian, and the mid point is the RV. This two, in
+principle, different radial velocities shifts the model and the telluric
+spectra. The lines from our line list is shifted with the same RV as for
+the model. Figure~\ref{fig:plot_fits} shows an example of this.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/plot_fits.pdf}
+    \caption{The middle plot shows a piece of HD20010 (black), the model
+    spectrum, in this case the Sun (green), a telluric spectrum (red), and two
+    lines from our line list (magenta vertical lines). The plot to the left shows
+    the CCF of the Sun with a fitted Gaussian. The right plot shows the same as the
+    one to the left, but for the telluric spectrum.}
+    \label{fig:plot_fits}
+\end{figure}
 
 
 
