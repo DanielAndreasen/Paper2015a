@@ -245,6 +245,48 @@ plotted.
 
 
 
+\section{Deriving parameters with the EW method}
+\label{sec:deriving_parameters_with_the_ew_method}
+
+After the EW have been measured for all lines in the line list (or as many as
+possible), one need to derive atmospheric parameters. Atmosphere models are
+necessary for computing abundances of the lines. The literature offers the
+possibility to choose from a wide variety of model atmospheres. Models like
+ATLAS9 \citep{kurucz1993} and MARCS \citep{gustafson2008} are the most used
+atmospheric models for derivation of spectroscopic and elemental abundances.
+
+Here we use the ATLAS9 models which, for efficiency, is created
+in a grid according to effective temperature, surface gravity,
+and metallicity. In search of final parameters it is necessary to
+interpolate models from the grid, thus allowing to look in a finer grid
+space.
+
+For a given atmosphere model, abundances of all the lines in the line
+list are calculated. By removing a correlation between the excitation
+potential and abundance of all lines (from same element) the effective
+temperature is constrained. In a similar way, the micro turbulence can
+be constrained be removing any correlation between the reduced EW ($\log
+EW$) and abundances. Lastly the surface gravity is found when there is
+ionization balance, i.e. the mean abundance of FeI and FeII are equal.
+
+When there are no longer any correlation, the final atmospheric
+parameters are obtained from the atmospheric model to calculate the
+given abundances. The iron abundance comes from the calculating the mean
+of all the iron abundances.
+
+In order to find the best atmosphere model, a minimization algorithm is
+used based on the downhill simplex method \citep{press1992} that search
+the parameter space for the best fitting model.
+
+
+
+
+
+
+
+
+
+
 \section{Derived parameters of the Sun}
 \label{sec:derived_parameters_of_the_sun}
 We derive atmospheric parameters for the Sun with the recalibrated line list.
