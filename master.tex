@@ -375,15 +375,31 @@ the model. Figure~\ref{fig:plot_fits} shows an example of this.
     \label{fig:plot_fits}
 \end{figure}
 
+The derived parameters for HD20010 for the full line list
+are overestimated compared to literature values, see e.g.
+\citet{Mortier2013,lebzelter2012}. To overcome this problem we tried
+to remove lines above different EPs and re-determine the atmospheric
+parameters. In this process we did not remove any of the FeII lines
+(we were only able to measure the EW of 5 lines out of the 13 from the
+solar case). Similar work as this have been done in the visible range
+of the spectrum \citep{tsantaki2013}. In the visible the maximum EP is
+$\SI{5.1}{eV}$. Figure~\ref{fig:HD20010_parameters_cuts} shows the
+results from this exercise. In the minimization process the surface gravity
+were fixed at 4.11. This is a mean value of previous studies. A second degree
+polynomial is fitted for the effective temperature, iron abundance, and the
+micro turbulence with the 95\% confidence interval. At a cut at $\SI{5.5}{eV}$
+and below the atmospheric parameters gets closer to the literature values which
+is plotted as a horizontal black line.
 
 
-\begin{figure}[htpb]
+\begin{figure}[htpb!]
     \centering
     \includegraphics[width=0.9\linewidth]{figures/HD20010_parameters_cuts.pdf}
-    \caption{atmospheric parameters for HD20010. In the top panel is the
+    \caption{Atmospheric parameters for HD20010. In the top panel is the
     effective temperature. The middle panel is the iron abundance, and the
     bottom panel is the micro turbulence. The parameters are derived with
-    different cuts in EP. The parameters for the full line list is plotted
+    different cuts in EP. The horizontal black lines are literature values.
+    The parameters for the full line list is plotted
     to the right for all three plots.}
     \label{fig:HD20010_parameters_cuts}
 \end{figure}
