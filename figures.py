@@ -202,6 +202,7 @@ def fig_HD20010_parameters():
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
 
+    ax1.plot(xlim1, [6160]*2, '--k')
     sns.regplot('EP', 'Teff', df, truncate=True, order=2, ax=ax1,
                 color=c[0]).set_xlabel('')
     ax1.set_ylabel('Teff [K]')
@@ -222,7 +223,6 @@ def fig_HD20010_parameters():
     ylim = (5800, 7400)
     dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
     dy = 0.02 * (ylim[1]-ylim[0])
-    # dy = 50
     ax1.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
     ax1.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
     ax2.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
@@ -237,6 +237,7 @@ def fig_HD20010_parameters():
     plt.setp(ax3.get_xticklabels(), visible=False)
     plt.setp(ax4.get_xticklabels(), visible=False)
 
+    ax3.plot(xlim1, [-0.23]*2, '--k')
     sns.regplot('EP', 'feh', df, truncate=True, order=2, ax=ax3,
                 color=c[1]).set_xlabel('')
     ax3.set_ylabel('[Fe/H]')
@@ -299,8 +300,8 @@ def fig_HD20010_parameters():
     ax5.set_ylim(ylim)
     ax6.set_ylim(ylim)
 
-    plt.show()
-    # plt.savefig('figures/HD20010_parameters_cuts.pdf')
+    # plt.show()
+    plt.savefig('figures/HD20010_parameters_cuts.pdf')
 
 
 def main():
