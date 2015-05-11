@@ -50,10 +50,8 @@ def fig_abundance(fout=None):
     ax = sns.jointplot(a[:, 1], a[:, 3], stat_func=None, kind='kde')
     ax.set_axis_labels(xlabel='Excitation potential',
                        ylabel='\nEW')
-    plt.savefig('%s.pdf' % fouts[1], format='pdf')
-
-
     # plt.show()
+    plt.savefig('%s.pdf' % fouts[1], format='pdf')
 
 
 def fig_EPcut_sun(fout=None):
@@ -210,7 +208,6 @@ def fig_HD20010_parameters():
 
     plt.axis((4.95, 6.15, -0.5, 3.3))
     plt.show()
-
     # plt.savefig('figures/HD20010_parameters_cuts.pdf')
 
 
