@@ -7,10 +7,11 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 import seaborn as sns
 sns.set_style('white')
-# sns.set_context('paper')
-sns.set_context('poster')
+sns.set_context('paper')
+# sns.set_context('poster')
 from glob import glob
 
 
@@ -26,8 +27,8 @@ def fig_abundance(fout=None):
     fouts = ('figures/EWvsEP', 'figures/EWvsEP_cut')
     b = np.loadtxt(p + 'Fe1_PreSynth_rec.log', skiprows=1)
     b = np.c_[b[:, 0], b[:, 1], b[:, 2], b[:, 3], b[:, 5]]
-    dfB = pd.DataFrame(b, columns=['w', 'Excitation potential', 'log gf', 'EW', 'Abundance'])
-
+    dfB = pd.DataFrame(b, columns=['w', 'Excitation potential',
+                                   'log gf', 'EW', 'Abundance'])
 
     idx = dfB.Abundance < 8.47
     sns.interactplot('Excitation potential', 'EW', 'Abundance', dfB,
@@ -50,8 +51,8 @@ def fig_abundance(fout=None):
     ax = sns.jointplot(a[:, 1], a[:, 3], stat_func=None, kind='kde')
     ax.set_axis_labels(xlabel='Excitation potential',
                        ylabel='\nEW')
-    # plt.show()
-    plt.savefig('%s.pdf' % fouts[1], format='pdf')
+    plt.show()
+    # plt.savefig('%s.pdf' % fouts[1], format='pdf')
 
 
 def fig_EPcut_sun(fout=None):
@@ -80,10 +81,11 @@ def fig_EPcut_sun(fout=None):
     def _plot_result(data, xlabel=None, ylabel=None, solar=None):
         x, y = data
         # No EP cut
-        sns.regplot(x[x==4.5], y[x==4.5], x_estimator=np.median, fit_reg=False)
+        sns.regplot(x[x == 4.5], y[x == 4.5], x_estimator=np.median,
+                    fit_reg=False)
         # EP cut
-        sns.regplot(x[x!=4.5], y[x!=4.5], x_estimator=np.median, truncate=True,
-                label='EP cut')
+        sns.regplot(x[x != 4.5], y[x != 4.5], x_estimator=np.median,
+                    truncate=True, label='EP cut')
         plt.xticks([4.5, 5.0, 5.5], ['No cut', '5.0', '5.5'])
         if ylabel:
             plt.ylabel(ylabel)
@@ -186,27 +188,117 @@ def fig_HD20010_parameters():
                        'vt':   data[0:-1, 3],
                        'feh':  data[0:-1, 4]})
 
+    xlim1 = [4.95, 6.05]
+    xlim2 = [6.95, 7.05]
+    xlim1ratio = (xlim1[1]-xlim1[0])/(xlim2[1]-xlim2[0]+xlim1[1]-xlim1[0])
+    xlim2ratio = (xlim2[1]-xlim2[0])/(xlim2[1]-xlim2[0]+xlim1[1]-xlim1[0])
+    gs = gridspec.GridSpec(3, 2, width_ratios=[xlim1ratio, xlim2ratio])
 
     c = sns.color_palette()
-    f, (ax1, ax2, ax3) = plt.subplots(3, 1, sharex=True)
+
+    fig = plt.figure()
+    ax1 = fig.add_subplot(gs[0])
+    ax2 = fig.add_subplot(gs[1])
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
-    plt.setp(ax3, xticks=np.arange(5, 6.2, 0.1),
-             xticklabels=list(np.arange(5, 6.1, 0.1)) + ['No cut'])
 
-    sns.regplot('EP', 'Teff', df, truncate=True, order=2, ax=ax1).set_xlabel('')
-    ax1.plot(6.1, data[-1, 1], 'o', color=c[0], ms=6)
-    ax1.set_ylabel(r'$\mathrm{T_{eff}}$ [K]')
+    sns.regplot('EP', 'Teff', df, truncate=True, order=2, ax=ax1,
+                color=c[0]).set_xlabel('')
+    ax1.set_ylabel('Teff [K]')
+    ax2.plot(7.0, data[-1, 1], 'o', color=c[0], ms=6)
+    ax1.set_xlim(xlim1)
+    ax2.set_xlim(xlim2)
+    plt.subplots_adjust(wspace=0.03)
 
-    sns.regplot('EP', 'feh', df, truncate=True, order=2, ax=ax2).set_xlabel('')
-    ax2.plot(6.1, data[-1, 4], 'o', color=c[1], ms=6)
-    ax2.set_ylabel('[Fe/H]')
+    ax1.spines['right'].set_visible(False)
+    ax2.spines['left'].set_visible(False)
+    ax2.yaxis.tick_right()
+    ax2.tick_params(labelright='off')
+    plt.setp(ax2, xticks=[7.0], xticklabels=['No EP cut'])
 
-    sns.regplot('EP', 'vt', df, truncate=True, order=2, ax=ax3)
-    ax3.plot(6.1, data[-1, 3], 'o', color=c[2], ms=6)
-    ax3.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
+    ax2.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
+    kwargs = dict(color='k', clip_on=False, linewidth=1)
 
-    plt.axis((4.95, 6.15, -0.5, 3.3))
+    ylim = (5800, 7400)
+    dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
+    dy = 0.02 * (ylim[1]-ylim[0])
+    # dy = 50
+    ax1.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
+    ax1.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
+    ax2.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
+    ax2.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
+
+    ax1.set_ylim(ylim)
+    ax2.set_ylim(ylim)
+
+    # [Fe/H]
+    ax3 = fig.add_subplot(gs[2])
+    ax4 = fig.add_subplot(gs[3])
+    plt.setp(ax3.get_xticklabels(), visible=False)
+    plt.setp(ax4.get_xticklabels(), visible=False)
+
+    sns.regplot('EP', 'feh', df, truncate=True, order=2, ax=ax3,
+                color=c[1]).set_xlabel('')
+    ax3.set_ylabel('[Fe/H]')
+    ax4.plot(7.0, data[-1, 4], 'o', color=c[1], ms=6)
+    ax3.set_xlim(xlim1)
+    ax4.set_xlim(xlim2)
+    plt.subplots_adjust(wspace=0.03)
+
+    ax3.spines['right'].set_visible(False)
+    ax4.spines['left'].set_visible(False)
+    ax4.yaxis.tick_right()
+    ax4.tick_params(labelright='off')
+    plt.setp(ax4, xticks=[7.0], xticklabels=['No EP cut'])
+
+    ax4.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
+    kwargs = dict(color='k', clip_on=False, linewidth=1)
+
+    ylim = (-0.30, 0.00)
+    dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
+    dy = 0.02 * (ylim[1]-ylim[0])
+    ax3.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
+    ax3.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
+    ax4.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
+    ax4.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
+
+    ax3.set_ylim(ylim)
+    ax4.set_ylim(ylim)
+
+    # micorturbulence
+    ax5 = fig.add_subplot(gs[4])
+    ax6 = fig.add_subplot(gs[5])
+    # plt.setp(ax5.get_xticklabels(), visible=False)
+    # plt.setp(ax6.get_xticklabels(), visible=False)
+
+    sns.regplot('EP', 'vt', df, truncate=True, order=2, ax=ax5,
+                color=c[2]).set_xlabel('')
+    ax5.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
+    ax6.plot(7.0, data[-1, 3], 'o', color=c[2], ms=6)
+    ax5.set_xlim(xlim1)
+    ax6.set_xlim(xlim2)
+    plt.subplots_adjust(wspace=0.03)
+
+    ax5.spines['right'].set_visible(False)
+    ax6.spines['left'].set_visible(False)
+    ax6.yaxis.tick_right()
+    ax6.tick_params(labelright='off')
+    plt.setp(ax6, xticks=[7.0], xticklabels=['No EP cut'])
+
+    ax6.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
+    kwargs = dict(color='k', clip_on=False, linewidth=1)
+
+    ylim = (0.20, 3.10)
+    dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
+    dy = 0.02 * (ylim[1]-ylim[0])
+    ax5.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
+    ax5.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
+    ax6.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
+    ax6.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
+
+    ax5.set_ylim(ylim)
+    ax6.set_ylim(ylim)
+
     plt.show()
     # plt.savefig('figures/HD20010_parameters_cuts.pdf')
 
