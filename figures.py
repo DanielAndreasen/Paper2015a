@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import seaborn as sns
 sns.set_style('white')
-sns.set_context('paper')
+sns.set_context('paper', font_scale=1.5)
 # sns.set_context('poster')
 from glob import glob
 
@@ -51,8 +51,8 @@ def fig_abundance(fout=None):
     ax = sns.jointplot(a[:, 1], a[:, 3], stat_func=None, kind='kde')
     ax.set_axis_labels(xlabel='Excitation potential',
                        ylabel='\nEW')
-    plt.show()
-    # plt.savefig('%s.pdf' % fouts[1], format='pdf')
+    # plt.show()
+    plt.savefig('%s.pdf' % fouts[1], format='pdf')
 
 
 def fig_EPcut_sun(fout=None):
@@ -132,8 +132,8 @@ def fig_EPcut_sun(fout=None):
     _plot_result(data=(epcut, feh), xlabel=True, ylabel='[Fe/H]')
     plt.hlines(0.0, 4.5, 5.5)
 
-    # plt.savefig('figures/solar_parameters_10runs.pdf')
-    plt.show()
+    plt.savefig('figures/solar_parameters_10runs.pdf')
+    # plt.show()
 
 
 def fig_HD20010_parameters():
@@ -310,7 +310,7 @@ def main():
     """
     # fig_abundance()
     # fig_EPcut_sun()
-    fig_HD20010_parameters()
+    # fig_HD20010_parameters()
 
 
 if __name__ == '__main__':
