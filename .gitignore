@@ -7,8 +7,9 @@
 *.log
 *.pdf
 
-# Python stuff
+# Python/figure stuff
 *.pyc
+*.fits
 
 # Elisa's stuff
 Li_hot3.tex
