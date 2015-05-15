@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 
 # My imports
-from __future__ import division, print_function
+from __future__ import division
 import os
 import numpy as np
 import pandas as pd
@@ -10,9 +10,12 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import seaborn as sns
 sns.set_style('white')
-sns.set_context('paper', font_scale=1.5)
-# sns.set_context('poster')
+# sns.set_context('paper', font_scale=1.5)
+sns.set_context('poster')
 from glob import glob
+from astropy.io import fits
+from astropy import constants as c
+from astropy import units as u
 
 
 def fig_abundance(fout=None):
@@ -304,6 +307,63 @@ def fig_HD20010_parameters():
     plt.savefig('figures/HD20010_parameters_cuts.pdf')
 
 
+def fig_spectral_region():
+    """
+    Plot a high Teff synthetic spectra and a low Teff synthetic spectra
+    """
+
+    path = '/home/daniel/Documents/Uni/phdproject/data/HD20010/article/figures/'
+    suffix = '.PHOENIX-ACES-AGSS-COND-2011-HiRes.fits'
+    w = fits.getdata('%sWAVE_PHOENIX-ACES-AGSS-COND-2011.fits' % path)
+    fl = fits.getdata('%slte02700-4.50-0.0%s' % (path, suffix))
+    fm = fits.getdata('%slte03500-4.00-0.0%s' % (path, suffix))
+    fh = fits.getdata('%slte06200-4.00-0.0%s' % (path, suffix))
+    h = fits.getheader('%slte02700-4.50-0.0%s' % (path, suffix))
+
+    r = 500
+    w = w[::r]
+    fl = fl[::r]
+    fm = fm[::r]
+    fh = fh[::r]
+
+    from astropy.analytic_functions import blackbody_lambda
+    _wmax = lambda Teff: (c.b_wien/Teff).to('AA')
+    PHOENIX_unit = u.erg/(u.s * (u.cm**2) * u.cm * u.sr)
+    # PHOENIX_unit = u.erg/(u.s * (u.cm**2) * u.cm)
+
+    Teff = np.arange(2000, 8500, 50) * u.K
+    wmax = _wmax(Teff)
+    bb_max = [blackbody_lambda(wi, Ti) for wi, Ti in zip(wmax, Teff)]
+    Bm = np.array([bi.value * 4*np.pi for bi in bb_max]) * u.erg/(u.s * (u.cm**2) * u.AA)
+    # Bm = np.array([bi.value for bi in bb_max]) * bb_max[0].unit
+    # Bm_new = Bm.to(PHOENIX_unit)
+    # Bm_new = Bm.to(PHOENIX_unit, equivalencies=u.spectral_density(wmax))
+
+    print 'PHOENIX unit: %s' % h['BUNIT']
+    print 'Astropy unit: %s' % Bm.unit
+    # print '    New unit: %s' % Bm_new.unit
+
+
+    plt.plot(w, fl, label=r'$T_\mathrm{eff}=2700\mathrm{K, }\log g=4.50$')
+    # plt.plot(w, blackbody_lambda(w, 2700*u.K).to(PHOENIX_unit))
+    plt.plot(w, fm, label=r'$T_\mathrm{eff}=3500\mathrm{K, }\log g=4.00$')
+    # plt.plot(w, blackbody_lambda(w, 3500*u.K).to(PHOENIX_unit))
+    plt.plot(w, fh, label=r'$T_\mathrm{eff}=6200\mathrm{K, }\log g=4.00$')
+    # plt.plot(w, blackbody_lambda(w, 6200*u.K).to(PHOENIX_unit) * 4.5)
+    plt.plot(wmax.value, Bm.value, '-r')
+    # plt.plot(wmax.value, Bm_new.value, '-k')
+
+    plt.xlabel(r'$\lambda$ ({0})'.format(wmax.unit))
+    # plt.ylabel(r'Flux [{0}]'.format(Bm_new.unit))
+    plt.legend(loc='best', frameon=False)
+    plt.show()
+
+
+
+
+
+
+
 def main():
     """Main function
     :returns: TODO
@@ -311,6 +371,7 @@ def main():
     # fig_abundance()
     # fig_EPcut_sun()
     # fig_HD20010_parameters()
+    fig_spectral_region()
 
 
 if __name__ == '__main__':
