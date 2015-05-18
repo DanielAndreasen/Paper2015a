@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import seaborn as sns
 sns.set_style('white')
-# sns.set_context('paper', font_scale=1.5)
-sns.set_context('poster')
+sns.set_context('paper', font_scale=1.5)
+# sns.set_context('poster')
 from glob import glob
 from astropy.io import fits
 from astropy import constants as c
@@ -334,9 +334,9 @@ def fig_spectral_region():
     # bb_max = [blackbody_lambda(wi, Ti) for wi, Ti in zip(wmax, Teff)]
     # Bm = np.array([bi.value * 4*np.pi for bi in bb_max])
 
-    plt.plot(w, fl*1e1, label=r'$T_\mathrm{eff}=2700\mathrm{K, }\log g=4.50$')
-    plt.plot(w, fm*1e1, label=r'$T_\mathrm{eff}=3500\mathrm{K, }\log g=4.00$')
     plt.plot(w, fh, label=r'$T_\mathrm{eff}=6200\mathrm{K, }\log g=4.00$')
+    plt.plot(w, fm*1e1, label=r'$T_\mathrm{eff}=3500\mathrm{K, }\log g=4.00$')
+    plt.plot(w, fl*1e1, label=r'$T_\mathrm{eff}=2700\mathrm{K, }\log g=4.50$')
 
     plt.xlabel(r'$\lambda$ Angstrom')
     plt.ylabel(r'Flux erg/(s cm$^2$ cm)')
