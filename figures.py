@@ -312,13 +312,13 @@ def fig_spectral_region():
     Plot a high Teff synthetic spectra and a low Teff synthetic spectra
     """
 
-    path = '/home/daniel/Documents/Uni/phdproject/data/HD20010/article/figures/'
+    pth = '/home/daniel/Documents/Uni/phdproject/data/HD20010/article/figures/'
     suffix = '.PHOENIX-ACES-AGSS-COND-2011-HiRes.fits'
-    w = fits.getdata('%sWAVE_PHOENIX-ACES-AGSS-COND-2011.fits' % path)
-    fl = fits.getdata('%slte02700-4.50-0.0%s' % (path, suffix))
-    fm = fits.getdata('%slte03500-4.00-0.0%s' % (path, suffix))
-    fh = fits.getdata('%slte06200-4.00-0.0%s' % (path, suffix))
-    h = fits.getheader('%slte02700-4.50-0.0%s' % (path, suffix))
+    w = fits.getdata('%sWAVE_PHOENIX-ACES-AGSS-COND-2011.fits' % pth)
+    fl = fits.getdata('%slte02700-4.50-0.0%s' % (pth, suffix))
+    fm = fits.getdata('%slte03500-4.00-0.0%s' % (pth, suffix))
+    fh = fits.getdata('%slte06200-4.00-0.0%s' % (pth, suffix))
+    h = fits.getheader('%slte02700-4.50-0.0%s' % (pth, suffix))
 
     r = 500
     w = w[::r]
@@ -328,40 +328,26 @@ def fig_spectral_region():
 
     from astropy.analytic_functions import blackbody_lambda
     _wmax = lambda Teff: (c.b_wien/Teff).to('AA')
-    PHOENIX_unit = u.erg/(u.s * (u.cm**2) * u.cm * u.sr)
-    # PHOENIX_unit = u.erg/(u.s * (u.cm**2) * u.cm)
 
     Teff = np.arange(2000, 8500, 50) * u.K
-    wmax = _wmax(Teff)
-    bb_max = [blackbody_lambda(wi, Ti) for wi, Ti in zip(wmax, Teff)]
-    Bm = np.array([bi.value * 4*np.pi for bi in bb_max]) * u.erg/(u.s * (u.cm**2) * u.AA)
-    # Bm = np.array([bi.value for bi in bb_max]) * bb_max[0].unit
-    # Bm_new = Bm.to(PHOENIX_unit)
-    # Bm_new = Bm.to(PHOENIX_unit, equivalencies=u.spectral_density(wmax))
+    # wmax = _wmax(Teff)
+    # bb_max = [blackbody_lambda(wi, Ti) for wi, Ti in zip(wmax, Teff)]
+    # Bm = np.array([bi.value * 4*np.pi for bi in bb_max])
 
-    print 'PHOENIX unit: %s' % h['BUNIT']
-    print 'Astropy unit: %s' % Bm.unit
-    # print '    New unit: %s' % Bm_new.unit
-
-
-    plt.plot(w, fl, label=r'$T_\mathrm{eff}=2700\mathrm{K, }\log g=4.50$')
-    # plt.plot(w, blackbody_lambda(w, 2700*u.K).to(PHOENIX_unit))
-    plt.plot(w, fm, label=r'$T_\mathrm{eff}=3500\mathrm{K, }\log g=4.00$')
-    # plt.plot(w, blackbody_lambda(w, 3500*u.K).to(PHOENIX_unit))
+    plt.plot(w, fl*1e1, label=r'$T_\mathrm{eff}=2700\mathrm{K, }\log g=4.50$')
+    plt.plot(w, fm*1e1, label=r'$T_\mathrm{eff}=3500\mathrm{K, }\log g=4.00$')
     plt.plot(w, fh, label=r'$T_\mathrm{eff}=6200\mathrm{K, }\log g=4.00$')
-    # plt.plot(w, blackbody_lambda(w, 6200*u.K).to(PHOENIX_unit) * 4.5)
-    plt.plot(wmax.value, Bm.value, '-r')
-    # plt.plot(wmax.value, Bm_new.value, '-k')
 
-    plt.xlabel(r'$\lambda$ ({0})'.format(wmax.unit))
-    # plt.ylabel(r'Flux [{0}]'.format(Bm_new.unit))
+    plt.xlabel(r'$\lambda$ Angstrom')
+    plt.ylabel(r'Flux erg/(s cm$^2$ cm)')
     plt.legend(loc='best', frameon=False)
+
+    # ax = plt.axes([0.35, 0.3, 0.2, 0.3])
+    # plt.plot(w, fl)
+    # plt.plot(w, fm)
+    # plt.setp(ax, xticks=[], yticks=[])
+    # plt.savefig('figures/spectral_region.pdf', format='pdf')
     plt.show()
-
-
-
-
-
 
 
 def main():
