@@ -3,6 +3,13 @@
 \usepackage{siunitx}
 \usepackage[version=3]{mhchem}
 
+\sisetup{
+%     fixed-exponent      = 3,
+%     list-units          = brackets,
+    range-units         = brackets,
+%     scientific-notation = fixed
+}
+
 
 \def\eps{\varepsilon}
 \def\aap{A\&A}
@@ -81,7 +88,7 @@ are related to the stellar parameters.
 % serve as a first approach to the determination of parameters in this
 % spectral domain, using well known FGK dwarfs as benchmarks. NIR
 % stellar spectra are significantly less blended, thus allowing for a
-% precise line-by-line analysis \citep{Woolf2006,2012Onehag}. The NIR
+% precise line-by-line analysis \citep{Woolf2006,Onehag2012}. The NIR
 % domain will then be key to solve the problem of M-dwarf parameter
 % estimation. Note that the IR part of the spectrum is preferred over
 % the optical for M-dwarfs because there is less photospheric molecular
@@ -99,7 +106,7 @@ Generally speaking there are two methods for determining parameters from
 a spectrum. One is the spectral synthesis method, where a synthetic
 spectrum is compared with an observed spectrum and by minimization
 procedure the best fit is found between the synthetic spectrum and the
-real spectrum \citep[see e.g.][]{2012Onehag}. The final atmospheric
+real spectrum \citep[see e.g.][]{Onehag2012}. The final atmospheric
 parameters are found when the minimization procedure reach a minimum.
 
 The other method is the equivalent width (EW) method, which we use in this
@@ -128,43 +135,54 @@ especially true for cool stars in the optical where molecular depression
 and line blending is an issue. By moving the analysis to the NIR, we
 reduce the molecular depression, and cooler stars such as M-dwarfs emit
 more in this spectral region, why the continuum is at least easier to
-determine.
+determine. In Figure~\ref{fig:spectral_region} we show a plot of three
+synthetic models created with the PHOENIX atmosphere models \citep{Husser2013}.
+The dependence of wavelength were most light is emitted and the effective
+temperature is called Wien's displacement law and follows from Planck's
+law of a radiating blackbody \citep{Gray2006}.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/spectral_region.pdf}
+    \caption{Synthetic spectra of varying effective temperature. The $\log g$
+    is 0.5 dex higher for the coolest model. The flux of the two coolest models
+    have been multiplied by a factor of 10, in order to show it all in the same
+    scale. The maximum of light emitted is located at different wavelengths for
+    different effective temperatures according to Wien's displacement law.}
+    \label{fig:spectral_region}
+\end{figure}
 
 We look at the spectral region covered by the J, H, and K bands, which cover a
 spectral region larger than $\SI{15000}{\AA}$.
 
 
 
-% The final stellar parameters are obtained when no correlation is present
-% \citep{Gray2006}. The iron abundance is derived in this process, computed by
-% the mean abundance given by all lines analysed.
-
-
-
-
 \subsection{Compiling the line list}
+
 To compile the line list we use the VALD
 database\footnote{The VALD database can be found here:
-\url{http://vald.astro.univie.ac.at/~vald3/php/vald.php}}. First we
-download all iron lines present in the spectral region of interest. In
-total 78537 lines of FeI and FeII are present in the spectral region
-(FeI: 50198 and FeII: 28339). Many of these lines are to faint to see
-in a spectrum. To select the lines for the line list a spectrum of the
-Sun is used downloaded from the BASS2000 web page\footnote{The web
-page can be found here: \url{bass2000.obspm.fr/solar_spect.php}}. The
-spectrum were downloaded in the highest possible resolution. But since
-the resolution is not constant the entire spectrum were interpolated to
-a regular grid with constant wavelength step of $\SI{0.01}{\AA}$.
+\url{http://vald.astro.univie.ac.at/~vald3/php/vald.php}}. First
+we download all iron lines present in the spectral region of
+interest. In total 78537 lines of FeI and FeII are present in
+the spectral region (FeI: 50198 and FeII: 28339) which covers
+\SIrange{10000}{25000}{\angstrom}. Many of these lines are to
+faint to be detected in a spectrum. To select the lines for
+the line list a spectrum of the Sun was used downloaded from
+the BASS2000 web page\footnote{The web page can be found here:
+\url{bass2000.obspm.fr/solar_spect.php}}. The spectrum were downloaded
+in the highest possible resolution. But since the resolution is not
+constant the entire spectrum were interpolated to a regular grid with
+constant wavelength step of $\SI{0.01}{\AA}$.
 
 With the spectrum on a regular wavelength grid the
 EW for all the lines were measured using the ARES
 software\footnote{The ARES software can be found here:
-\url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007}. This
-software can measure EW automatically by fitting a Gaussian profile to
-a spectral line. For a given line ARES output the central wavelength of
-the line, the number of lines fitted for the end result, the depth of
-the line, the FWHM of the line, the EW of the line, and last Gaussians
-coefficients for the line.
+\url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007,Sousa2015}
+. This software can measure EW automatically by fitting a Gaussian
+profile to a spectral line. For a given line ARES output the central
+wavelength of the line, the number of lines fitted for the end result,
+the depth of the line, the FWHM of the line, the EW of the line, and
+last Gaussians coefficients for the line.
 
 We first remove lines from the line list based on the criteria listed
 below:
@@ -245,7 +263,7 @@ gravity.
 After the removal of lines from the complete VALD line list we only
 need to recalibrate the strength of the lines ($\log \mathrm{gf}$)
 the lines in order to match the adopted solar abundance. This is
-a common thing to do for a star we know well \citep{2012Onehag}.
+a common thing to do for a star we know well \citep{Onehag2012}.
 The abundance varies more or less linearly with $\log \mathrm{gf}$.
 Therefore, the recalibrated $\log \mathrm{gf}$ can be found with few
 iterations. In Figure~\ref{fig:Fe1_before_recal} the EW of the Fe I
@@ -283,8 +301,8 @@ Once the EW's have been measured for all lines in the line list (or as
 many as possible), the next step is to derive atmospheric parameters.
 Atmosphere models are necessary for computing abundances of the lines.
 The literature offers the possibility to choose from a wide variety
-of model atmospheres. Models like ATLAS9 \citep{kurucz1993} and
-MARCS \citep{gustafson2008} are the most used atmospheric models for
+of model atmospheres. Models like ATLAS9 \citep{Kurucz1993} and
+MARCS \citep{Gustafson2008} are the most used atmospheric models for
 derivation of spectroscopic parameters for FGK stars.
 
 Here we use the ATLAS9 models which, for efficiency, is created in
@@ -307,7 +325,7 @@ given abundances. The iron abundance comes from calculating the mean of
 all the iron abundances.
 
 In order to find the best atmosphere model, a minimization algorithm
-is used based on the downhill simplex method \citep{press1992} that
+is used based on the downhill simplex method \citep{Press1992} that
 searches in the parameter space for the best fitting model. The
 convergence criteria for the correlation between excitation potential
 and abundances gives a slope less than 0.001, a slope less than 0.002
@@ -375,10 +393,10 @@ for HD20010.
 \label{sec:derived_parameters_of_hd20010}
 
 HD20010 is a well studied F8 subgiant, see e.g.
-\cite{Mortier2013,lebzelter2012}. Therefore, it is a prime object for
+\cite{Mortier2013,Lebzelter2012}. Therefore, it is a prime object for
 our studies, since we want to benchmark results from our new line list
 with literature values. To analyse this star we used spectra from
-the CRIRES-POP \citep{lebzelter2012}. The data comes in pieces of
+the CRIRES-POP \citep{Lebzelter2012}. The data comes in pieces of
 $\SI{50}{\angstrom}$ to $\SI{120}{\angstrom}$. At the time of writing
 the data is not yet fully reduced. This is a task the CRIRES-POP team
 is working on. However, the data can still be used as it is after the
@@ -391,7 +409,7 @@ In order to measure the EW of the lines in our line list, the correct
 absorption lines need to be identified. This was done by plotting
 the spectra for HD20010, a solar spectrum (the parameters are close
 enough so we can use the Sun as a reference), an observed telluric
-spectrum from the TAPAS web page \citep{TAPAS}, and the lines from our
+spectrum from the TAPAS web page \citep{Bertaux2014}, and the lines from our
 line list in the region we are looking at. The pieces of spectra are
 shifted in radial velocity as well. A software was developed that plots
 everything and calculate the cross correlation function of the model
@@ -416,13 +434,13 @@ the model. Figure~\ref{fig:plot_fits} shows an example of this.
 
 The derived parameters for HD20010 for the full line list
 are overestimated compared to literature values, see e.g.
-\citet{Mortier2013,lebzelter2012}. To overcome this problem we
+\citet{Mortier2013,Lebzelter2012}. To overcome this problem we
 tried to remove lines above different EPs and re-determine the
 atmospheric parameters. In this process we did not remove any of
 the FeII lines (we were only able to measure the EW of 5 lines out
 of the 13 from the solar case). Similar work as this has been done
-in the visible range of the spectrum \citep{tsantaki2013}. In the
-line list by \citep{tsantaki2013} the maximum EP is $\SI{5.1}{eV}$.
+in the visible range of the spectrum \citep{Tsantaki2013}. In the
+line list by \citep{Tsantaki2013} the maximum EP is $\SI{5.1}{eV}$.
 Figure~\ref{fig:HD20010_parameters_cuts} shows the results from this
 exercise. In the minimization process the surface gravity were fixed
 at 4.11(ADD REFERENCE) in order to reach convergence. This is a mean
