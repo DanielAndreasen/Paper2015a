@@ -8,10 +8,12 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+import matplotlib
 import seaborn as sns
 sns.set_style('white')
-sns.set_context('paper', font_scale=1.5)
+# sns.set_context('paper', font_scale=1.5)
 # sns.set_context('poster')
+sns.set_context('talk', font_scale=1.2)
 from glob import glob
 from astropy.io import fits
 from astropy import constants as c
@@ -27,35 +29,23 @@ def fig_abundance(fout=None):
     """
 
     p = '../../../programs/moog/results/'
-    fouts = ('figures/EWvsEP', 'figures/EWvsEP_cut')
-    b = np.loadtxt(p + 'Fe1_PreSynth_rec.log', skiprows=1)
-    b = np.c_[b[:, 0], b[:, 1], b[:, 2], b[:, 3], b[:, 5]]
-    dfB = pd.DataFrame(b, columns=['w', 'Excitation potential',
-                                   'log gf', 'EW', 'Abundance'])
+    df = pd.read_csv('%sFe1_PreSynth_rec.log' % p, delimiter=r'\s+')
+    df.rename(columns={'abund': 'Abundance'}, inplace=True)
 
-    idx = dfB.Abundance < 8.47
-    sns.interactplot('Excitation potential', 'EW', 'Abundance', dfB,
-                     filled=True, levels=100,
-                     scatter_kws={'ms': 0})
+    fig = plt.figure()
+    ax1 = sns.interactplot('EP', 'EW', 'Abundance', df, filled=True,
+                           levels=100, scatter_kws={'ms': 6})
+    ax1.set_xlabel('Excitation potential [eV]')
+    ax1.set_ylabel(r'EW [m$\AA$]')
+    plt.draw()
 
-    sns.interactplot('Excitation potential', 'EW', 'Abundance', dfB[idx],
-                     filled=True, levels=100, colorbar=False,
-                     scatter_kws={'label': 'Good abundance'})
+    plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
-    sns.interactplot('Excitation potential', 'EW', 'Abundance', dfB[~idx],
-                     filled=True, levels=100, colorbar=False,
-                     scatter_kws={'alpha': 0.3, 'ms': 4,
-                                  'label': 'Bad abundance',
-                                  'color': 'r'})
-    plt.legend(loc='best')
-    plt.savefig('%s.pdf' % fouts[0], format='pdf')
-
-    a = np.loadtxt(p + 'Fe1_PostSynth_cut.log', skiprows=1)
-    ax = sns.jointplot(a[:, 1], a[:, 3], stat_func=None, kind='kde')
-    ax.set_axis_labels(xlabel='Excitation potential',
-                       ylabel='\nEW')
+    df = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
+    ax = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
+    ax.set_axis_labels(xlabel='Excitation potential', ylabel=r'EW [m$\AA$]')
+    # plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
     # plt.show()
-    plt.savefig('%s.pdf' % fouts[1], format='pdf')
 
 
 def fig_EPcut_sun(fout=None):
@@ -346,18 +336,92 @@ def fig_spectral_region():
     # plt.plot(w, fl)
     # plt.plot(w, fm)
     # plt.setp(ax, xticks=[], yticks=[])
-    # plt.savefig('figures/spectral_region.pdf', format='pdf')
-    plt.show()
+    plt.savefig('figures/spectral_region.pdf', format='pdf')
+    # plt.show()
+
+
+def fig_synthesis():
+    """
+    Plot of solar spectrum and a synthesis
+    """
+
+    def _plotting(synth, nr=3):
+        with open(synth, 'r') as f:
+            line = f.readline()
+            rows = int(line.split('=')[1].strip(' '))
+
+        data = np.zeros((nr, rows, 2))
+        with open(synth, 'r') as f:
+            i = -1
+            for j, line in enumerate(f):
+                if line.startswith('the'):
+                    row = 0
+                    pass
+                elif line.startswith('start'):
+                    i += 1
+                else:
+                    w = float(line[0:12].strip(' '))
+                    f = float(line[13::].strip(' '))
+                    data[i][row] = [w, f]
+                    row += 1
+        return data
+
+    data = _plotting('figures/synth.asc', nr=3)
+    data1 = data[0][:, 1]
+
+    lines = np.loadtxt('figures/lines80.dat',
+                       dtype={'names': ('element', 'w', 'excit', 'gf'),
+                              'formats': ('S4', 'f4', 'f4', 'f4')},
+                       comments='#', delimiter=',', usecols=(0, 1, 2, 3))
+
+    obs = np.loadtxt('figures/15451.979.asc')
+    obs[:, 1] = obs[:, 1]/np.median(obs[:, 1])
+
+    # Get the element from sun.par (line 11 only!!)
+    with open('figures/sun.par', 'r') as par:
+        for i in range(24):
+            par.readline()
+        N_elements = int(par.readline().split(' ')[1]) - 1
+        par.readline()
+
+    # Setting the format
+    fig = plt.figure()
+    ax1 = fig.add_subplot(211)
+    x_formatter = matplotlib.ticker.ScalarFormatter(useOffset=False)
+    ax1.set_xticklabels([])
+    ax1.set_ylabel('Normalized flux')
+    ax1.set_ylim(0.8, 1.05)
+    ax2 = fig.add_subplot(212)
+    ax2.xaxis.set_major_formatter(x_formatter)
+    ax2.set_xlabel(r'$\lambda$ Angstrom')
+
+    # The first plot
+    ax1.plot(obs[:, 0], obs[:, 1], '-k', lw=4, alpha=0.6,
+             label='Observed spectrum')
+    for i, met in zip(range(3), ('0.20', '0.00', '-0.20')):
+        lbl = 'Fe abundance: %s' % met
+        ax1.plot(data[i][:, 0], data[i][:, 1], label=lbl)
+    for line in lines:
+        if line[0].startswith('Fe'):
+            ax1.vlines(line[1], 0.8, 1.05, alpha=0.3)
+    ax1.legend(frameon=False, loc='best')
+
+    # The second plot
+    for i in range(3-1):
+        ax2.plot(data[i+1][:, 0], data[i+1][:, 1] - data1)
+    ax2.legend((r'$\Delta_{21}$', r'$\Delta_{31}$'), loc='best', frameon=False)
+    plt.savefig('figures/synthetic_spectrum.pdf', format='pdf')
+    # plt.show()
 
 
 def main():
     """Main function
-    :returns: TODO
     """
-    # fig_abundance()
+    fig_abundance()
     # fig_EPcut_sun()
     # fig_HD20010_parameters()
-    fig_spectral_region()
+    # fig_spectral_region()
+    # fig_synthesis()
 
 
 if __name__ == '__main__':
