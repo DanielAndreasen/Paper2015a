@@ -10,6 +10,9 @@
 # Python/figure stuff
 *.pyc
 *.fits
+*.dat
+*.par
+*.asc
 
 # Elisa's stuff
 Li_hot3.tex
