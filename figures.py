@@ -125,8 +125,29 @@ def fig_EPcut_sun(fout=None):
     _plot_result(data=(epcut, feh), xlabel=True, ylabel='[Fe/H]')
     plt.hlines(0.0, 4.5, 5.5)
 
-    plt.savefig('figures/solar_parameters_10runs.pdf')
+    # plt.savefig('figures/solar_parameters_10runs.pdf')
     # plt.show()
+    p = parameters
+    tbl = np.vstack((p[:,4], p[:,0], p[:,1], p[:,2], p[:,3])).T
+    i1 = tbl[:,0] == 4.5
+    i2 = tbl[:,0] == 5.0
+    i3 = tbl[:,0] == 5.5
+
+    table = np.zeros((3, 9))
+    for j, i in enumerate((i1, i2, i3)):
+        table[j, 0] = tbl[i, 0][0]
+        table[j, 1] = np.median(tbl[i, 1])
+        table[j, 2] = 3 * np.std(tbl[i, 1])
+        table[j, 3] = np.median(tbl[i, 2])
+        table[j, 4] = 3 * np.std(tbl[i, 2])
+        table[j, 5] = np.median(tbl[i, 3])
+        table[j, 6] = 3 * np.std(tbl[i, 3])
+        table[j, 7] = np.median(tbl[i, 4])
+        table[j, 8] = 3 * np.std(tbl[i, 4])
+
+    fmt = ['%.1f', '%i', '%i', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f']
+    # np.savetxt('table_sun.dat', table, fmt=fmt, delimiter=' & ',
+            # newline='\\\\\n')
 
 
 def fig_HD20010_parameters():
@@ -417,8 +438,8 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    fig_abundance()
-    # fig_EPcut_sun()
+    # fig_abundance()
+    fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
     # fig_synthesis()
