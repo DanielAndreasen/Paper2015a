@@ -203,24 +203,29 @@ below:
 
 
 \subsection{Manually removal of lines}
-\label{sub:manually_removal_of_lines}
+\label{sub:manual_removal_of_lines}
 After the automatic removal of lines following the criteria above
-we reduced the number of lines to 6060 and 2735 for FeI and FeII
+we reduced the number of lines to 6060 and 2735 for FeI and FeII,
 respectively. A manual inspection of the lines is necessary at this
 point in order to sort bad lines. We only removed lines where we were
-certain they did not belong to either FeI or FeII from our list.
-The rest were kept as they would appear as outliers later on in the
-analysis.
+certain they did not belong to either FeI or FeII from our list or
+if the line where clearly blended. We were careful at this step, and
+only few lines were removed The rest were kept as they would appear as
+outliers later on in the analysis.
 
-For the remaining lines, a small spectral window were created around them.
-For each spectral range, the corresponding absorption lines for all elements
-were downloaded. These lines were plotted on top of the Solar spectrum, and
-iron lines were rejected when another element fitted the Solar absorption line
-better.
+For the remaining lines, a small spectral window were created with a
+width of \SI{3}{\angstrom}. For each spectral window, the corresponding
+absorption lines for all elements were downloaded from the VALD data
+base. These lines were plotted on top of the Solar spectrum, and iron
+lines were rejected when another element fitted the Solar absorption
+line better. Note that we did not make a synthetic spectra in order to
+check this but merely looked at the excitation potential and oscillator
+strength ($\log \mathrm{gf}$). Many of the removed iron lines at this
+step had high excitation potential, compared to the final line list.
 
 For some spectral regions it was not clear which element or elements
-caused an absorption line. In these cases the iron line were marked for further
-investigation with synthesis.
+caused an absorption line. In these cases the iron line were marked for
+further investigation with synthesis explained below.
 
 
 
@@ -234,7 +239,24 @@ then two $\pm0.2$ dex. If the synthetic spectra shows variation at
 the absorption line of interest with respect to the different iron
 abundances, then it's likely to be an iron line. We also changed
 abundances of other elements in the proximity to see if our line is
-blended with other elements.
+blended with other elements. An example of these plots can be seen
+in Figure~\ref{fig:synthesis}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/synthetic_spectrum.pdf}
+    \caption{The top panel shows the observed spectra in grey, while
+        the colored graphs is synthetic spectra with increasing iron
+        abundance as the central two lines get deeper. The iron abundance
+        is varied 0.4 dex in total. The vertical lines shows all the places
+        there are an iron line in the line list. The bottom panel shows
+        two plots, namely the difference between the first synthetic curve
+        and the second, and the third ($\Delta_{21}$ and $\Delta_{31}$,
+        respectively). This is for highlighting were the change in iron
+        abundance have an impact.}
+    \label{fig:synthesis}
+\end{figure}
+
 
 Sometimes more than 1 iron line might be present with very similar
 wavelengths. In order to find the iron line which is creating the
@@ -243,8 +265,9 @@ the synthetic spectra. If this removed (either fully or partially) the
 absorption line in the synthetic spectra, then it will be the cause for
 the real absorption line.
 
-A few times two iron lines had similar wavelengths and the same excitation
-potential. In those cases the $\log \mathrm{gf}$ were combined.
+A few times two iron lines had similar wavelengths and identical
+excitation potential. In those cases the $\log \mathrm{gf}$ were
+combined.
 
 
 \subsubsection{Recalibrating the atomic data}
@@ -258,19 +281,21 @@ to resemble the Sun. We consider a solar value of 7.47 according to
 more than 1 dex were discarded. At this point we are down to 319 and 12
 lines, for Fe I and Fe II respectively. We only removed Fe I lines here,
 since the Fe II lines are sparse and important to determine the surface
-gravity.
+gravity when we reach ionization balance, as explained in
+Subsection~\ref{sec:deriving_parameters_with_the_ew_method}.
 
-After the removal of lines from the complete VALD line list we only
-need to recalibrate the strength of the lines ($\log \mathrm{gf}$)
-the lines in order to match the adopted solar abundance. This is
-a common thing to do for a star we know well \citep{Onehag2012}.
-The abundance varies more or less linearly with $\log \mathrm{gf}$.
-Therefore, the recalibrated $\log \mathrm{gf}$ can be found with few
-iterations. In Figure~\ref{fig:Fe1_before_recal} the EW of the Fe I
-lines are plotted with respect to the excitation potential. On top
-of that, the color scale represent the abundance calculated before
-the recalibration of $\log \mathrm{gf}$. A similar plot is seen in
-Figure\ref{fig:Fe1_after_recal} but after the recalibration.
+After the removal of lines from the complete VALD line list we only need
+to recalibrate the strength of the lines ($\log \mathrm{gf}$) the lines
+in order to match the adopted solar abundance. This is also known as a
+differential analysis, which is a common thing to do for a star we know
+well \citep{Onehag2012}. The abundance varies more or less linearly
+with $\log \mathrm{gf}$. Therefore, the recalibrated $\log \mathrm{gf}$
+can be found with few iterations. In Figure~\ref{fig:Fe1_before_recal}
+the EW of the Fe I lines are plotted with respect to the excitation
+potential. On top of that, the color scale represent the abundance
+calculated before the recalibration of $\log \mathrm{gf}$. A similar
+plot is seen in Figure\ref{fig:Fe1_after_recal} but after the
+recalibration.
 
 \begin{figure}[htpb]
     \centering
@@ -312,17 +337,18 @@ interpolate models from the grid, thus allowing to look in a finer grid
 space.
 
 For a given atmosphere model, abundances of all the lines in the line
-list are calculated. By removing a correlation between the excitation
+list are calculated. By removing any correlation between the excitation
 potential and abundance of all lines (from same element) the effective
 temperature is constrained. In a similar way, the micro turbulence can
 be constrained be removing any correlation between the reduced EW ($\log
-EW$) and abundances. Lastly the surface gravity is found when there is
+EW$) and abundances, and the surface gravity is found when there is
 ionization balance, i.e. the mean abundance of FeI and FeII are equal.
+Lastly, the iron abundance comes from calculating the mean of
+all the iron abundances.
 
 When there are no longer any correlation, the final atmospheric
 parameters are obtained from the atmospheric model to calculate the
-given abundances. The iron abundance comes from calculating the mean of
-all the iron abundances.
+given abundances.
 
 In order to find the best atmosphere model, a minimization algorithm
 is used based on the downhill simplex method \citep{Press1992} that
@@ -341,7 +367,6 @@ FeII.
 
 \section{Results}
 \label{sec:results}
-
 
 
 \subsection{Derived parameters for the Sun}
@@ -372,11 +397,12 @@ well with solar values (ADD REFERENCE HERE).
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.9\linewidth]{figures/solar_parameters_10runs.pdf}
-    \caption{Derived atmospheric parameters for the Sun. The horizontal black
-    lines are the parameters for the calibrated line list, the three points
-    shows the median value of 10 runs with random noise added, the blue point
-    is the result for the whole line list, and lastly the two green points are the
-    results from the line lists cut in EP as given on the x-axis.}
+    \caption{Derived atmospheric parameters for the Sun. The horizontal
+    black lines are the parameters for the calibrated line list, the
+    three points shows the median value of 10 runs with random noise
+    added, the blue point is the result for the whole line list, and
+    lastly the two green points are the results from the line lists cut
+    in EP as given on the x-axis.}
     \label{fig:solar_parameters}
 \end{figure}
 
@@ -386,6 +412,27 @@ the parameters except the iron abundance, when a cut in EP is not
 applied. This suggest that it might be necessary to do a cut in the line
 list for other stars to get reliable parameters. This is indeed the case
 for HD20010.
+
+The derived atmospheric parameters are presented in Table~\ref{tab:sun}.
+
+
+\begin{table*}[htb!]
+    \caption{The derived parameters for the Sun with two different cuts
+    in EP, and with no cut. For all the line lists here, there is noise
+    added to the EW measurements.}
+    \label{tab:sun}
+    \centering
+    \begin{tabular}{lllll}
+      \hline\hline
+        EP cut (eV) & $T_\mathrm{eff}$ (K) & $\log g$ (cgs) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H] \\
+      \hline
+        No cut      & 5920 \pm 247         & 4.94 \pm  0.64 & 4.99 \pm 3.96               & -0.03 \pm 0.14\\
+        5.0         & 5738 \pm 274         & 4.54 \pm  0.72 & 4.99 \pm 4.83               & -0.11 \pm 0.25\\
+        5.5         & 5612 \pm 158         & 4.49 \pm  0.70 & 4.80 \pm 5.64               & -0.24 \pm 0.44\\
+      \hline
+    \end{tabular}
+\end{table*}
+
 
 
 
