@@ -80,24 +80,40 @@ searches. Planetary radius, and mass are mainly found from lightcurve
 analysis and radial velocity analysis, respectively. These parameters
 are related to the stellar parameters.
 
+Today there are several methods of determine atmospheric parameters.
+Interferometry of bright stars give highly accurate radii and effective
+temperatures with low uncertainties. See e.g. \cite{Boyajian2012} for
+application of interferometry of K and M stars. A newer technique is
+asteroseismology were stellar pulsation observed at the surface penetrates
+the interior of a star, and then reveals the inner structure. From
+asteroseismology it is possible to relatively easy measure the surface
+gravity and mean density, and therefore from scaling relations
+\citep{Kjeldsen1995} calculate the mass and radius. This technique have been
+tested in great extent for solar like stars and red giants since the launch of
+the \emph{Kepler} mission \citep{Huber2011} and the CoRoT mission (ADD
+REFERENCE).
+
+From photometry we can find effective temperatures from simple color relations.
+Such relations have been examined in \cite{Ramirez2005a} and is a well known
+method. Yet another method is the infrared flux method (IRFM) first described
+by \cite{Blackwell1977} and a newer study by \cite{Ramirez2005b}. For this
+method, we need to know the bolometric flux, surface gravity, and the
+metallicity a priori.
 
 
 
-% In this seminar I will explore the use of NIR spectroscopy towards
-% the derivation of precise parameters for FGK dwarfs. This work will
-% serve as a first approach to the determination of parameters in this
-% spectral domain, using well known FGK dwarfs as benchmarks. NIR
-% stellar spectra are significantly less blended, thus allowing for a
-% precise line-by-line analysis \citep{Woolf2006,Onehag2012}. The NIR
-% domain will then be key to solve the problem of M-dwarf parameter
-% estimation. Note that the IR part of the spectrum is preferred over
-% the optical for M-dwarfs because there is less photospheric molecular
-% line blending and continuum depression.
-%
-% For the determination of stellar parameters we need to choose our
-% approach. In general there is two widely used approaches to analyse
-% spectra, 1: The spectral synthesis method, and 2: The equivalent
-% method. I will use the latter approach.
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{The method}
 \label{sec:the_method}
@@ -481,13 +497,12 @@ the model. Figure~\ref{fig:plot_fits} shows an example of this.
 
 The derived parameters for HD20010 for the full line list
 are overestimated compared to literature values, see e.g.
-\citet{Mortier2013,Lebzelter2012}. To overcome this problem we
-tried to remove lines above different EPs and re-determine the
-atmospheric parameters. In this process we did not remove any of
-the FeII lines (we were only able to measure the EW of 5 lines out
-of the 13 from the solar case). Similar work as this has been done
-in the visible range of the spectrum \citep{Tsantaki2013}. In the
-line list by \citep{Tsantaki2013} the maximum EP is $\SI{5.1}{eV}$.
+\citet{Mortier2013,Lebzelter2012}. To overcome this problem we tried
+to remove lines above different EPs and re-determine the atmospheric
+parameters. In this process we did not remove any of the FeII
+lines (we were only able to measure the EW of 5 lines out of the
+13 from the solar case). In the line list by \cite{Tsantaki2013}
+covering a visual range the maximum EP is $\SI{5.1}{eV}$.
 Figure~\ref{fig:HD20010_parameters_cuts} shows the results from this
 exercise. In the minimization process the surface gravity were fixed
 at 4.11(ADD REFERENCE) in order to reach convergence. This is a mean
@@ -495,7 +510,33 @@ value of previous studies. A second degree polynomial is fitted for the
 effective temperature, iron abundance, and the micro turbulence with
 the 95\% confidence interval. At a cut at $\SI{5.5}{eV}$ and below the
 atmospheric parameters gets closer to the literature values which is
-plotted as a horizontal black line.
+plotted as a horizontal black line. The exact values can be seen in
+Table~\ref{tab:hd20010}.
+
+\begin{table*}[htb!]
+    \caption{The derived parameters for HD20010 at different EP cut. $\log g$
+    were fixed at 4.11 for all calculations.}
+    \label{tab:hd20010}
+    \centering
+    \begin{tabular}{lllll}
+      \hline\hline
+        EP cut (eV) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H] \\
+      \hline
+      5.0           & 6098                 & 0.67                        & -0.22   \\
+      5.1           & 6060                 & 1.31                        & -0.26   \\
+      5.2           & 6084                 & 1.29                        & -0.25   \\
+      5.3           & 6081                 & 1.29                        & -0.25   \\
+      5.4           & 6149                 & 2.01                        & -0.27   \\
+      5.5           & 6324                 & 2.05                        & -0.23   \\
+      5.6           & 6353                 & 2.12                        & -0.23   \\
+      5.7           & 6596                 & 2.10                        & -0.18   \\
+      5.8           & 6601                 & 2.10                        & -0.18   \\
+      5.9           & 6992                 & 2.02                        & -0.09   \\
+      6.0           & 7000                 & 2.03                        & -0.08   \\
+      No cut        & 7138                 & 2.87                        & -0.06   \\
+      \hline
+    \end{tabular}
+\end{table*}
 
 
 \begin{figure}[htpb!]
