@@ -196,11 +196,11 @@ def fig_HD20010_parameters():
                 data[index, 3] = np.nan  # microturbulence
                 data[index, 4] = float(z[-1])  # metalicity
 
-    df = pd.DataFrame({'EP':   data[0:-1, 0],
+    df = pd.DataFrame({  'EP': data[0:-1, 0],
                        'Teff': data[0:-1, 1],
                        'logg': data[0:-1, 2],
-                       'vt':   data[0:-1, 3],
-                       'feh':  data[0:-1, 4]})
+                         'vt': data[0:-1, 3],
+                        'feh': data[0:-1, 4]})
 
     xlim1 = [4.95, 6.05]
     xlim2 = [6.95, 7.05]
@@ -315,7 +315,8 @@ def fig_HD20010_parameters():
     ax6.set_ylim(ylim)
 
     # plt.show()
-    plt.savefig('figures/HD20010_parameters_cuts.pdf')
+    # plt.savefig('figures/HD20010_parameters_cuts.pdf')
+    return df
 
 
 def fig_spectral_region():
