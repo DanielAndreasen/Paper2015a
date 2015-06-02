@@ -83,22 +83,22 @@ are related to the stellar parameters.
 Today there are several methods of determine atmospheric parameters.
 Interferometry of bright stars give highly accurate radii and effective
 temperatures with low uncertainties. See e.g. \cite{Boyajian2012} for
-application of interferometry of K and M stars. A newer technique is
-asteroseismology were stellar pulsation observed at the surface penetrates
-the interior of a star, and then reveals the inner structure. From
-asteroseismology it is possible to relatively easy measure the surface
-gravity and mean density, and therefore from scaling relations
-\citep{Kjeldsen1995} calculate the mass and radius. This technique have been
-tested in great extent for solar like stars and red giants since the launch of
-the \emph{Kepler} mission \citep{Huber2011} and the CoRoT mission (ADD
-REFERENCE).
+application of interferometry of K and M stars. A newer technique
+is asteroseismology were stellar pulsation observed at the surface
+penetrates the interior of a star, and then reveals the inner structure.
+From asteroseismology it is possible to relatively easy measure the
+surface gravity and mean density, and therefore from scaling relations
+\citep{Kjeldsen1995} calculate the mass and radius. This technique
+have been tested in great extent for solar like stars and red giants
+since the launch of the \emph{Kepler} mission and the CoRoT mission
+\citep{Michel2008,Huber2011,Huber2012}.
 
-From photometry we can find effective temperatures from simple color relations.
-Such relations have been examined in \cite{Ramirez2005a} and is a well known
-method. Yet another method is the infrared flux method (IRFM) first described
-by \cite{Blackwell1977} and a newer study by \cite{Ramirez2005b}. For this
-method, we need to know the bolometric flux, surface gravity, and the
-metallicity a priori.
+From photometry we can find effective temperatures from simple color
+relations. Such relations have been examined in \cite{Ramirez2005a} and
+is a well known method. Yet another method is the infrared flux method
+(IRFM) first described by \cite{Blackwell1977} and a newer study by
+\cite{Ramirez2005b,Casagrande2010}. For this method, we need to know the
+bolometric flux, surface gravity, and the metallicity a priori.
 
 
 
@@ -245,7 +245,7 @@ further investigation with synthesis explained below.
 
 
 
-\subsubsection{Synthesis of selected lines}
+\subsection{Synthesis of selected lines}
 \label{sub:synthesis_of_selected_lines}
 Lines from all elements in a small window around an iron line marked
 for further investigation were used to make a synthetic spectrum.
@@ -286,7 +286,7 @@ excitation potential. In those cases the $\log \mathrm{gf}$ were
 combined.
 
 
-\subsubsection{Recalibrating the atomic data}
+\subsection{Recalibrating the atomic data}
 \label{ssub:Recalibrating-the-atomic-data}
 
 The iron abundances were calculated for all lines with an atmosphere
@@ -392,23 +392,34 @@ We derive atmospheric parameters for the Sun with the recalibrated line
 list. This is a trivial case since the line list is calibrated for the
 Sun, but it serves as a consistency test. Additionally, we added noise
 to the EW measurements and derived parameters with different cuts in
-excitation potential (EP). The noisy EW's is a drawn sample from a
-Poisson distribution \begin{align} f(k; \lambda) = \frac{\lambda^k
-e^{-\lambda}}{k!}, \end{align} for events with an expected separation
-$\lambda$ the Poisson distribution $f(k; \lambda)$ describes the
-probability of $k$ events occurring within the observed interval
-$\lambda$. For all EW's we make 10 draws which corresponds to 11
-different line lists (10 line lists with noisy EW's and the original
-line list). We cut in EP since the absorption lines are generally weaker
-for higher EP, thus the relative error in EW becomes higher. We want to
-avoid this issue in other stars. The cuts are located at $\SI{5.5}{eV}$
-and $\SI{5.0}{eV}$. This gives additionally 20 line lists for which we
-derive atmospheric parameters.
+excitation potential (EP). The noisy EW's follow the procedure from
+\cite{Caryel1988}:
+
+\begin{align}
+    \sigma \simeq 1.6 \frac{\sqrt{\Delta\lambda EW}}{SNR},
+\end{align}
+where $\Delta\lambda=0.1$ and we consider to different signal-to-noise ratios,
+100 and 300. This sigma is used to create a normal distribution with a mean
+around the original EW.
+
+\begin{align}
+    f(x, EW, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-EW)^2}{2\sigma^2}}
+\end{align}
+A new EW is drawn from this distribution and the atmospheric parameters
+are derived again. For all EWs we make 10 draws which corresponds to
+20 different line lists (2 for each SNR we consider with 10 draws
+each). For this 20 line lists we cut in the EP. The cuts are located
+at $\SI{5.5}{eV}$ and $\SI{5.0}{eV}$. This gives additionally 40 line
+lists, which is a total of 61 including the original line list which at
+this point is used as a standard. We derive parameters for all 61 line
+lists.
+
 
 In Figure~\ref{fig:solar_parameters} the parameters are plotted with
 different EP cuts in the line list. The horizontal black line is the
 derived atmospheric parameters without noise added to the EW. This agree
-well with solar values (ADD REFERENCE HERE).
+well with solar values (ADD REFERENCE HERE). The color shows the two different
+SNR considered.
 
 \begin{figure}[htpb]
     \centering
@@ -416,9 +427,8 @@ well with solar values (ADD REFERENCE HERE).
     \caption{Derived atmospheric parameters for the Sun. The horizontal
     black lines are the parameters for the calibrated line list, the
     three points shows the median value of 10 runs with random noise
-    added, the blue point is the result for the whole line list, and
-    lastly the two green points are the results from the line lists cut
-    in EP as given on the x-axis.}
+    added, the blue points is the results for SNR=100, while the
+    green points is for SNR=300.}
     \label{fig:solar_parameters}
 \end{figure}
 
@@ -567,65 +577,3 @@ Table~\ref{tab:hd20010}.
 \nocite*{}
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Summary}
-\label{sec:conclusion}
-It is a lengthy process to compile a final good line list for spectral
-analysis, and with a high possibility to make errors along the way. E.g.\ the
-data that was first used from the \url{vso.nso.edu} was not corrected in radial
-velocity was used. This was only discovered by an accident after many of the
-above steps were already taken. Therefore, all the steps needed to be done
-again, after switching to the BASS2000 dataset.
-
-Now the solar spectrum are ready for analysis. All the neutral and first
-ionized iron lines in a wide wavelength coverage in the NIR have been
-downloaded from the VALD database. With the lines follows the excitation
-potential and the oscillator strength. The latter has to be recalibrated for
-all the lines before an analysis can take place.
-
-Far from all the lines from the VALD database are useful for a spectral
-analysis in the NIR domain. Therefore, many of the lines have been removed
-following the selection criteria in Section~\ref{ssec:compiling_the_line_list}.
-
-\subsubsection{The future work}
-\label{ssub:the_future_work}
-At the moment of writing the next step is to remove ``false-positive'' lines,
-which are lines there are found in the VALD database and seems to hit a
-spectral line, but in reality the spectral line belongs to another element.
-This step has to be done before recalibrating the $\log gf$ values makes sense.
-Even though yet another somewhat lengthy process awaits ahead, the
-recalibration software is ready, as it was already shown in
-Figure~\ref{fig:recalFe1}.
-
-The recalibration will be done with respect to the Sun, the star we know best.
-The goal is to characterise M-dwarfs, but since the Sun (G2V by definition,
-\citet{Gray2006}) is not far away in spectral class, it should be save to use
-the Sun as a starting point. However, for benchmarking the line list a sample
-of FGK-dwarfs will be analysed. These stars will have well known stellar
-parameters in order to test the line list. After the benchmarking some small
-corrections might be made to the line list, in order to have consistent
-results.
-
-This will be the final step before the determination of stellar parameters
-using iron lines in the NIR combined with the equivalent method on M-dwarfs,
-and the characterisation of this cool planet hosts.
-
-
