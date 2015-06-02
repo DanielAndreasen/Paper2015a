@@ -55,13 +55,16 @@ def fig_EPcut_sun(fout=None):
     :fout: File name figure is written to
     """
 
-    def _get_params(fname):
+    def get_params(fname):
         with open(fname, 'r') as lines:
-            for _ in range(2):
-                lines.readline()
-            line = lines.readline().strip().split()
-            if line[0] == '#':
-                line = lines.readline().strip().split()
+            line = lines.readline()
+            while True:
+                if line.startswith('#') or line.startswith('Wavelength'):
+                    line = lines.readline()
+                    break
+                else:
+                    line = lines.readline()
+            line = line.strip().split()
         T = int(line[1])
         logg = float(line[4])
         vt = float(line[6])
@@ -71,81 +74,116 @@ def fig_EPcut_sun(fout=None):
             feh = float(line[-1])
         return T, logg, vt, feh
 
-    def _plot_result(data, xlabel=None, ylabel=None, solar=None):
-        x, y = data
-        # No EP cut
-        sns.regplot(x[x == 4.5], y[x == 4.5], x_estimator=np.median,
-                    fit_reg=False)
-        # EP cut
-        sns.regplot(x[x != 4.5], y[x != 4.5], x_estimator=np.median,
-                    truncate=True, label='EP cut')
-        plt.xticks([4.5, 5.0, 5.5], ['No cut', '5.0', '5.5'])
+
+    def plot_result(data, xlabel=None, ylabel=None, solar=None, color=None):
+        ep, y = data
+        try:
+            sns.regplot(ep[ep==6.0], y[ep==6.0], x_estimator=np.median, fit_reg=False, color=color)
+        except ValueError:
+            pass
+        try:
+            sns.regplot(ep[ep!=6.0], y[ep!=6.0], x_estimator=np.median, truncate=True, color=color)
+        except ValueError:
+            pass
+        plt.xticks([5.0, 5.5, 6.0], ['5.0', '5.5', 'No cut'])
         if ylabel:
             plt.ylabel(ylabel)
         if solar:
-            plt.hlines(solar, 4.5, 5.5)
+            plt.hlines(solar, 5.0, 6.0)
 
-    p = '/home/daniel/Software/SPECPAR/Sun/'
-    files = glob(p + 'Out_moog_*')
-    parameters = np.zeros((len(files) - 1, 5))
 
-    i = 0
-    for file in files:
-        if 'Poisson' not in file:
-            solar = _get_params(file)
+    def get_run(fname):
+        tmp = fname[::-1]
+        n = tmp.find('N')
+        if tmp[n+2] == '10':
+            return 10
         else:
-            if 'filtered' in file:
-                epcut = float(file.split('filtered_2_')[1].strip('.moog'))
-            else:
-                epcut = 4.5
-            T, logg, vt, feh = _get_params(file)
-            parameters[i, 0] = T
-            parameters[i, 1] = logg
-            parameters[i, 2] = vt
-            parameters[i, 3] = feh
-            parameters[i, 4] = epcut
-            i += 1
+            return int(tmp[n+1])
 
-    T, logg, vt, feh, epcut = parameters.T
+
+
+
+    p = '/home/daniel/Software/SPECPAR/Sun/snr_results/'
+    files = glob(p + 'Out_moog_*')
+    N = len(files)
+    data = np.empty((N, 7))
+    data[:, 5] = 6.0
+
+    eps = [5.0, 5.5]
+    snrs = [100, 300]
+    for i, file in enumerate(files):
+        if 'SNR' not in file:
+            solar = get_params(file)
+            # Skip the original line list
+            continue
+        if 'b' in file:
+            # Skip file, it it didn't converge
+            continue
+        T, logg, vt, feh = get_params(file)
+        run = get_run(file)
+        data[i, 0] = run
+        data[i, 1] = T
+        data[i, 2] = logg
+        data[i, 3] = vt
+        data[i, 4] = feh
+        for ep in eps:
+            if str(ep) in file:
+                data[i, 5] = float(ep)
+        for snr in snrs:
+            if str(snr) in file:
+                data[i, 6] = snr
+
+
+    run, T, logg, vt, feh, epcut, snr = data.T
+
+# Divide in SNR and make sure the file converged
+    i1 = (snr == 100) & (T > 100)
+    i2 = (snr == 300) & (T > 100)
+    color = sns.color_palette()
+
     ax1 = plt.subplot(221)
-    _plot_result(data=(epcut, T), ylabel=r'$\mathrm{T_{eff}}$', solar=solar[0])
+    plot_result(data=(epcut[i1], T[i1]), ylabel=r'$\mathrm{T_{eff}}$', solar=solar[0], color=color[0])
+    plot_result(data=(epcut[i2], T[i2]), solar=solar[0], color=color[1])
 
     ax2 = plt.subplot(222, sharex=ax1)
     ax2.yaxis.tick_right()
     ax2.yaxis.set_label_position('right')
-    _plot_result(data=(epcut, logg), ylabel=r'$\log(g)$', solar=solar[1])
+    plot_result(data=(epcut[i1], logg[i1]), solar=solar[1], color=color[0])
+    plot_result(data=(epcut[i2], logg[i2]), ylabel=r'$\log(g)$', solar=solar[1], color=color[1])
 
     ax3 = plt.subplot(223, sharex=ax1)
-    _plot_result(data=(epcut, vt), xlabel=True, ylabel=r'$\xi_\mathrm{micro}$',
-                 solar=solar[2])
+    plot_result(data=(epcut[i1], vt[i1]), solar=solar[2], color=color[0])
+    plot_result(data=(epcut[i2], vt[i2]), ylabel=r'$\xi_\mathrm{micro}$', solar=solar[2], color=color[1])
 
     ax4 = plt.subplot(224, sharex=ax1)
     ax4.yaxis.tick_right()
     ax4.yaxis.set_label_position('right')
-    _plot_result(data=(epcut, feh), xlabel=True, ylabel='[Fe/H]')
-    plt.hlines(0.0, 4.5, 5.5)
+    plot_result(data=(epcut[i1], feh[i1]), solar=solar[3], color=color[0])
+    plot_result(data=(epcut[i2], feh[i2]), ylabel='[Fe/H]', solar=solar[3], color=color[1])
+    plt.hlines(0.0, 5.0, 6.0)
 
-    # plt.savefig('figures/solar_parameters_10runs.pdf')
+
+    plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
     # plt.show()
-    p = parameters
-    tbl = np.vstack((p[:,4], p[:,0], p[:,1], p[:,2], p[:,3])).T
-    i1 = tbl[:,0] == 4.5
-    i2 = tbl[:,0] == 5.0
-    i3 = tbl[:,0] == 5.5
+    # p = data
+    # tbl = np.vstack((p[:,4], p[:,0], p[:,1], p[:,2], p[:,3])).T
+    # i1 = tbl[:,0] == 4.5
+    # i2 = tbl[:,0] == 5.0
+    # i3 = tbl[:,0] == 5.5
 
-    table = np.zeros((3, 9))
-    for j, i in enumerate((i1, i2, i3)):
-        table[j, 0] = tbl[i, 0][0]
-        table[j, 1] = np.median(tbl[i, 1])
-        table[j, 2] = 3 * np.std(tbl[i, 1])
-        table[j, 3] = np.median(tbl[i, 2])
-        table[j, 4] = 3 * np.std(tbl[i, 2])
-        table[j, 5] = np.median(tbl[i, 3])
-        table[j, 6] = 3 * np.std(tbl[i, 3])
-        table[j, 7] = np.median(tbl[i, 4])
-        table[j, 8] = 3 * np.std(tbl[i, 4])
+    # table = np.zeros((3, 9))
+    # for j, i in enumerate((i1, i2, i3)):
+    #     table[j, 0] = tbl[i, 0][0]
+    #     table[j, 1] = np.median(tbl[i, 1])
+    #     table[j, 2] = 3 * np.std(tbl[i, 1])
+    #     table[j, 3] = np.median(tbl[i, 2])
+    #     table[j, 4] = 3 * np.std(tbl[i, 2])
+    #     table[j, 5] = np.median(tbl[i, 3])
+    #     table[j, 6] = 3 * np.std(tbl[i, 3])
+    #     table[j, 7] = np.median(tbl[i, 4])
+    #     table[j, 8] = 3 * np.std(tbl[i, 4])
 
-    fmt = ['%.1f', '%i', '%i', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f']
+    # fmt = ['%.1f', '%i', '%i', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f']
     # np.savetxt('table_sun.dat', table, fmt=fmt, delimiter=' & ',
             # newline='\\\\\n')
 
