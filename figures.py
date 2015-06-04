@@ -39,13 +39,13 @@ def fig_abundance(fout=None):
     ax1.set_ylabel(r'EW [m$\AA$]')
     plt.draw()
 
-    plt.savefig('figures/EWvsEP.pdf', format='pdf')
+    # plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
     df = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
     ax = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
-    ax.set_axis_labels(xlabel='Excitation potential', ylabel=r'EW [m$\AA$]')
+    ax.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
     # plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
-    # plt.show()
+    plt.show()
 
 
 def fig_EPcut_sun(fout=None):
@@ -477,8 +477,8 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    # fig_abundance()
-    fig_EPcut_sun()
+    fig_abundance()
+    # fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
     # fig_synthesis()
