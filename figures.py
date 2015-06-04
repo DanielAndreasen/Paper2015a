@@ -454,6 +454,7 @@ def fig_synthesis():
     ax2 = fig.add_subplot(212)
     ax2.xaxis.set_major_formatter(x_formatter)
     ax2.set_xlabel(r'$\lambda$ Angstrom')
+    ax2.set_ylabel('Residuals')
 
     # The first plot
     ax1.plot(obs[:, 0], obs[:, 1], '-k', lw=4, alpha=0.6,
@@ -477,11 +478,11 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    fig_abundance()
+    # fig_abundance()
     # fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
-    # fig_synthesis()
+    fig_synthesis()
 
 
 if __name__ == '__main__':
