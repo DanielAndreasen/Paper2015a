@@ -511,20 +511,24 @@ the model. Figure~\ref{fig:plot_fits} shows an example of this.
 The derived parameters for HD20010 for the full line list
 are overestimated compared to literature values, see e.g.
 \citet{Mortier2013,Lebzelter2012}. To overcome this problem we tried
-to remove lines above different EPs and re-determine the atmospheric
-parameters. In this process we did not remove any of the FeII
-lines (we were only able to measure the EWs of 5 lines out of the
-13 from the solar case). In the line list by \cite{Tsantaki2013}
-covering a visual range the maximum EP is $\SI{5.1}{eV}$.
-Figure~\ref{fig:HD20010_parameters_cuts} shows the results from this
-exercise. In the minimization process the surface gravity were fixed
-at 4.11(ADD REFERENCE) in order to reach convergence. This is a mean
-value of previous studies. A second degree polynomial is fitted for the
+to remove lines above different EPs and re-determine the stellar
+atmospheric parameters. In this process we did not remove any of the
+FeII lines (we were only able to measure the EWs of 5 lines out of
+the 13 from the solar case). The reason not to remove the FeII lines
+is, that they are essential to determine the surface gravity from the
+ionization balance. As it turned out, 5 lines were to few, and we
+fixed the surface gravity to a median of literature values at 4.11(ADD
+REFERENCES). Figure~\ref{fig:HD20010_parameters_cuts} shows the results
+from this exercise. A second degree polynomial is fitted for the
 effective temperature, iron abundance, and the micro turbulence with
-the 95\% confidence interval. At a cut at $\SI{5.5}{eV}$ and below the
-atmospheric parameters gets closer to the literature values which is
-plotted as a horizontal black line. The exact values can be seen in
-Table~\ref{tab:hd20010}.
+the 95\% confidence interval. At a cut at $\SI{5.5}{eV}$ and below
+the atmospheric parameters gets closer to the literature values which
+is plotted as a horizontal black line. The exact values can be seen
+in Table~\ref{tab:hd20010}. For comparison, a line list covering the
+visual part of the spectrum by \cite{Tsantaki2013} reach at maximum
+$\SI{5.1}{eV}$ for the EP
+
+
 
 \begin{table*}[htb!]
     \caption{The derived parameters for HD20010 at different EP cut. $\log g$
@@ -555,12 +559,13 @@ Table~\ref{tab:hd20010}.
 \begin{figure}[tpb!]
     \centering
     \includegraphics[width=0.9\linewidth]{figures/HD20010_parameters_cuts.pdf}
-    \caption{Atmospheric parameters for HD20010. In the top panel is the
-    effective temperature. The middle panel is the iron abundance, and the
-    bottom panel is the micro turbulence. The parameters are derived with
-    different cuts in EP. Here the horizontal black lines are literature values.
-    The parameters for the full line list are plotted to the right for all
-    three plots.}
+    \caption{Atmospheric parameters for HD20010. In the top panel is
+    the effective temperature. The middle panel is the iron abundance,
+    and the bottom panel is the micro turbulence. The parameters are
+    derived with different cuts in EP. Here the horizontal black lines
+    are literature values. The parameters for the full line list are
+    plotted to the right for all three plots. The shaded areas are the
+    95\% confidence interval for the fit.}
     \label{fig:HD20010_parameters_cuts}
 \end{figure}
 
