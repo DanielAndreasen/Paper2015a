@@ -135,79 +135,79 @@ def fig_EPcut_sun(fout=None):
     run, T, logg, vt, feh, epcut, snr = data.T
 
     # Divide in SNR and make sure the file converged
-    # i1 = (snr == 100) & (T > 100)
-    # i2 = (snr == 300) & (T > 100)
-    # color = sns.color_palette()
+    i1 = (snr == 100) & (T > 100)
+    i2 = (snr == 300) & (T > 100)
+    color = sns.color_palette()
 
-    # ax1 = plt.subplot(221)
-    # plot_result(data=(epcut[i1], T[i1]), ylabel=r'$\mathrm{T_{eff}}$', solar=solar[0], color=color[0])
-    # plot_result(data=(epcut[i2], T[i2]), solar=solar[0], color=color[1])
-    # ax1.set_ylim(solar[0]-30, solar[0]+10)
+    ax1 = plt.subplot(221)
+    plot_result(data=(epcut[i1], T[i1]), ylabel=r'$\mathrm{T_{eff}}$', solar=solar[0], color=color[0])
+    plot_result(data=(epcut[i2], T[i2]), solar=solar[0], color=color[1])
+    ax1.set_ylim(solar[0]-30, solar[0]+10)
 
-    # ax2 = plt.subplot(222, sharex=ax1)
-    # ax2.yaxis.tick_right()
-    # ax2.yaxis.set_label_position('right')
-    # plot_result(data=(epcut[i1], logg[i1]), solar=solar[1], color=color[0])
-    # plot_result(data=(epcut[i2], logg[i2]), ylabel=r'$\log(g)$', solar=solar[1], color=color[1])
-    # ax2.set_ylim(solar[1]-0.07, solar[1]+0.07)
+    ax2 = plt.subplot(222, sharex=ax1)
+    ax2.yaxis.tick_right()
+    ax2.yaxis.set_label_position('right')
+    plot_result(data=(epcut[i1], logg[i1]), solar=solar[1], color=color[0])
+    plot_result(data=(epcut[i2], logg[i2]), ylabel=r'$\log(g)$', solar=solar[1], color=color[1])
+    ax2.set_ylim(solar[1]-0.07, solar[1]+0.07)
 
-    # ax3 = plt.subplot(223, sharex=ax1)
-    # plot_result(data=(epcut[i1], vt[i1]), solar=solar[2], color=color[0])
-    # plot_result(data=(epcut[i2], vt[i2]), ylabel=r'$\xi_\mathrm{micro}$', solar=solar[2], color=color[1])
-    # ax3.set_ylim(solar[2]-0.08, solar[2]+0.16)
+    ax3 = plt.subplot(223, sharex=ax1)
+    plot_result(data=(epcut[i1], vt[i1]), solar=solar[2], color=color[0])
+    plot_result(data=(epcut[i2], vt[i2]), ylabel=r'$\xi_\mathrm{micro}$', solar=solar[2], color=color[1])
+    ax3.set_ylim(solar[2]-0.08, solar[2]+0.16)
 
-    # ax4 = plt.subplot(224, sharex=ax1)
-    # ax4.yaxis.tick_right()
-    # ax4.yaxis.set_label_position('right')
-    # plot_result(data=(epcut[i1], feh[i1]), solar=solar[3], color=color[0])
-    # plot_result(data=(epcut[i2], feh[i2]), ylabel='[Fe/H]', solar=solar[3], color=color[1])
-    # plt.hlines(0.0, 5.0, 6.0)
-    # ax4.set_ylim(solar[3]-0.025, solar[3]+0.025)
+    ax4 = plt.subplot(224, sharex=ax1)
+    ax4.yaxis.tick_right()
+    ax4.yaxis.set_label_position('right')
+    plot_result(data=(epcut[i1], feh[i1]), solar=solar[3], color=color[0])
+    plot_result(data=(epcut[i2], feh[i2]), ylabel='[Fe/H]', solar=solar[3], color=color[1])
+    plt.hlines(0.0, 5.0, 6.0)
+    ax4.set_ylim(solar[3]-0.025, solar[3]+0.025)
 
     # plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
-    # plt.show()
+    plt.show()
 
-    d = data
-    d = d[d[:,1] > 100]  # Remove the non-converged results
-    # Divide in the two SNR
-    is100 = d[:, 6] == 100
-    is300 = d[:, 6] == 300
-    s1 = d[is100, :]
-    s3 = d[is300, :]
+    # d = data
+    # d = d[d[:,1] > 100]  # Remove the non-converged results
+    # # Divide in the two SNR
+    # is100 = d[:, 6] == 100
+    # is300 = d[:, 6] == 300
+    # s1 = d[is100, :]
+    # s3 = d[is300, :]
 
-    eps = (5.0, 5.5, 6.0)
+    # eps = (5.0, 5.5, 6.0)
 
-    t = np.empty((6, 10))
-    for i, ep in enumerate(eps):
-        j = s1[:, 5] == ep
-        t[i, 0] = ep
-        t[i, 1] = 100
-        t[i, 2] = np.mean(s1[j, 1])
-        t[i, 3] = 3*np.std(s1[j, 1])
-        t[i, 4] = np.mean(s1[j, 1])
-        t[i, 5] = 3*np.std(s1[j, 1])
-        t[i, 6] = np.mean(s1[j, 1])
-        t[i, 7] = 3*np.std(s1[j, 1])
-        t[i, 8] = np.mean(s1[j, 1])
-        t[i, 9] = 3*np.std(s1[j, 1])
+    # t = np.empty((6, 10))
+    # for i, ep in enumerate(eps):
+    #     j = s1[:, 5] == ep
+    #     t[i, 0] = ep
+    #     t[i, 1] = 100
+    #     t[i, 2] = np.mean(s1[j, 1])
+    #     t[i, 3] = 3*np.std(s1[j, 1])
+    #     t[i, 4] = np.mean(s1[j, 2])
+    #     t[i, 5] = 3*np.std(s1[j, 2])
+    #     t[i, 6] = np.mean(s1[j, 3])
+    #     t[i, 7] = 3*np.std(s1[j, 3])
+    #     t[i, 8] = np.mean(s1[j, 4])
+    #     t[i, 9] = 3*np.std(s1[j, 4])
 
-    for i, ep in enumerate(eps):
-        i += 3
-        j = s1[:, 5] == ep
-        t[i, 0] = ep
-        t[i, 1] = 300
-        t[i, 2] = np.mean(s3[j, 1])
-        t[i, 3] = 3*np.std(s3[j, 1])
-        t[i, 4] = np.mean(s3[j, 1])
-        t[i, 5] = 3*np.std(s3[j, 1])
-        t[i, 6] = np.mean(s3[j, 1])
-        t[i, 7] = 3*np.std(s3[j, 1])
-        t[i, 8] = np.mean(s3[j, 1])
-        t[i, 9] = 3*np.std(s3[j, 1])
+    # for i, ep in enumerate(eps):
+    #     i += 3
+    #     j = s1[:, 5] == ep
+    #     t[i, 0] = ep
+    #     t[i, 1] = 300
+    #     t[i, 2] = np.mean(s3[j, 1])
+    #     t[i, 3] = 3*np.std(s3[j, 1])
+    #     t[i, 4] = np.mean(s3[j, 2])
+    #     t[i, 5] = 3*np.std(s3[j, 2])
+    #     t[i, 6] = np.mean(s3[j, 3])
+    #     t[i, 7] = 3*np.std(s3[j, 3])
+    #     t[i, 8] = np.mean(s3[j, 4])
+    #     t[i, 9] = 3*np.std(s3[j, 4])
 
-    fmt = ['%.1f', '%i', '%i', '%i', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f']
-    np.savetxt('table_sun_new.dat', t, fmt=fmt, delimiter=' & ',
-            newline='\\\\\n')
+    # fmt = ['%.1f', '%i', '%i', '%i', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f']
+    # np.savetxt('table_sun_new.dat', t, fmt=fmt, delimiter=' & ',
+    #         newline='\\\\\n')
 
 
 def fig_HD20010_parameters():
