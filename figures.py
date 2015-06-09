@@ -78,11 +78,11 @@ def fig_EPcut_sun(fout=None):
     def plot_result(data, xlabel=None, ylabel=None, solar=None, color=None):
         ep, y = data
         try:
-            sns.regplot(ep[ep==6.0], y[ep==6.0], x_estimator=np.median, fit_reg=False, color=color)
+            sns.regplot(ep[ep==6.0], y[ep==6.0], x_estimator=np.mean, fit_reg=False, color=color)
         except ValueError:
             pass
         try:
-            sns.regplot(ep[ep!=6.0], y[ep!=6.0], x_estimator=np.median, truncate=True, color=color)
+            sns.regplot(ep[ep!=6.0], y[ep!=6.0], x_estimator=np.mean, color=color, robust=True)
         except ValueError:
             pass
         plt.xticks([5.0, 5.5, 6.0], ['5.0', '5.5', 'No cut'])
@@ -100,11 +100,8 @@ def fig_EPcut_sun(fout=None):
         else:
             return int(tmp[n+1])
 
-
-
-
-    p = '/home/daniel/Software/SPECPAR/Sun/snr_results/'
-    files = glob(p + 'Out_moog_*')
+    p = '/home/daniel/Software/SPECPAR/Sun/snr_results1/'
+    files = glob(p + 'Out_moog*.moog')
     N = len(files)
     data = np.empty((N, 7))
     data[:, 5] = 6.0
@@ -133,10 +130,9 @@ def fig_EPcut_sun(fout=None):
             if str(snr) in file:
                 data[i, 6] = snr
 
-
     run, T, logg, vt, feh, epcut, snr = data.T
 
-# Divide in SNR and make sure the file converged
+    # Divide in SNR and make sure the file converged
     i1 = (snr == 100) & (T > 100)
     i2 = (snr == 300) & (T > 100)
     color = sns.color_palette()
@@ -144,16 +140,19 @@ def fig_EPcut_sun(fout=None):
     ax1 = plt.subplot(221)
     plot_result(data=(epcut[i1], T[i1]), ylabel=r'$\mathrm{T_{eff}}$', solar=solar[0], color=color[0])
     plot_result(data=(epcut[i2], T[i2]), solar=solar[0], color=color[1])
+    ax1.set_ylim(solar[0]-20, solar[0]+20)
 
     ax2 = plt.subplot(222, sharex=ax1)
     ax2.yaxis.tick_right()
     ax2.yaxis.set_label_position('right')
     plot_result(data=(epcut[i1], logg[i1]), solar=solar[1], color=color[0])
     plot_result(data=(epcut[i2], logg[i2]), ylabel=r'$\log(g)$', solar=solar[1], color=color[1])
+    ax2.set_ylim(solar[1]-0.08, solar[1]+0.08)
 
     ax3 = plt.subplot(223, sharex=ax1)
     plot_result(data=(epcut[i1], vt[i1]), solar=solar[2], color=color[0])
     plot_result(data=(epcut[i2], vt[i2]), ylabel=r'$\xi_\mathrm{micro}$', solar=solar[2], color=color[1])
+    ax3.set_ylim(solar[2]-0.12, solar[2]+0.12)
 
     ax4 = plt.subplot(224, sharex=ax1)
     ax4.yaxis.tick_right()
@@ -161,10 +160,10 @@ def fig_EPcut_sun(fout=None):
     plot_result(data=(epcut[i1], feh[i1]), solar=solar[3], color=color[0])
     plot_result(data=(epcut[i2], feh[i2]), ylabel='[Fe/H]', solar=solar[3], color=color[1])
     plt.hlines(0.0, 5.0, 6.0)
+    ax4.set_ylim(solar[3]-0.025, solar[3]+0.025)
 
-
-    plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
-    # plt.show()
+    # plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
+    plt.show()
     # p = data
     # tbl = np.vstack((p[:,4], p[:,0], p[:,1], p[:,2], p[:,3])).T
     # i1 = tbl[:,0] == 4.5
@@ -479,10 +478,10 @@ def main():
     """Main function
     """
     # fig_abundance()
-    # fig_EPcut_sun()
+    fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
-    fig_synthesis()
+    # fig_synthesis()
 
 
 if __name__ == '__main__':
