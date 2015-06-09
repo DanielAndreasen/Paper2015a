@@ -77,19 +77,16 @@ def fig_EPcut_sun(fout=None):
 
     def plot_result(data, xlabel=None, ylabel=None, solar=None, color=None):
         ep, y = data
-        try:
-            sns.regplot(ep[ep==6.0], y[ep==6.0], x_estimator=np.mean, fit_reg=False, color=color)
-        except ValueError:
-            pass
-        try:
-            sns.regplot(ep[ep!=6.0], y[ep!=6.0], x_estimator=np.mean, truncate=True, color=color)
-        except ValueError:
-            pass
+        plt.errorbar(5.0, np.mean(y[ep==5.0]), yerr=np.std(y[ep==5.0]), marker='o', color=color)
+        plt.errorbar(5.5, np.mean(y[ep==5.5]), yerr=np.std(y[ep==5.5]), marker='o', color=color)
+        plt.errorbar(6.0, np.mean(y[ep==6.0]), yerr=np.std(y[ep==6.0]), marker='o', color=color)
+        sns.regplot(ep[ep!=6.0], y[ep!=6.0], x_estimator=np.mean, truncate=True, color=color, scatter=False)
         plt.xticks([5.0, 5.5, 6.0], ['5.0', '5.5', 'No cut'])
         if ylabel:
             plt.ylabel(ylabel)
         if solar:
             plt.hlines(solar, 5.0, 6.0)
+        plt.xlim(4.95, 6.05)
 
 
     def get_run(fname):
@@ -142,7 +139,7 @@ def fig_EPcut_sun(fout=None):
     ax1 = plt.subplot(221)
     plot_result(data=(epcut[i1], T[i1]), ylabel=r'$\mathrm{T_{eff}}$', solar=solar[0], color=color[0])
     plot_result(data=(epcut[i2], T[i2]), solar=solar[0], color=color[1])
-    ax1.set_ylim(solar[0]-30, solar[0]+10)
+    ax1.set_ylim(solar[0]-40, solar[0]+20)
 
     ax2 = plt.subplot(222, sharex=ax1)
     ax2.yaxis.tick_right()
@@ -154,7 +151,7 @@ def fig_EPcut_sun(fout=None):
     ax3 = plt.subplot(223, sharex=ax1)
     plot_result(data=(epcut[i1], vt[i1]), solar=solar[2], color=color[0])
     plot_result(data=(epcut[i2], vt[i2]), ylabel=r'$\xi_\mathrm{micro}$', solar=solar[2], color=color[1])
-    ax3.set_ylim(solar[2]-0.08, solar[2]+0.16)
+    ax3.set_ylim(solar[2]-0.06, solar[2]+0.16)
 
     ax4 = plt.subplot(224, sharex=ax1)
     ax4.yaxis.tick_right()
@@ -162,10 +159,10 @@ def fig_EPcut_sun(fout=None):
     plot_result(data=(epcut[i1], feh[i1]), solar=solar[3], color=color[0])
     plot_result(data=(epcut[i2], feh[i2]), ylabel='[Fe/H]', solar=solar[3], color=color[1])
     plt.hlines(0.0, 5.0, 6.0)
-    ax4.set_ylim(solar[3]-0.025, solar[3]+0.025)
+    ax4.set_ylim(solar[3]-0.025, solar[3]+0.015)
 
-    # plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
-    plt.show()
+    plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
+    # plt.show()
 
     # d = data
     # d = d[d[:,1] > 100]  # Remove the non-converged results
