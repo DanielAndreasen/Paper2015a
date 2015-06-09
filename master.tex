@@ -125,8 +125,8 @@ hotter HD20010, which is a F8 subgiant.
 
 
 
-\section{The method}
-\label{sec:the_method}
+\section{Method}
+\label{sec:method}
 
 Generally speaking there are two methods for determining parameters from
 a spectrum. One is the spectral synthesis method, where a synthetic
@@ -142,9 +142,11 @@ EW is given as
     \label{eq:EW}
     EW = \int_0^\infty \left(1 - \frac{F_\lambda}{F_0}\right) d\lambda,
 \end{align}
-where $F_0$ is the continuum level and $F_\lambda$ is the flux as a function
-of wavelength. In other words, the EW is the area from a spectral line up
-to the normalized continuum level.
+where $F_0$ is the continuum level and $F_\lambda$ is the flux as a
+function of wavelength. In other words, the EW is the area from a
+spectral line up to the normalized continuum level. A line list consist
+of the atomic data: central wavelength of an absorption line, the
+excitation potential, the oscillator strength, and the equivalent width.
 
 Using the EW method, the abundance for individual lines can be found
 with a code like MOOG\footnote{The MOOG code can be downloaded free
@@ -161,10 +163,13 @@ continuum leads to wrong measurements of the EW. Many spectroscopic
 features make it difficult to determine the continuum. This is
 especially true for cool stars in the optical where molecular depression
 and line blending is an issue. By moving the analysis to the NIR, we
-reduce the molecular depression, and cooler stars such as M-dwarfs emit
-more in this spectral region, where the continuum is at least easier to
-determine. In Figure~\ref{fig:spectral_region} we show a plot of three
-synthetic models created with the PHOENIX atmosphere models \citep{Husser2013}.
+reduce the molecular depression, and cooler stars such as M-dwarfs
+emit more in this spectral region, where the continuum is at least
+easier to determine. In Figure~\ref{fig:spectral_region} we show a
+plot of three synthetic models created with the PHOENIX atmosphere
+models \citep{Husser2013}. We look at the spectral region covered
+by the J, H, and K bands, which cover a spectral region larger than
+$\SI{15000}{\AA}$.
 
 \begin{figure}[tbp!]
     \centering
@@ -177,23 +182,22 @@ synthetic models created with the PHOENIX atmosphere models \citep{Husser2013}.
     \label{fig:spectral_region}
 \end{figure}
 
-We look at the spectral region covered by the J, H, and K bands, which cover a
-spectral region larger than $\SI{15000}{\AA}$.
 
 
 
 \subsection{Compiling the line list}
 
-To compile the line list we use the VALD
-database\footnote{The VALD database can be found here:
-\url{http://vald.astro.univie.ac.at/~vald3/php/vald.php}}. First we
-download all iron lines present in the spectral region of interest.
-In total 78537 lines (FeI: 50198 and FeII: 28339) are present in the
-spectral region which covers \SIrange{10000}{25000}{\angstrom}. Many of
-these lines are too faint to be detected in a spectrum. A spectrum of the
-Sun was downloaded from the BASS2000 web page\footnote{The web page can
-be found here: \url{bass2000.obspm.fr/solar_spect.php}} to select the
-lines. The spectrum was downloaded in the highest possible resolution.
+To compile the line list we use the VALD3
+database\footnote{The VALD3 database can be found here:
+\url{http://vald.astro.univie.ac.at/~vald3/php/vald.php}}.
+First we download all iron lines present in the spectral
+region of interest. In total 78537 lines (FeI: 50198 and
+FeII: 28339) are present in the spectral region which covers
+\SIrange{10000}{25000}{\angstrom}. Many of these lines are too faint
+to be detected in a spectrum. A spectrum of the Sun was downloaded
+from the BASS2000 web page\footnote{The web page can be found here:
+\url{bass2000.obspm.fr/solar_spect.php}} to select the lines.
+The spectrum was downloaded in the highest possible resolution.
 We use the ARES\footnote{The ARES software can be found here:
 \url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007,Sousa2015}
 . Software to automatically measure EWs of all the lines. Since ARES
@@ -215,7 +219,7 @@ below:
     \item If the EW is higher than $\SI{200}{m\AA}$ for a given line, the strength
         is too high and we can no longer fit the line with a Gaussian profile.
     \item If the fitted central wavelength is more than $\SI{0.05}{\AA}$ away
-        from the wavelength provided by VALD, the line will also be rejected to
+        from the wavelength provided by VALD3, the line will also be rejected to
         avoid false identification.
 \end{itemize}
 
@@ -235,13 +239,15 @@ this point, they would be clear outliers later on in the analysis
 
 For the remaining lines, a small spectral window were created with a
 width of \SI{3}{\angstrom}. For each spectral window, the corresponding
-absorption lines for all elements were downloaded from the VALD data
-base. These lines were plotted on top of the Solar spectrum, and iron
-lines were rejected when another element fitted the Solar absorption
-line better. Note that we did not make a synthetic spectrum in order to
-check this but merely looked at the excitation potential and oscillator
-strength ($\log \mathrm{gf}$). Many of the removed iron lines at this
-step had high excitation potential, compared to the final line list.
+absorption lines for all elements were downloaded from the VALD3 data
+base. The location of these lines we plotted on top of the Solar
+spectrum, and iron lines were rejected when another element fitted the
+solar absorption better, e.g. by being located at the exact center of
+the absorption line. Note that we did not make a synthetic spectrum
+in order to check this but merely looked at the excitation potential,
+central wavelength, and oscillator strength ($\log \mathrm{gf}$). Many
+of the removed iron lines at this step had high excitation potential,
+compared to the final line list.
 
 For some spectral regions it was not clear which element or elements
 caused an absorption line. In these cases the iron line were marked for
@@ -285,9 +291,11 @@ the synthetic spectra. If this removed (either fully or partially) the
 absorption line in the synthetic spectra, then it will be the cause for
 the real absorption line.
 
-A few times two iron lines had similar wavelengths and identical
-excitation potential. In those cases the $\log \mathrm{gf}$ were
-combined (average of the gf-value).
+A few times two iron lines had identical wavelengths and excitation
+potential. In those cases the $\log \mathrm{gf}$ were combined (average
+of the gf-value) to create a single line that can be analyzed with our
+method. The number of lines at this point were reduced to 594 and 15 for
+FeI and FeII, respectively.
 
 
 \subsection{Recalibrating the atomic data}
@@ -304,9 +312,9 @@ here, since the Fe II lines are sparse and essential to determine the
 surface gravity when we reach ionization balance, as explained in
 Subsection~\ref{sec:deriving_parameters_with_the_ew_method}.
 
-After the removal of lines from the complete VALD line list we only need
-to recalibrate the strength of the lines ($\log \mathrm{gf}$) the lines
-in order to match the adopted solar abundance. This is also known as a
+After the removal of lines from the complete VALD3 line list we only
+need to recalibrate the strength of the lines ($\log \mathrm{gf}$) in
+order to match the adopted solar abundance. This is also known as a
 differential analysis, which is a common thing to do for a star we know
 well \citep{Onehag2012}. The abundance varies more or less linearly
 with $\log \mathrm{gf}$. Therefore, the recalibrated $\log \mathrm{gf}$
@@ -350,11 +358,11 @@ of model atmospheres. Models like ATLAS9 \citep{Kurucz1993} and
 MARCS \citep{Gustafson2008} are the most used atmospheric models for
 derivation of spectroscopic parameters for FGK stars.
 
-Here we use the ATLAS9 models which, for efficiency, is created in
-a grid according to effective temperature, surface gravity, and
+Here we use the ATLAS9 models which, for efficiency, are created
+in a grid according to effective temperature, surface gravity, and
 metallicity. In order to search for final parameters it is necessary to
-interpolate models from the grid, thus allowing to look in a finer grid
-space.
+interpolate models from the grid, thus allowing to look into a finer
+grid space.
 
 For a given atmosphere model, abundances of all the lines in the line
 list are calculated. By removing any correlation between the excitation
@@ -400,11 +408,11 @@ excitation potential (EP). The noisy EWs follow the procedure from
 \cite{Caryel1988}:
 
 \begin{align}
-    \sigma \simeq 1.6 \frac{\sqrt{\Delta\lambda EW}}{SNR},
+    \sigma \simeq 1.6 \frac{\sqrt{\Delta\lambda\; \mathrm{EW}}}{\mathrm{SNR}},
 \end{align}
-where $\Delta\lambda=0.1$ and we consider to different signal-to-noise ratios,
-100 and 300. This sigma is used to create a normal distribution with a mean
-around the original EW.
+where $\Delta\lambda=0.1$ and we consider two different signal-to-noise
+ratios, 100 and 300. This sigma is used to create a normal distribution
+with a mean around the original EW.
 
 \begin{align}
     f(x, EW, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-EW)^2}{2\sigma^2}}
@@ -422,9 +430,14 @@ lists.
 In Figure~\ref{fig:solar_parameters} the parameters are plotted with
 different EP cuts in the line list. The horizontal black lines are
 the derived atmospheric parameters without noise added to the EWs as
-expected. The color shows the two different SNR considered.
+expected. The color shows the two different SNR considered (blue is
+SNR at 100, and green is SNR at 300). For a given SNR and EP cut,
+the 10 runs were combined to a single value by calculating the mean.
+Additionally we show the 1$\sigma$ standard deviation. A few of the
+runs did not converge with our minimization routine. These runs are not
+considered in the plot.
 
-\begin{figure}[tpb]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.9\linewidth]{figures/solar_parameters_10runs.pdf}
     \caption{Derived atmospheric parameters for the Sun. The horizontal
@@ -445,19 +458,23 @@ for HD20010.
 The derived atmospheric parameters are presented in Table~\ref{tab:sun}.
 
 
-\begin{table*}[htb!]
+\begin{table*}[tb!]
     \caption{The derived parameters for the Sun with two different cuts
     in EP, and with no cut. For all the line lists here, there is noise
     added to the EW measurements.}
     \label{tab:sun}
     \centering
-    \begin{tabular}{lllll}
+    \begin{tabular}{llllll}
       \hline\hline
-        EP cut (eV) & $T_\mathrm{eff}$ (K) & $\log g$ (cgs) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H] \\
-      \hline
-        No cut      & 5920 \pm 247         & 4.94 \pm  0.64 & 4.99 \pm 3.96               & -0.03 \pm 0.14\\
-        5.0         & 5738 \pm 274         & 4.54 \pm  0.72 & 4.99 \pm 4.83               & -0.11 \pm 0.25\\
-        5.5         & 5612 \pm 158         & 4.49 \pm  0.70 & 4.80 \pm 5.64               & -0.24 \pm 0.44\\
+        EP cut (eV) &  SNR &  $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)     &  $\xi_\mathrm{micro}$ (km/s) &  [Fe/H]           \\
+        \hline
+        5.0         &  100 &  $5771 \pm  41$       &  4.44   \pm  0.11   &  1.04  \pm  0.14             &  -0.01    \pm 0.03\\
+        5.5         &  100 &  $5770 \pm  34$       &  4.42   \pm  0.08   &  1.04  \pm  0.13             &  -0.01    \pm 0.02\\
+        No cut      &  100 &  $5776 \pm  23$       &  4.44   \pm  0.04   &  1.01  \pm  0.12             &  -0.00    \pm 0.01\\
+        \hline
+        5.0         &  300 &  $5776 \pm  9 $       &  4.43   \pm  0.02   &  1.00  \pm  0.05             &   0.00    \pm 0.00\\
+        5.5         &  300 &  $5774 \pm  11$       &  4.43   \pm  0.04   &  1.01  \pm  0.04             &  -0.00    \pm 0.01\\
+        No cut      &  300 &  $5778 \pm  9 $       &  4.44   \pm  0.01   &  1.00  \pm  0.03             &   0.00    \pm 0.00\\
       \hline
     \end{tabular}
 \end{table*}
@@ -474,12 +491,12 @@ our studies, since we want to benchmark results from our new line list
 with literature values. To analyse this star we used spectra from
 the CRIRES-POP \citep{Lebzelter2012}. The data comes in pieces of
 $\SI{50}{\angstrom}$ to $\SI{120}{\angstrom}$. At the time of writing
-the data is not yet fully reduced. This is a task the CRIRES-POP team
-is working on. However, the data can still be used as it is after the
-pipeline reduction. It is already known by the CRIRES-POP team that the
-pipeline reduced form of the wavelength calibration is of poor quality.
-Most of the spectra are stretched compared to e.g. a model or a solar
-spectrum in the same region.
+this paper the data is not yet fully reduced. This is a task the
+CRIRES-POP team is working on. However, the data can still be used as it
+is after the pipeline reduction. It is already known by the CRIRES-POP
+team that the pipeline reduced form of the wavelength calibration is of
+poor quality. Most of the spectra are stretched compared to e.g. a model
+or a solar spectrum in the same region.
 
 In order to measure the EWs of the lines in our line list, the correct
 absorption lines need to be identified. This was done by plotting
@@ -532,25 +549,27 @@ $\SI{5.1}{eV}$ for the EP
 
 \begin{table*}[htb!]
     \caption{The derived parameters for HD20010 at different EP cut. $\log g$
-    were fixed at 4.11 for all calculations.}
+        were fixed at 4.11 for all calculations. The literature value are from \cite{Santos2004}.}
     \label{tab:hd20010}
     \centering
     \begin{tabular}{lllll}
       \hline\hline
-        EP cut (eV) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H] \\
+        EP cut (eV) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H]          \\
       \hline
-      5.0           & 6098                 & 0.67                        & -0.22   \\
-      5.1           & 6060                 & 1.31                        & -0.26   \\
-      5.2           & 6084                 & 1.29                        & -0.25   \\
-      5.3           & 6081                 & 1.29                        & -0.25   \\
-      5.4           & 6149                 & 2.01                        & -0.27   \\
-      5.5           & 6324                 & 2.05                        & -0.23   \\
-      5.6           & 6353                 & 2.12                        & -0.23   \\
-      5.7           & 6596                 & 2.10                        & -0.18   \\
-      5.8           & 6601                 & 2.10                        & -0.18   \\
-      5.9           & 6992                 & 2.02                        & -0.09   \\
-      6.0           & 7000                 & 2.03                        & -0.08   \\
-      No cut        & 7138                 & 2.87                        & -0.06   \\
+      Literature    & 6275 \pm 57          & 2.41 \pm 0.41               & -0.19 \pm 0.06  \\
+      \hline
+      5.0           & 6098                 & 0.67                        & -0.22           \\
+      5.1           & 6060                 & 1.31                        & -0.26           \\
+      5.2           & 6084                 & 1.29                        & -0.25           \\
+      5.3           & 6081                 & 1.29                        & -0.25           \\
+      5.4           & 6149                 & 2.01                        & -0.27           \\
+      5.5           & 6324                 & 2.05                        & -0.23           \\
+      5.6           & 6353                 & 2.12                        & -0.23           \\
+      5.7           & 6596                 & 2.10                        & -0.18           \\
+      5.8           & 6601                 & 2.10                        & -0.18           \\
+      5.9           & 6992                 & 2.02                        & -0.09           \\
+      6.0           & 7000                 & 2.03                        & -0.08           \\
+      No cut        & 7138                 & 2.87                        & -0.06           \\
       \hline
     \end{tabular}
 \end{table*}
