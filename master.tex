@@ -107,22 +107,52 @@ bolometric flux, surface gravity, and the metallicity a priori.
 A well known method is a spectroscopic determination of stellar
 atmospheric parameters. The procedure we choose depend on the quality
 of the spectra, resolution, wavelength region, and e.g. the effective
-temperature and rotational velocity. For low resolution, below 20000, it
-is preferred to fit the overall observed spectrum with a synthetic one.
-For higher resolution at low rotational velocities, below
-\SIrange{10}{15}{km/s} we can use the equivalent width (EW) method (for details
-see Section~\ref{sec:the_method}). To use this method the key is to resolve
-all lines we are interested in, otherwise a fit with synthetic spectra
-are preferred. For FGK stars we can use optical spectra since these stars
-are brightest in this wavelength domain. However, when we move to the cool
-M stars the near infrared (NIR) is preferred because of the higher brightness
-and less molecular line blending.
+temperature and rotational velocity. For low resolution, below 20000,
+it is preferred to fit the overall observed spectrum with a synthetic
+one. For higher resolution at low rotational velocities, below
+\SIrange{10}{15}{km/s}, we can use the equivalent width (EW) method
+(for details see Section~\ref{sec:the_method}). To use this method the
+key is to resolve all lines we are interested in. For FGK stars we can
+use optical spectra since these stars are brightest in this wavelength
+domain. However, when we move to the cool M stars the near infrared
+(NIR) is preferred because of the higher brightness and less molecular
+line blending in the spectra.
 
 In this paper we want to explorer the possibility for a line list of
 iron lines in the NIR which can be applied for FGK and especially M
 stars in a consistent way. Our first approach is to create a line list
 in this area for the Sun and test it for another star, the slightly
 hotter HD20010, which is a F8 subgiant.
+
+
+Several NIR spectrographs are upcoming and some in use already. A list of
+some with highest spectral resolution are listed in Table~\ref{tab:spectrograph}.
+
+
+
+
+\begin{table*}[tb!]
+    \caption{Four high-resolution NIR spectrographs adequate for our proposed
+        methodology}
+    \label{tab:spectrograph}
+    \centering
+    \begin{tabular}{llllll}
+      \hline\hline
+        Spectrograph & Resolution   & Wavelength coverage               & First light & References \\
+      \hline
+        CRIRES+      & 50000-100000 & YJHKLM                            & 2017        & 1 \\
+        CARMENES     & 82000        & \SIrange{0.55}{1.7}{\micro\meter} & 2015        & \cite{CARMENES} \\
+        SPIRou       & 75000        & YJHK                              & 2017        & 2 \\
+        IRD          & 70000        & \SIrange{0.97}{1.75}{\micro\meter}& 2014        & \cite{IRD} \\
+        GIANO        & 50000        & \SIrange{0.90}{2.5}{\micro\meter} & 2012        & 3 \\
+      \hline
+    \end{tabular}
+    \tablebib{
+        (1)~\url{http://www.eso.org/sci/facilities/develop/instruments/crires_up.html};
+        (2)~\url{http://cfht.hawaii.edu/en/news/SPIRou/};
+        (3)~\url{http://www.bo.astro.it/giano/GIANO/GIANO_Overview.html}
+    }
+\end{table*}
 
 
 
