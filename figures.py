@@ -218,7 +218,7 @@ def fig_HD20010_parameters():
 
     p = '/home/daniel/Software/SPECPAR/HD20010/'
     N = len(glob(p+'Out*.moog'))
-    data = np.zeros((N, 5))
+    data = np.zeros((N-1, 5))
 
     prefixes = (p+'Out_moog_b.', p+'Out_moog_')
     with open(p+'star_file', 'r') as files:
@@ -226,6 +226,8 @@ def fig_HD20010_parameters():
         for _ in range(2):
             files.readline()
         for index, file in enumerate(files):
+            if 'final' in file:
+                continue
             ep = file.split('.moog')[0].split('_')[-1]
             ep = float(ep)
             file = file.split(' ')[0]
@@ -270,7 +272,7 @@ def fig_HD20010_parameters():
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
 
-    ax1.plot(xlim1, [6160]*2, '--k')
+    ax1.plot(xlim1, [6170]*2, '--k')
     sns.regplot('EP', 'Teff', df, truncate=True, order=2, ax=ax1,
                 color=c[0]).set_xlabel('')
     ax1.set_ylabel('Teff [K]')
@@ -305,7 +307,7 @@ def fig_HD20010_parameters():
     plt.setp(ax3.get_xticklabels(), visible=False)
     plt.setp(ax4.get_xticklabels(), visible=False)
 
-    ax3.plot(xlim1, [-0.23]*2, '--k')
+    ax3.plot(xlim1, [-0.21]*2, '--k')
     sns.regplot('EP', 'feh', df, truncate=True, order=2, ax=ax3,
                 color=c[1]).set_xlabel('')
     ax3.set_ylabel('[Fe/H]')
@@ -340,6 +342,7 @@ def fig_HD20010_parameters():
     # plt.setp(ax5.get_xticklabels(), visible=False)
     # plt.setp(ax6.get_xticklabels(), visible=False)
 
+    ax5.plot(xlim1, [1.7]*2, '--k')
     sns.regplot('EP', 'vt', df, truncate=True, order=2, ax=ax5,
                 color=c[2]).set_xlabel('')
     ax5.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
@@ -494,7 +497,7 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    fig_abundance()
+    # fig_abundance()
     # fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
