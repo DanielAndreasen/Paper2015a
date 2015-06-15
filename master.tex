@@ -1,13 +1,10 @@
 \documentclass{aa}
 \usepackage[varg]{txfonts}
-\usepackage{siunitx}
+\usepackage[separate-uncertainty=true]{siunitx}
 \usepackage[version=3]{mhchem}
 
 \sisetup{
-%     fixed-exponent      = 3,
-%     list-units          = brackets,
     range-units         = brackets,
-%     scientific-notation = fixed
 }
 
 
@@ -33,9 +30,9 @@
 \subtitle{}
 
 \author{D.~T.~Andreasen\inst{1,2,3}
-    \and N.~C.~Santos.\inst{1,2}
     \and S.~G.~Sousa.\inst{1,2}
-    \and E.~Delgado Mena.\inst{1,2}}
+    \and E.~Delgado Mena.\inst{1,2}
+    \and N.~C.~Santos.\inst{1,2}}
 
 
 \institute{
@@ -111,7 +108,7 @@ temperature and rotational velocity. For low resolution, below 20000,
 it is preferred to fit the overall observed spectrum with a synthetic
 one. For higher resolution at low rotational velocities, below
 \SIrange{10}{15}{km/s}, we can use the equivalent width (EW) method
-(for details see Section~\ref{sec:the_method}). To use this method the
+(for details see Section~\ref{sec:method}). To use this method the
 key is to resolve all lines we are interested in. For FGK stars we can
 use optical spectra since these stars are brightest in this wavelength
 domain. However, when we move to the cool M stars the near infrared
@@ -124,11 +121,11 @@ stars in a consistent way. Our first approach is to create a line list
 in this area for the Sun and test it for another star, the slightly
 hotter HD20010, which is a F8 subgiant.
 
-
-Several NIR spectrographs are upcoming and some in use already. A list of
-some with highest spectral resolution are listed in Table~\ref{tab:spectrograph}.
-
-
+The future will provide us with several NIR spectrographs, with some
+already in use. A list of spectrographs with the highest spectral
+resolution are listed in Table~\ref{tab:spectrograph}. The methodology
+we propose is also a critical step for characterisation of FGKM stars
+with high resolution NIR spectrographs.
 
 
 \begin{table*}[tb!]
@@ -154,17 +151,25 @@ some with highest spectral resolution are listed in Table~\ref{tab:spectrograph}
     }
 \end{table*}
 
+This paper is organized as follows: In Section~\ref{sec:method} we
+present the method for deriving parameters with the equivalent width
+method for an iron line list. In Section~\ref{sec:results} we present
+the results for the derived parameters for the Sun and HD20010.
+
+
+
 
 
 \section{Method}
 \label{sec:method}
 
-Generally speaking there are two methods for determining parameters from
-a spectrum. One is the spectral synthesis method, where a synthetic
-spectrum is compared with an observed spectrum and by minimization
-procedure the best fit is found between the synthetic spectrum and the
-real spectrum \citep[see e.g.][]{Onehag2012}. The final atmospheric
-parameters are found when the minimization procedure reach a minimum.
+The two most widely used methods for deriving stellar atmosphere
+parameters from a spectrum are spectral synthesis and the equivalent
+width method. The spectral synthesis method compares a synthetic
+spectrum with an observed spectrum and by minimization procedure the
+best fit is found between the synthetic spectrum and the real spectrum
+\citep[see e.g.][]{Onehag2012}. When the minimization procedure reach a
+minimum, the final atmospheric parameters are found.
 
 The other method is the equivalent width (EW) method, which we use in this
 work. With this method the EWs are measured for all lines in a line list. The
@@ -206,7 +211,7 @@ $\SI{15000}{\AA}$.
     \centering
     \includegraphics[width=0.9\linewidth]{figures/spectral_region.pdf}
     \caption{Synthetic spectra of varying effective temperature. The $\log g$
-    is 0.5 dex higher for the coolest model. The flux of the two coolest models
+    is 0.5 dex higher for the coolest model, and the flux of the two coolest models
     have been multiplied by a factor of 10, in order to show it all in the same
     scale. The maximum of light emitted is located at different wavelengths for
     different effective temperatures according to Wien's displacement law.}
@@ -268,17 +273,19 @@ the line where clearly blended. We were careful at this step, and only
 few lines were removed. Even though many bad lines were not removed at
 this point, they would be clear outliers later on in the analysis
 
-For the remaining lines, a small spectral window were created with a
-width of \SI{3}{\angstrom}. For each spectral window, the corresponding
-absorption lines for all elements were downloaded from the VALD3 data
-base. The location of these lines we plotted on top of the Solar
-spectrum, and iron lines were rejected when another element fitted the
-solar absorption better, e.g. by being located at the exact center of
-the absorption line. Note that we did not make a synthetic spectrum
+For the remaining lines, we analyzed in detail a small \SI{3}{\angstrom}
+wide spectral window around each line. For each spectral window, the
+corresponding absorption lines for all elements were downloaded from the
+VALD3 data base. The location of these lines we plotted on top of the
+Solar spectrum, and iron lines were rejected when another element fitted
+the solar absorption better, e.g. by being located at the exact center
+of the absorption line. Note that we did not make a synthetic spectrum
 in order to check this but merely looked at the excitation potential,
 central wavelength, and oscillator strength ($\log \mathrm{gf}$). Many
 of the removed iron lines at this step had high excitation potential,
-compared to the final line list.
+compared to the final line list, since these lines generally are weaker
+than those with lower excitation potential.
+
 
 For some spectral regions it was not clear which element or elements
 caused an absorption line. In these cases the iron line were marked for
@@ -302,11 +309,11 @@ in Figure~\ref{fig:synthesis}
 \begin{figure}[tpb]
     \centering
     \includegraphics[width=0.9\linewidth]{figures/synthetic_spectrum.pdf}
-    \caption{The top panel shows the observed spectra in grey, while
+    \caption{Top panel shows the observed spectra in grey, while
         the colored graphs is synthetic spectra with increasing iron
         abundance as the central two lines get deeper. The iron abundance
         is varied 0.4 dex in total. The vertical lines show all the places
-        there are an iron line in the line list. The bottom panel shows
+        there are an iron line in the line list. Bottom panel shows
         two plots, namely the difference between the first synthetic curve
         and the second, and the third ($\Delta_{21}$ and $\Delta_{31}$,
         respectively). This is for highlighting were the change in iron
@@ -393,7 +400,7 @@ Here we use the ATLAS9 models which, for efficiency, are created
 in a grid according to effective temperature, surface gravity, and
 metallicity. In order to search for final parameters it is necessary to
 interpolate models from the grid, thus allowing to look into a finer
-grid space.
+grid space \citep[see e.g.][]{Sousa2014}.
 
 For a given atmosphere model, abundances of all the lines in the line
 list are calculated. By removing any correlation between the excitation
@@ -464,7 +471,7 @@ the derived atmospheric parameters without noise added to the EWs as
 expected. The color shows the two different SNR considered (blue is
 SNR at 100, and green is SNR at 300). For a given SNR and EP cut,
 the 10 runs were combined to a single value by calculating the mean.
-Additionally we show the 1$\sigma$ standard deviation. A few of the
+Additionally, we show the 1$\sigma$ standard deviation. A few of the
 runs did not converge with our minimization routine. These runs are not
 considered in the plot.
 
@@ -499,13 +506,13 @@ The derived atmospheric parameters are presented in Table~\ref{tab:sun}.
       \hline\hline
         EP cut (eV) &  SNR &  $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)     &  $\xi_\mathrm{micro}$ (km/s) &  [Fe/H]           \\
         \hline
-        5.0         &  100 &  $5771 \pm  41$       &  4.44   \pm  0.11   &  1.04  \pm  0.14             &  -0.01    \pm 0.03\\
-        5.5         &  100 &  $5770 \pm  34$       &  4.42   \pm  0.08   &  1.04  \pm  0.13             &  -0.01    \pm 0.02\\
-        No cut      &  100 &  $5776 \pm  23$       &  4.44   \pm  0.04   &  1.01  \pm  0.12             &  -0.00    \pm 0.01\\
+        5.0         &  100 &  $5771 \pm  41$       & $4.44   \pm  0.11$  & $1.04  \pm  0.14$            & $-0.01    \pm 0.03$\\
+        5.5         &  100 &  $5770 \pm  34$       & $4.42   \pm  0.08$  & $1.04  \pm  0.13$            & $-0.01    \pm 0.02$\\
+        No cut      &  100 &  $5776 \pm  23$       & $4.44   \pm  0.04$  & $1.01  \pm  0.12$            & $-0.00    \pm 0.01$\\
         \hline
-        5.0         &  300 &  $5776 \pm  9 $       &  4.43   \pm  0.02   &  1.00  \pm  0.05             &   0.00    \pm 0.00\\
-        5.5         &  300 &  $5774 \pm  11$       &  4.43   \pm  0.04   &  1.01  \pm  0.04             &  -0.00    \pm 0.01\\
-        No cut      &  300 &  $5778 \pm  9 $       &  4.44   \pm  0.01   &  1.00  \pm  0.03             &   0.00    \pm 0.00\\
+        5.0         &  300 &  $5776 \pm  9 $       & $4.43   \pm  0.02$  & $1.00  \pm  0.05$            &  $0.00    \pm 0.00$\\
+        5.5         &  300 &  $5774 \pm  11$       & $4.43   \pm  0.04$  & $1.01  \pm  0.04$            & $-0.00    \pm 0.01$\\
+        No cut      &  300 &  $5778 \pm  9 $       & $4.44   \pm  0.01$  & $1.00  \pm  0.03$            &  $0.00    \pm 0.00$\\
       \hline
     \end{tabular}
 \end{table*}
@@ -530,20 +537,20 @@ poor quality. Most of the spectra are stretched compared to e.g. a model
 or a solar spectrum in the same region.
 
 In order to measure the EWs of the lines in our line list, the correct
-absorption lines need to be identified. This was done by plotting
-the spectra for HD20010, a solar spectrum (the parameters are close
-enough so we can use the Sun as a reference), an observed telluric
-spectrum from the TAPAS web page \citep{Bertaux2014}, and the lines from our
+absorption lines need to be identified. This was done by plotting the
+spectra for HD20010, a solar spectrum (the parameters are close enough
+so we can use the Sun as a reference), an observed telluric spectrum
+from the TAPAS web page \citep{Bertaux2014}, and the lines from our
 line list in the region we are looking at. The pieces of spectra are
-shifted in radial velocity as well. A software was developed that plots
-everything and calculate the cross correlation function of the model
-(in this case the Sun), and the telluric spectra\footnote{The software
-(plot\textunderscore{}fits) is open source and can be found here:
-\url{https://github.com/DanielAndreasen/astro_scripts}}. The two CCFs
-are fitted with a Gaussian, and the mid point is the RV. This two, in
-principle, different radial velocities shift the model and the telluric
-spectra. The lines from our line list are shifted with the same RV as for
-the model. Figure~\ref{fig:plot_fits} shows an example of this.
+shifted in radial velocity as well. A software was developed that
+plots everything and calculate the cross correlation function of the
+model (in this case the Sun), and the telluric spectra\footnote{The
+software (plot\textunderscore{}fits) is open source and can be found
+here: \url{https://github.com/DanielAndreasen/astro_scripts}}. The two
+CCFs are fitted with a Gaussian, and the mid point is the RV. These two
+RVs are used to shift the model and telluric respectively. The lines
+from our line list are shifted with the same RV as for the model.
+Figure~\ref{fig:plot_fits} shows an example of this.
 
 \begin{figure*}[tbp!]
     \centering
@@ -558,52 +565,53 @@ the model. Figure~\ref{fig:plot_fits} shows an example of this.
 
 The derived parameters for HD20010 for the full line list
 are overestimated compared to literature values, see e.g.
-\citet{Mortier2013,Lebzelter2012}. To overcome this problem we tried
-to remove lines above different EPs and re-determine the stellar
-atmospheric parameters. In this process we did not remove any of the
-FeII lines (we were only able to measure the EWs of 5 lines out of
-the 13 from the solar case). The reason not to remove the FeII lines
-is, that they are essential to determine the surface gravity from the
-ionization balance. As it turned out, 5 lines were to few, and we
-fixed the surface gravity to a median of literature values at 4.11(ADD
-REFERENCES). Figure~\ref{fig:HD20010_parameters_cuts} shows the results
-from this exercise. A second degree polynomial is fitted for the
-effective temperature, iron abundance, and the micro turbulence with
-the 95\% confidence interval. At a cut at $\SI{5.5}{eV}$ and below
-the atmospheric parameters gets closer to the literature values which
-is plotted as a horizontal black line. The exact values can be seen
-in Table~\ref{tab:hd20010}. For comparison, a line list covering the
-visual part of the spectrum by \cite{Tsantaki2013} reach at maximum
-$\SI{5.1}{eV}$ for the EP
-
+\citet{Mortier2013,Gonzalez2010}. \cite{Gonzalez2010} use the same
+method as us, and derive the following atmospheric parameters:
+$T_\mathrm{eff}=6170\pm33\,\si{\kelvin}$, $\log g=3.93\pm0.02$,
+$\xi_\mathrm{micro}=1.70\pm0.09\,\si{km/s}$, and [Fe/H]=$-0.206\pm0.025$.
+To overcome this problem we tried to remove lines above different EPs
+and re-determine the stellar atmospheric parameters. In this process
+we did not remove any of the FeII lines (we were only able to measure
+the EWs of 5 lines out of the 13 from the solar case). The reason not
+to remove the FeII lines is, that they are essential to determine the
+surface gravity from the ionization balance. As it turned out, 5 lines
+were too few, and we fixed the surface gravity to the value found in
+\cite{Gonzalez2010}. Figure~\ref{fig:HD20010_parameters_cuts} shows the
+results from this exercise. A second degree polynomial is fitted for
+the effective temperature, iron abundance, and the micro turbulence
+with the 95\% confidence interval. At a cut at $\SI{5.5}{eV}$ and
+below the atmospheric parameters gets close to the values derived
+from \cite{Gonzalez2010} which is plotted as a horizontal black
+line. The exact values can be seen in Table~\ref{tab:hd20010}.
 
 
 \begin{table*}[htb!]
     \caption{The derived parameters for HD20010 at different EP cut. $\log g$
-        were fixed at 4.11 for all calculations. The literature value are from \cite{Santos2004}.}
+        were fixed at 3.93 for all calculations. The literature value are from \cite{Santos2004}.}
     \label{tab:hd20010}
     \centering
     \begin{tabular}{lllll}
       \hline\hline
-        EP cut (eV) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H]          \\
+        EP cut (eV) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H]               \\
       \hline
-      Literature    & 6275 \pm 57          & 2.41 \pm 0.41               & -0.19 \pm 0.06  \\
+        Literature  & $6170 \pm  33$       & $1.70 \pm 0.09$             & $-0.21 \pm 0.03$      \\
       \hline
-      5.0           & 6098                 & 0.67                        & -0.22           \\
-      5.1           & 6060                 & 1.31                        & -0.26           \\
-      5.2           & 6084                 & 1.29                        & -0.25           \\
-      5.3           & 6081                 & 1.29                        & -0.25           \\
-      5.4           & 6149                 & 2.01                        & -0.27           \\
-      5.5           & 6324                 & 2.05                        & -0.23           \\
-      5.6           & 6353                 & 2.12                        & -0.23           \\
-      5.7           & 6596                 & 2.10                        & -0.18           \\
-      5.8           & 6601                 & 2.10                        & -0.18           \\
-      5.9           & 6992                 & 2.02                        & -0.09           \\
-      6.0           & 7000                 & 2.03                        & -0.08           \\
-      No cut        & 7138                 & 2.87                        & -0.06           \\
+        5.0         & $6112 \pm 121$       & $0.78 \pm 0.08$             & $-0.25 \pm 0.44$      \\
+        5.1         & $6067 \pm 209$       & $1.39 \pm 0.17$             & $-0.29 \pm 0.74$      \\
+        5.2         & $6093 \pm 196$       & $1.37 \pm 0.16$             & $-0.29 \pm 0.71$      \\
+        5.3         & $6096 \pm 196$       & $1.37 \pm 0.16$             & $-0.29 \pm 0.73$      \\
+        5.4         & $6294 \pm 353$       & $2.00 \pm 0.30$             & $-0.27 \pm 1.52$      \\
+        5.5         & $6337 \pm 558$       & $2.14 \pm 0.49$             & $-0.26 \pm 2.48$      \\
+        5.6         & $6367 \pm 714$       & $2.21 \pm 0.63$             & $-0.26 \pm 3.33$      \\
+        5.7         & $6621 \pm 248$       & $2.18 \pm 0.20$             & $-0.20 \pm 1.35$      \\
+        5.8         & $6624 \pm 241$       & $2.17 \pm 0.19$             & $-0.20 \pm 1.31$      \\
+        5.9         & $7000 \pm 218$       & $2.09 \pm 0.09$             & $-0.11 \pm 1.29$      \\
+        6.0         & $6999 \pm 181$       & $2.08 \pm 0.08$             & $-0.10 \pm 1.06$      \\
+        No cut      & $7150 \pm 467$       & $2.99 \pm 0.30$             & $-0.09 \pm 3.04$      \\
       \hline
     \end{tabular}
 \end{table*}
+
 
 
 \begin{figure}[tpb!]
@@ -623,6 +631,23 @@ $\SI{5.1}{eV}$ for the EP
 
 
 
+
+\begin{acknowledgements}
+D.T.A, S.G.S, E.D.M and N.C.S  acknowledge support from the Funda\c{c}\~ao
+para a Ci\^encia e Tecnologia, FCT (Portugal) in the form of grants
+SFRH/BPD/76606/2011, SFRH/BPD/47611/2008, and SFRH/BPD/70574/2010,
+respectively. PF acknowledges support by Funda\c{c}\~ao para a Ci\^encia
+e a Tecnologia (Portugal) through Investigador FCT contracts of
+reference IF/01037/2013 and POPH/FSE (EC) by FEDER funding through
+the program ``Programa Operacional de Factores de Competitividade -
+COMPETE''.
+
+This research made use of the SIMBAD database operated at CDS,
+This Strasbourg (France) and the Encyclopaedia of Extrasolar Planets.\\
+This work also made use of the IRAF facility.
+
+
+\end{acknowledgements}
 
 
 
