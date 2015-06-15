@@ -32,18 +32,15 @@ def fig_abundance(fout=None):
     df = pd.read_csv('%sFe1_PreSynth_rec.log' % p, delimiter=r'\s+')
     df.rename(columns={'abund': 'Abundance'}, inplace=True)
 
-    fig = plt.figure()
-    ax1 = sns.interactplot('EP', 'EW', 'Abundance', df, filled=True,
-                           levels=100, scatter_kws={'ms': 6})
-    ax1.set_xlabel('Excitation potential [eV]')
-    ax1.set_ylabel(r'EW [m$\AA$]')
+    ax1 = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
+    ax1.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
     plt.draw()
 
-    # plt.savefig('figures/EWvsEP.pdf', format='pdf')
+    plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
-    df = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
-    ax = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
-    ax.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
+    # df = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
+    # ax = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
+    # ax.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
     # plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
     plt.show()
 
@@ -497,8 +494,8 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    # fig_abundance()
-    fig_EPcut_sun()
+    fig_abundance()
+    # fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
     # fig_synthesis()
