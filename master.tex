@@ -35,7 +35,6 @@
 
 
 \institute{
-\and
 Instituto de Astrof\'isica e Ci\^encias do Espa\c{c}o, Universidade do Porto, CAUP, Rua das
 Estrelas, PT4150-762 Porto, Portugal
     \email{daniel.andreasen@astro.up.pt}
@@ -72,86 +71,98 @@ parameters, such as mass, radius, and age from stellar evolutionary
 models \citep{Girardi2000}.
 
 Precise and accurate stellar parameters are also essential in
-exoplanet searches. Planetary radius, and mass are mainly found from
-lightcurve analysis and radial velocity analysis, respectively.
-These parameters are strongly related to the stellar parameters
+exoplanet searches. Planetary radius and mass are mainly found from
+lightcurve analysis and radial velocity analysis, respectively. The
+determination of the mass of the planet implies a knowledge of the
+stellar mass, while the measurement of the radius of the planet
+is dependent on our capability to derive the radius of the star
 \citep{Ammler2009,Torres2008,Torres2012}.
 
-Today there exist several methods to determine stellar atmospheric
-parameters. Interferometry of bright stars give highly accurate
-radii and effective temperatures with low uncertainties. See e.g.
-\cite{Boyajian2012} for application of interferometry of K and M stars.
-Another technique is asteroseismology were stellar pulsation observed
-at the surface originates from deeper layers of a star, and therefore
-reveals the inner structure. From asteroseismology it is possible to (in
-a relatively easy way) measure the surface gravity and mean density,
-and therefore from scaling relations \citep{Kjeldsen1995} calculate
-the mass and radius. This technique has been tested in great extent
-for solar like stars and red giants from ground based observations and
-since the launch of the \emph{Kepler} mission and the CoRoT mission
-\citep{Michel2008,Huber2011,Huber2012}.
+The derivation of precise stellar atmospheric parameters is however not
+a simple task. Different approaches often lead to discrepant results
+\citep[see e.g.][]{Santos13}. Interferometry, usually only possible for
+bright nearby stars, are usually considered as an accurate method to
+derive stellar radii \citep[e.g.][]{Boyajian2012}. Another technique
+is asteroseismology were stellar pulsation observed at the surface
+originates from deeper layers of a star, and therefore reveals the inner
+structure. From asteroseismology it is possible to (in a relatively
+easy way) measure the surface gravity and mean density, and therefore
+\citep{Kjeldsen1995} calculate the mass and radius. This technique has
+been tested in great extent for solar like stars and red giants from
+ground based observations and since the launch of the \emph{Kepler}
+mission and the CoRoT mission \citep{Michel2008,Huber2011,Huber2012}.
+\cite{Campante2015} is an example of usage of asteroseismology for
+characterization of planetary system.
 
-From photometry we can determine effective temperatures from
-simple color relations. Such relations have been examined by
-\cite{Ramirez2005a}. Yet another method is the infrared flux method
-(IRFM) first described by \cite{Blackwell1977} and a newer study by
-\cite{Ramirez2005b,Casagrande2010}. For this method, we need to know the
-bolometric flux, surface gravity, and the metallicity a priori.
+As key to all these approaches is a correct determination
+of the effective temperature. In that respect, the
+IRFM is usually considered as one of the most reliable
+\citep{Blackwell1977,Ramirez2005b,Casagrande2010}. However, these
+methods needs a priori knowledge of the bolometric flux, surface gravity
+and stellar metallicity.
 
-Finally, a well known method is a spectroscopic determination of stellar
-atmospheric parameters. The procedure to choose depend on the quality
-of the spectra, resolution, wavelength region, and e.g. the effective
-temperature and rotational velocity. For low resolution, below 20000,
-it is preferred to fit the overall observed spectrum with a synthetic
-one. For higher resolution at low rotational velocities (below 10 to 15
-\si{km/s}) we can use the equivalent width (EW) method (for details see
-Section~\ref{sec:method}). To use this method the key is to resolve all
-lines we are interested in. For FGK stars we can use optical spectra
-since these stars are the brightest in this wavelength domain. However,
-when we move to the cool M stars the near infrared (NIR) is preferred
-because of the higher brightness and less molecular line blending in the
-spectra.
+Finally, the use of high resolution spectroscopy, together with stellar
+atmospheric models, is also often used to derive, simultaneously,
+all the key atmospheric stellar parameters. The chosen procedure
+often depends on the quality of the spectra, their resolution, and
+wavelength region. For low resolution, below 20000, it is preferred
+to fit the overall observed spectrum with a synthetic one \citep[see
+e.g.][]{Onehag2012}. For higher resolution at low rotational velocities
+(below 10 to 15 \si{km/s}) we can use the equivalent width (EW) method
+(for details see Section~\ref{sec:method}). To use this method the key
+is to resolve all lines we are interested in. For FGK stars we can use
+optical spectra since these stars are the brightest in this wavelength
+domain. However, when we move to the cool M stars the near infrared
+(NIR) is preferred because of the higher brightness and less molecular
+line blending in the spectra.
 
-In this paper we want to explore the possibility for a line list of iron
-lines in the NIR which can be applied for FGK and especially M stars
-in a consistent way. Our first approach is to create a line list in
-this area for the Sun and test it for another star, the slightly hotter
-HD20010, which is a F8 subgiant.
+Derivation of stellar atmospheric parameters from high
+resolution spectra in the optical is now a standard way
+to obtain those parameters. With the advancement of NIR
+instruments, we will now be able to explore a new domain. At
+the moment the GIANO spectrograph installed at TNC is already
+available\footnote{\url{http://www.bo.astro.it/giano/GIANO/GIANO_Overvie
+w.html}}, as well as the IRD spectrograph installed at Subaru
+\citep{IRD}. Furthermore, the CRIRES spectrograph at VLT is being
+updated to
+CRIRES+\footnote{\url{http://www.eso.org/sci/facilities/develop/instruments/crires_up.html}},
+CARMENES for the 3.5 m telescope at Calar Alto Observatory \citep{CARMENES}, and
+SPIROU at CFHT\footnot{\url{http://cfht.hawaii.edu/en/news/SPIRou/}}. The spectral
+resolution for these spectrographs range between 50000 and 100000.
 
-The future will provide us with several NIR spectrographs, with some
-already in use. A list of spectrographs with the highest spectral
-resolution are listed in Table~\ref{tab:spectrograph}. The methodology
-we propose is also a critical step for characterisation of FGKM stars
-with high resolution NIR spectrographs.
+In this paper we want to explore the possibility to create a
+line list of iron lines in the NIR which can be applied for FGK
+stars in a consistent way. The paper is organized as follows:
+In Section~\ref{sec:method} we present the method for deriving
+parameters with the equivalent width method for an iron line list.
+In Section~\ref{sec:results} we present the results for the derived
+parameters for the Sun and HD20010.
 
 
-\begin{table*}[tb!]
-    \caption{Four high-resolution NIR spectrographs adequate for our proposed
-        methodology}
-    \label{tab:spectrograph}
-    \centering
-    \begin{tabular}{llllll}
-      \hline\hline
-        Spectrograph & Resolution   & Wavelength coverage               & First light & References \\
-      \hline
-        CRIRES+      & 50000-100000 & YJHKLM                            & 2017        & 1 \\
-        CARMENES     & 82000        & \SIrange{0.55}{1.7}{\micro\meter} & 2015        & \cite{CARMENES} \\
-        SPIRou       & 75000        & YJHK                              & 2017        & 2 \\
-        IRD          & 70000        & \SIrange{0.97}{1.75}{\micro\meter}& 2014        & \cite{IRD} \\
-        GIANO        & 50000        & \SIrange{0.90}{2.5}{\micro\meter} & 2012        & 3 \\
-      \hline
-    \end{tabular}
-    \tablebib{
-        (1)~\url{http://www.eso.org/sci/facilities/develop/instruments/crires_up.html};
-        (2)~\url{http://cfht.hawaii.edu/en/news/SPIRou/};
-        (3)~\url{http://www.bo.astro.it/giano/GIANO/GIANO_Overview.html}
-    }
-\end{table*}
 
-This paper is organized as follows: In Section~\ref{sec:method} we
-present the method for deriving parameters with the equivalent width
-method for an iron line list. In Section~\ref{sec:results} we present
-the results for the derived parameters for the Sun and HD20010.
+% \begin{table*}[tb!]
+%     \caption{Four high-resolution NIR spectrographs adequate for our proposed
+%         methodology}
+%     \label{tab:spectrograph}
+%     \centering
+%     \begin{tabular}{llllll}
+%       \hline\hline
+%         Spectrograph & Resolution   & Wavelength coverage               & First light & References \\
+%       \hline
+%         CRIRES+      & 50000-100000 & YJHKLM                            & 2017        & 1 \\
+%         CARMENES     & 82000        & \SIrange{0.55}{1.7}{\micro\meter} & 2015        & \cite{CARMENES} \\
+%         SPIRou       & 75000        & YJHK                              & 2017        & 2 \\
+%         IRD          & 70000        & \SIrange{0.97}{1.75}{\micro\meter}& 2014        & \cite{IRD} \\
+%         GIANO        & 50000        & \SIrange{0.90}{2.5}{\micro\meter} & 2012        & 3 \\
+%       \hline
+%     \end{tabular}
+%     \tablebib{
+%         (1)~\url{http://www.eso.org/sci/facilities/develop/instruments/crires_up.html};
+%         (2)~\url{http://cfht.hawaii.edu/en/news/SPIRou/};
+%         (3)~\url{http://www.bo.astro.it/giano/GIANO/GIANO_Overview.html}
+%     }
+% \end{table*}
+
 
 
 
@@ -165,8 +176,8 @@ parameters from a spectrum are spectral synthesis and the equivalent
 width method. The spectral synthesis method compares a synthetic
 spectrum with an observed spectrum and by minimization procedure the
 best fit is found between the synthetic spectrum and the real spectrum
-\citep[see e.g.][]{Onehag2012}. When the minimization procedure reaches
-a minimum, the final atmospheric parameters are found.
+\citep[see e.g.][]{Valenti2005,Onehag2012}. When the minimization
+procedure reaches a minimum, the final atmospheric parameters are found.
 
 The other method is the equivalent width (EW) method, which we use in this
 work. With this method the EWs are measured for all lines in a line list. The
