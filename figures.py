@@ -18,6 +18,7 @@ from glob import glob
 from astropy.io import fits
 from astropy import constants as c
 from astropy import units as u
+from plot_fits import get_wavelength
 
 
 def fig_abundance(fout=None):
@@ -29,6 +30,9 @@ def fig_abundance(fout=None):
     """
 
     p = '../../../programs/moog/results/'
+    p_spec = '/home/daniel/Documents/Uni/phdproject/data/atlas/BASS2000/solarspectrum_01.fits'
+    color = sns.color_palette()
+
     df = pd.read_csv('%sFe1_PreSynth_rec.log' % p, delimiter=r'\s+')
     df.rename(columns={'abund': 'Abundance'}, inplace=True)
 
@@ -36,11 +40,22 @@ def fig_abundance(fout=None):
     ax1.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
     plt.draw()
 
-    plt.savefig('figures/EWvsEP.pdf', format='pdf')
+    # plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
-    # df = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
-    # ax = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
-    # ax.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
+    fe1 = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
+    fe2 = pd.read_csv('%sFe2_PostSynth_rec.log' % p, delimiter=r'\s+')
+    I = fits.getdata(p_spec)
+    I /= np.median(I)
+    I *= 40
+    w = get_wavelength(fits.getheader(p_spec))
+    w, I = w[(w>9500) & (w<25000)], I[(w>9500) & (w<25000)]
+    plt.plot(w[::50], I[::50], '-k', alpha=0.3)
+    plt.hist(fe1.wavelength, color=color[1], bins=30, label='FeI')
+    plt.hist(fe2.wavelength, color=color[0], bins=20, label='FeII')
+    plt.xlabel(r'Wavelength $\AA$')
+    plt.ylabel('Number of lines')
+    plt.title('Recalibrated iron lines')
+    plt.legend(loc=2, frameon=False)
     # plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
     plt.show()
 
@@ -497,7 +512,7 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    # fig_abundance()
+    fig_abundance()
     # fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
