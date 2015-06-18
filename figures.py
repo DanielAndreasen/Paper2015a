@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+import matplotlib.ticker as ticker
 import matplotlib
 import seaborn as sns
 sns.set_style('white')
@@ -19,6 +20,13 @@ from astropy.io import fits
 from astropy import constants as c
 from astropy import units as u
 from plot_fits import get_wavelength
+
+
+matplotlib.rc('xtick', labelsize=24)
+matplotlib.rc('ytick', labelsize=24)
+params = {'legend.fontsize': 24}
+matplotlib.rcParams.update(params)
+matplotlib.rcParams.update({'font.size': 24})
 
 
 def fig_abundance(fout=None):
@@ -33,12 +41,12 @@ def fig_abundance(fout=None):
     p_spec = '/home/daniel/Documents/Uni/phdproject/data/atlas/BASS2000/solarspectrum_01.fits'
     color = sns.color_palette()
 
-    df = pd.read_csv('%sFe1_PreSynth_rec.log' % p, delimiter=r'\s+')
-    df.rename(columns={'abund': 'Abundance'}, inplace=True)
+    # df = pd.read_csv('%sFe1_PreSynth_rec.log' % p, delimiter=r'\s+')
+    # df.rename(columns={'abund': 'Abundance'}, inplace=True)
 
-    ax1 = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
-    ax1.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
-    plt.draw()
+    # ax1 = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
+    # ax1.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
+    # plt.draw()
 
     # plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
@@ -52,12 +60,15 @@ def fig_abundance(fout=None):
     plt.plot(w[::50], I[::50], '-k', alpha=0.3)
     plt.hist(fe1.wavelength, color=color[1], bins=30, label='FeI')
     plt.hist(fe2.wavelength, color=color[0], bins=20, label='FeII')
-    plt.xlabel(r'Wavelength $\AA$')
-    plt.ylabel('Number of lines')
-    plt.title('Recalibrated iron lines')
+    plt.xlabel(r'Wavelength $\AA$', fontsize=24)
+    plt.ylabel('Number of lines', fontsize=24)
+    plt.title('Recalibrated iron lines', fontsize=26)
     plt.legend(loc=2, frameon=False)
-    # plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
-    plt.show()
+    fig = plt.gcf()
+    fig.subplots_adjust(bottom=0.15)
+    plt.xticks(np.arange(8000, 26001, 3000), np.arange(8000, 26001, 3000))
+    plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
+    # plt.show()
 
 
 def fig_EPcut_sun(fout=None):
@@ -95,7 +106,7 @@ def fig_EPcut_sun(fout=None):
         sns.regplot(ep[ep!=6.0], y[ep!=6.0], x_estimator=np.mean, truncate=True, color=color, scatter=False)
         plt.xticks([5.0, 5.5, 6.0], ['5.0', '5.5', 'No cut'])
         if ylabel:
-            plt.ylabel(ylabel)
+            plt.ylabel(ylabel, fontsize=24)
         if solar:
             plt.hlines(solar, 5.0, 6.0)
         plt.xlim(4.95, 6.05)
@@ -155,7 +166,7 @@ def fig_EPcut_sun(fout=None):
 
     ax2 = plt.subplot(222, sharex=ax1)
     ax2.yaxis.tick_right()
-    ax2.yaxis.set_label_position('right')
+    ax2.yaxis.set_label_position('left')
     plot_result(data=(epcut[i1], logg[i1]), solar=solar[1], color=color[0])
     plot_result(data=(epcut[i2], logg[i2]), ylabel=r'$\log(g)$', solar=solar[1], color=color[1])
     ax2.set_ylim(solar[1]-0.07, solar[1]+0.07)
@@ -167,14 +178,18 @@ def fig_EPcut_sun(fout=None):
 
     ax4 = plt.subplot(224, sharex=ax1)
     ax4.yaxis.tick_right()
-    ax4.yaxis.set_label_position('right')
+    ax4.yaxis.set_label_position('left')
     plot_result(data=(epcut[i1], feh[i1]), solar=solar[3], color=color[0])
     plot_result(data=(epcut[i2], feh[i2]), ylabel='[Fe/H]', solar=solar[3], color=color[1])
     plt.hlines(0.0, 5.0, 6.0)
     ax4.set_ylim(solar[3]-0.025, solar[3]+0.015)
 
-    plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
-    # plt.show()
+    fig = plt.gcf()
+    fig.subplots_adjust(top=0.95)
+    fig.subplots_adjust(right=0.87)
+    fig.subplots_adjust(bottom=0.06)
+    # plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
+    plt.show()
 
     # d = data
     # d = d[d[:,1] > 100]  # Remove the non-converged results
@@ -273,6 +288,10 @@ def fig_HD20010_parameters():
                          'vt': data[0:-1, 3],
                         'feh': data[0:-1, 4]})
 
+    df = pd.read_csv('HD20010_params.dat')
+    l = df[df.Ep < 6.5]
+    u = df[df.Ep > 6.5]
+
     xlim1 = [4.95, 6.05]
     xlim2 = [6.95, 7.05]
     xlim1ratio = (xlim1[1]-xlim1[0])/(xlim2[1]-xlim2[0]+xlim1[1]-xlim1[0])
@@ -288,10 +307,9 @@ def fig_HD20010_parameters():
     plt.setp(ax2.get_xticklabels(), visible=False)
 
     ax1.plot(xlim1, [6170]*2, '--k')
-    sns.regplot('EP', 'Teff', df, truncate=True, order=2, ax=ax1,
-                color=c[0]).set_xlabel('')
+    ax1.errorbar(l.Ep, l.Teff, yerr=l.Tefferr, fmt='o', color=c[0])
     ax1.set_ylabel('Teff [K]')
-    ax2.plot(7.0, data[-1, 1], 'o', color=c[0], ms=6)
+    ax2.errorbar(u.Ep, u.Teff, yerr=u.Tefferr, fmt='o', color=c[0])
     ax1.set_xlim(xlim1)
     ax2.set_xlim(xlim2)
     plt.subplots_adjust(wspace=0.03)
@@ -305,7 +323,7 @@ def fig_HD20010_parameters():
     ax2.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
     kwargs = dict(color='k', clip_on=False, linewidth=1)
 
-    ylim = (5800, 7400)
+    ylim = (5600, 7800)
     dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
     dy = 0.02 * (ylim[1]-ylim[0])
     ax1.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
@@ -323,10 +341,9 @@ def fig_HD20010_parameters():
     plt.setp(ax4.get_xticklabels(), visible=False)
 
     ax3.plot(xlim1, [-0.21]*2, '--k')
-    sns.regplot('EP', 'feh', df, truncate=True, order=2, ax=ax3,
-                color=c[1]).set_xlabel('')
+    ax3.errorbar(l.Ep, l.feh, yerr=l.feherr, fmt='o', color=c[1])
     ax3.set_ylabel('[Fe/H]')
-    ax4.plot(7.0, data[-1, 4], 'o', color=c[1], ms=6)
+    ax4.errorbar(u.Ep, u.feh, yerr=u.feherr, fmt='o', color=c[1])
     ax3.set_xlim(xlim1)
     ax4.set_xlim(xlim2)
     plt.subplots_adjust(wspace=0.03)
@@ -340,7 +357,7 @@ def fig_HD20010_parameters():
     ax4.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
     kwargs = dict(color='k', clip_on=False, linewidth=1)
 
-    ylim = (-0.30, 0.00)
+    ylim = (-4.00, 4.00)
     dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
     dy = 0.02 * (ylim[1]-ylim[0])
     ax3.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
@@ -350,6 +367,7 @@ def fig_HD20010_parameters():
 
     ax3.set_ylim(ylim)
     ax4.set_ylim(ylim)
+    # ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
     # micorturbulence
     ax5 = fig.add_subplot(gs[4])
@@ -358,10 +376,9 @@ def fig_HD20010_parameters():
     # plt.setp(ax6.get_xticklabels(), visible=False)
 
     ax5.plot(xlim1, [1.7]*2, '--k')
-    sns.regplot('EP', 'vt', df, truncate=True, order=2, ax=ax5,
-                color=c[2]).set_xlabel('')
+    ax5.errorbar(l.Ep, l.vt, yerr=l.vterr, fmt='o', color=c[2])
     ax5.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
-    ax6.plot(7.0, data[-1, 3], 'o', color=c[2], ms=6)
+    ax6.errorbar(u.Ep, u.vt, yerr=u.vterr, fmt='o', color=c[2])
     ax5.set_xlim(xlim1)
     ax6.set_xlim(xlim2)
     plt.subplots_adjust(wspace=0.03)
@@ -370,12 +387,12 @@ def fig_HD20010_parameters():
     ax6.spines['left'].set_visible(False)
     ax6.yaxis.tick_right()
     ax6.tick_params(labelright='off')
-    plt.setp(ax6, xticks=[7.0], xticklabels=['No EP cut'])
+    plt.setp(ax6, xticks=[7.0], xticklabels=['No\nEP cut'])
 
     ax6.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
     kwargs = dict(color='k', clip_on=False, linewidth=1)
 
-    ylim = (0.20, 3.10)
+    ylim = (0.00, 4.30)
     dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
     dy = 0.02 * (ylim[1]-ylim[0])
     ax5.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
@@ -386,7 +403,12 @@ def fig_HD20010_parameters():
     ax5.set_ylim(ylim)
     ax6.set_ylim(ylim)
 
-    # plt.show()
+    fig = plt.gcf()
+    fig.subplots_adjust(top=0.97)
+    fig.subplots_adjust(bottom=0.12)
+    fig.subplots_adjust(right=0.97)
+
+    plt.show()
     # plt.savefig('figures/HD20010_parameters_cuts.pdf')
     return df
 
@@ -483,12 +505,14 @@ def fig_synthesis():
     ax1 = fig.add_subplot(211)
     x_formatter = matplotlib.ticker.ScalarFormatter(useOffset=False)
     ax1.set_xticklabels([])
-    ax1.set_ylabel('Normalized flux')
+    ax1.set_ylabel('Normalized flux', fontsize=24)
+    ax1.set_xlim(15449, 15455)
     ax1.set_ylim(0.8, 1.05)
     ax2 = fig.add_subplot(212)
+    ax2.set_xlim(15449, 15455)
     ax2.xaxis.set_major_formatter(x_formatter)
-    ax2.set_xlabel(r'$\lambda$ Angstrom')
-    ax2.set_ylabel('Residuals')
+    ax2.set_xlabel(r'$\lambda$ Angstrom', fontsize=24)
+    ax2.set_ylabel('Residuals', fontsize=24)
 
     # The first plot
     ax1.plot(obs[:, 0], obs[:, 1], '-k', lw=4, alpha=0.6,
@@ -499,7 +523,7 @@ def fig_synthesis():
     for line in lines:
         if line[0].startswith('Fe'):
             ax1.vlines(line[1], 0.8, 1.05, alpha=0.3)
-    ax1.legend(frameon=False, loc='best')
+    # ax1.legend(frameon=False, loc='best')
 
     # The second plot
     for i in range(3-1):
@@ -512,9 +536,9 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    fig_abundance()
+    # fig_abundance()
     # fig_EPcut_sun()
-    # fig_HD20010_parameters()
+    fig_HD20010_parameters()
     # fig_spectral_region()
     # fig_synthesis()
 
