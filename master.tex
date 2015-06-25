@@ -10,6 +10,7 @@
 
 \def\eps{\varepsilon}
 \def\aap{A\&A}
+\def\eprint{e-prints}
 \def\apj{ApJ}
 \def\apjs{ApJS}
 \def\apjl{ApJL}
@@ -240,8 +241,8 @@ the BASS2000 web page\footnote{The web page can be found here:
 \url{bass2000.obspm.fr/solar_spect.php}} to select the lines. The
 spectrum was downloaded in the highest possible resolution. We use
 the ARES software\footnote{The ARES software can be found here:
-\url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007,Sousa2015a
-} to automatically measure EWs of all the lines. Since the first version
+\url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007,Sousa2015a}
+to automatically measure EWs of all the lines. Since the first version
 of ARES expect a 1D spectrum, the solar spectrum was interpolated to a
 regular grid with constant wavelength step of $\SI{0.01}{\AA}$. The EWs
 are measured by fitting Gaussian profiles to spectral lines. For a given
@@ -360,10 +361,10 @@ need to recalibrate the strength of the lines ($\log \mathrm{gf}$)
 in order to match the adopted solar abundance. This is one of the
 ways to perform a differential analysis, which is a common thing
 to do for a star we know well \citep{Sousa2008a,Onehag2012}. In
-Fig~\ref{fig:Fe1_before_recal} the EWs of the Sun of the Fe I lines
-are plotted with respect to the excitation potential. This plot shows
-the distribution before recalibration of the oscillator strengths
-and cut for lines with abundances deviating more than 1 dex from the
+Fig~\ref{fig:Fe1_before_recal} the EWs of the Sun of the Fe I
+lines are plotted with respect to the excitation potential. This
+plot shows the distribution before recalibration of $\log gf$ and
+cut for lines with abundances deviating more than 1 dex from the
 Solar value. The distribution of FeI and FeII lines are shown in
 Fig~\ref{fig:Fe1_after_recal} on top of the solar spectrum we have used
 for our analysis.
@@ -484,9 +485,9 @@ The color shows the two different SNR considered (blue is SNR at 100,
 and green is SNR at 300). For a given SNR and EP cut, the 10 runs were
 combined to a single value by calculating the mean. Additionally,
 we show the 1$\sigma$ standard deviation. A few of the runs did not
-converge with our minimization routine. These runs are not considered
-in the plot. The derived atmospheric parameters are presented in
-Table~\ref{tab:sun}.
+converge with our minimization routine. For these with manual changed
+the atmospheric model parameters untill we met the convergence criteria.
+The derived atmospheric parameters are presented in Table~\ref{tab:sun}.
 
 \begin{figure}[t!]
     \centering
@@ -658,7 +659,27 @@ exact values can be seen in Table~\ref{tab:hd20010}.
 
 
 \section{Conclusion}
-This is al fantastic. Have a nice São João :)
+In this work, we present a new iron line list for the NIR. The quality
+of the line list plays a key role for deriving stellar atmospheric
+parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -686,6 +707,5 @@ Strasbourg (France).
 \bibpunct{(}{)}{;}{a}{}{,}
 \bibliographystyle{aa}
 \bibliography{thesis}
-% \nocite*{}
 
 \end{document}
