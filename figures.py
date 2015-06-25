@@ -537,8 +537,8 @@ def main():
     """Main function
     """
     # fig_abundance()
-    # fig_EPcut_sun()
-    fig_HD20010_parameters()
+    fig_EPcut_sun()
+    # fig_HD20010_parameters()
     # fig_spectral_region()
     # fig_synthesis()
 
