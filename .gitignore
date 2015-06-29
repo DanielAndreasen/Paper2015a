@@ -6,6 +6,7 @@
 *.llt
 *.log
 *.pdf
+*.tex.backup
 
 # Python/figure stuff
 *.pyc
