@@ -432,14 +432,6 @@ def fig_spectral_region():
     fm = fm[::r]
     fh = fh[::r]
 
-    from astropy.analytic_functions import blackbody_lambda
-    _wmax = lambda Teff: (c.b_wien/Teff).to('AA')
-
-    Teff = np.arange(2000, 8500, 50) * u.K
-    # wmax = _wmax(Teff)
-    # bb_max = [blackbody_lambda(wi, Ti) for wi, Ti in zip(wmax, Teff)]
-    # Bm = np.array([bi.value * 4*np.pi for bi in bb_max])
-
     plt.plot(w, fh, label=r'$T_\mathrm{eff}=6200\mathrm{K, }\log g=4.00$')
     plt.plot(w, fm*1e1, label=r'$T_\mathrm{eff}=3500\mathrm{K, }\log g=4.00$')
     plt.plot(w, fl*1e1, label=r'$T_\mathrm{eff}=2700\mathrm{K, }\log g=4.50$')
@@ -447,13 +439,14 @@ def fig_spectral_region():
     plt.xlabel(r'$\lambda$ Angstrom')
     plt.ylabel(r'Flux erg/(s cm$^2$ cm)')
     plt.legend(loc='best', frameon=False)
+    plt.xlim(1000, 40000)
 
     # ax = plt.axes([0.35, 0.3, 0.2, 0.3])
     # plt.plot(w, fl)
     # plt.plot(w, fm)
     # plt.setp(ax, xticks=[], yticks=[])
-    plt.savefig('figures/spectral_region.pdf', format='pdf')
-    # plt.show()
+    # plt.savefig('figures/spectral_region.pdf', format='pdf')
+    plt.show()
 
 
 def fig_synthesis():
@@ -537,9 +530,9 @@ def main():
     """Main function
     """
     # fig_abundance()
-    fig_EPcut_sun()
+    # fig_EPcut_sun()
     # fig_HD20010_parameters()
-    # fig_spectral_region()
+    fig_spectral_region()
     # fig_synthesis()
 
 
