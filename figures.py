@@ -42,32 +42,33 @@ def fig_abundance(fout=None):
     color = sns.color_palette()
 
     # df = pd.read_csv('%sFe1_PreSynth_rec.log' % p, delimiter=r'\s+')
-    # df.rename(columns={'abund': 'Abundance'}, inplace=True)
+    df = pd.read_csv('%sFe1_PostSynth_cut_rec.log' % p, delimiter=r'\s+')
+    df.rename(columns={'abund': 'Abundance'}, inplace=True)
 
-    # ax1 = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
-    # ax1.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
+    ax1 = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
+    ax1.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
     # plt.draw()
 
-    # plt.savefig('figures/EWvsEP.pdf', format='pdf')
+    plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
-    fe1 = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
-    fe2 = pd.read_csv('%sFe2_PostSynth_rec.log' % p, delimiter=r'\s+')
-    I = fits.getdata(p_spec)
-    I /= np.median(I)
-    I *= 40
-    w = get_wavelength(fits.getheader(p_spec))
-    w, I = w[(w>9500) & (w<25000)], I[(w>9500) & (w<25000)]
-    plt.plot(w[::50], I[::50], '-k', alpha=0.3)
-    plt.hist(fe1.wavelength, color=color[1], bins=30, label='FeI')
-    plt.hist(fe2.wavelength, color=color[0], bins=20, label='FeII')
-    plt.xlabel(r'Wavelength $\AA$', fontsize=24)
-    plt.ylabel('Number of lines', fontsize=24)
-    plt.title('Recalibrated iron lines', fontsize=26)
-    plt.legend(loc=2, frameon=False)
-    fig = plt.gcf()
-    fig.subplots_adjust(bottom=0.15)
-    plt.xticks(np.arange(8000, 26001, 3000), np.arange(8000, 26001, 3000))
-    plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
+    # fe1 = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
+    # fe2 = pd.read_csv('%sFe2_PostSynth_rec.log' % p, delimiter=r'\s+')
+    # I = fits.getdata(p_spec)
+    # I /= np.median(I)
+    # I *= 40
+    # w = get_wavelength(fits.getheader(p_spec))
+    # w, I = w[(w>9500) & (w<25000)], I[(w>9500) & (w<25000)]
+    # plt.plot(w[::50], I[::50], '-k', alpha=0.3)
+    # plt.hist(fe1.wavelength, color=color[1], bins=30, label='FeI')
+    # plt.hist(fe2.wavelength, color=color[0], bins=20, label='FeII')
+    # plt.xlabel(r'Wavelength $\AA$', fontsize=24)
+    # plt.ylabel('Number of lines', fontsize=24)
+    # plt.title('Recalibrated iron lines', fontsize=26)
+    # plt.legend(loc=2, frameon=False)
+    # fig = plt.gcf()
+    # fig.subplots_adjust(bottom=0.15)
+    # plt.xticks(np.arange(8000, 26001, 3000), np.arange(8000, 26001, 3000))
+    # plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
     # plt.show()
 
 
@@ -529,10 +530,10 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    # fig_abundance()
+    fig_abundance()
     # fig_EPcut_sun()
     # fig_HD20010_parameters()
-    fig_spectral_region()
+    # fig_spectral_region()
     # fig_synthesis()
 
 
