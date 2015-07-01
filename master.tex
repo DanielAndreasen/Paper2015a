@@ -54,25 +54,29 @@ Departamento de F\'isica e Astronom\'ia, Faculdade de Ci\^encias, Universidade d
 \abstract
 % Context
 {Effective temperature, surface gravity, and metallicity are basic
-stellar atmospheric parameters necessary to characterize a star. There
-exist sevaral methods to derive these parameters, and with up-coming NIR
-spectrographs, we will push for this spectral region.}
+spectroscopic stellar atmospheric parameters necessary to characterize a
+star or a planetary system. There exist several methods to derive these
+stellar parameters, high resolution optical spectroscopy being one of
+the most solid. With the advent of a new generation of high resolution
+near-IR spectrographs, it is interesting to investigate the use of this
+"new" spectral window.}
 % Aims
 {We aim to compile a new iron line list in the NIR from a solar
 spectrum, to derive stellar atmospheric parameters.}
 % Methods
 {Our spectroscopic analysis is based on the iron excitation and
-ionization balance, assuming Kurucz ATLAS9 model atmospheres in LTE.
-The abundance analysis was determined using the code, MOOG. We use a
-high resolution and high signal-to-noise ratio spectrum of the Sun as a
-starting point to compile the iron line list. We tested the line list on
-HD20010, and the result indicate a necessary cut in excitation potential
-of the line list.}
+ionization balance. The abundance analysis was done using the code,
+MOOG. We use a high resolution and high signal-to-noise ratio spectrum
+of the Sun as a starting point to compile the iron line list. The
+oscillator strengths were calibrated for the Sun.}
 % Results
-{We analysed HD20010, a F8IV star, from which we derived stellar
+{We successfully derived stellar atmospheric parameters for the Sun.
+We also added noise to the EW measurements of the Sun and derived
+parameters in perfect agreement with calibrated line-list. Furthermore,
+we analysed HD20010, a F8IV star, from which we derived stellar
 atmospheric parameters. Due to a lack of measured FeII lines from the
 spectrum we used, we were not able to derive the surface gravity, which
-was fixed duing the proccess. The rest of the stellar atmospheric
+was fixed during the process. The rest of the stellar atmospheric
 parameters were derived at different cuts in excitation potential in
 order to get parameters closer to literature values. At a \SI{5.3}{eV}
 cut in excitation potential and a fixed $\log g$ at 3.93 we derive:
@@ -93,12 +97,12 @@ and [Fe/H]=$-0.29\pm0.73$ dex.}
 \section{Introduction}
 \label{sec:introduction}
 
-Effective surface temperature ($T_\mathrm{eff}$), surface gravity
-($\log g$), and metallicity ([Fe/H], where iron is normally used
-as a proxy) are fundamental atmospheric parameters necessary to
-characterise a star, as well as to determine other indirect fundamental
-parameters, such as mass, radius, and age from stellar evolutionary
-models \citep[e.g.][]{Girardi2000}.
+Effective temperature ($T_\mathrm{eff}$), surface gravity ($\log g$),
+and metallicity ([Fe/H], where iron is normally used as a proxy)
+are fundamental atmospheric parameters necessary to characterise a
+star, as well as to determine other indirect fundamental parameters,
+such as mass, radius, and age from stellar evolutionary models
+\citep[e.g.][]{Girardi2000}.
 
 Precise and accurate stellar parameters are also essential in
 exoplanet searches. Planetary radius and mass are mainly found from
@@ -117,12 +121,11 @@ is another technique were stellar pulsation observed at the surface
 originates from deeper layers of a star, and therefore reveals the
 inner structure. From asteroseismology it is possible to measure
 the surface gravity and mean density, and therefore calculate the
-mass and radius \citep[e.g.][]{Kjeldsen1995}. This technique has
-been tested in great extent for solar like stars and red giants from
-ground based observations and since the launch of the \emph{Kepler}
-mission and the CoRoT mission \citep{Michel2008,Huber2011,Huber2012}.
-\cite{Campante2015} is an example of usage of asteroseismology for
-characterization of planetary system.
+mass and radius \citep[e.g.][]{Kjeldsen1995}. Asteroseismology has
+been tested to great extent with e.g. \emph{Kepler} and \emph{CoRoT}
+\citep{Michel2008,Huber2011,Huber2012}. \cite{Campante2015} is a recent
+example of usage of asteroseismology for characterization of planetary
+system.
 
 As key to all these approaches is a correct determination
 of the effective temperature. In that respect, the IRFM
@@ -134,15 +137,12 @@ stellar metallicity.
 Finally, the use of high resolution spectroscopy, together with stellar
 atmospheric models, is also often used to derive key atmospheric stellar
 parameters. The selected procedures often depends on the quality of the
-spectra, their resolution, and wavelength region. For low resolution,
-below 20000, it is preferred to fit the overall observed spectrum with
-a synthetic one \citep[see e.g.][]{Recio2006}. For higher resolution
-at low rotational velocities (below 10 to 15 \si{km/s}) we can use the
-equivalent width (EW) method (for details see Sect.~\ref{sec:method}).
-For FGK stars it is preferable to use optical spectra since these stars
-have the peak flux in this wavelength domain. However, when we move to
-the cooler M stars the near infrared (NIR) is preferred because of the
-higher brightness and lower presence of molecular lines in the spectra.
+spectra, their resolution, and wavelength region. For low resolution
+spectra ($\lambda/\Delta\lambda$ below 20000) it is preferred to
+fit the overall observed spectrum with a synthetic one \citep[see
+e.g.][]{Recio2006}. For higher resolution spectra of slowly rotating
+stars (below 10 to 15 \si{km/s}) we can use the equivalent width (EW)
+method (for details see Sect.~\ref{sec:method}).
 
 Derivation of stellar atmospheric parameters (effective temperature,
 surface gravity, and metallicity) from high resolution spectra in the
@@ -150,23 +150,26 @@ optical is now a standard way to obtain those parameters. With the
 advancement of NIR instruments, we will now be able to explore a new
 domain. At the moment the GIANO spectrograph installed at TNC is already
 available\footnote{\url{http://www.bo.astro.it/giano/GIANO/GIANO_Overvie
-w.html}}, as well as the IRD spectrograph
-installed at Subaru \citep{IRD}. Furthermore, the
-CRIRES spectrograph at VLT is being updated to
-CRIRES+\footnote{\url{http://www.eso.org/sci/facilities/develop/instrume
-nts/crires_up.html}}, CARMENES for the 3.5 m telescope at
-Calar Alto Observatory \citep{CARMENES}, and SPIRou at
+w.html}}, as well as the IRD spectrograph installed
+at Subaru \citep{IRD}. Three future spectrographs
+are planned for the near future: 1) CRIRES+ at
+VLT\footnote{\url{http://www.eso.org/sci/facilities/develop/instrume
+nts/crires_up.html}}, 2) CARMENES for the 3.5 m telescope at
+Calar Alto Observatory \citep{CARMENES}, and 3) SPIRou at
 CFHT\footnote{\url{http://cfht.hawaii.edu/en/news/SPIRou/}}. The
 spectral resolution for these spectrographs range between 50000 and
 100000.
 
-In this paper we want to explore the possibility to create a line
-list of iron lines in the NIR which can be applied for FGK stars in
-a consistent way as it is currently done for FGK stars. The paper is
-organized as follows: In Sect.~\ref{sec:method} we present the method
-for deriving parameters with the equivalent width method for an iron
-line list. In Sect.~\ref{sec:results} we present the results for the
-derived parameters for the Sun and HD20010.
+However, although reliable line lists for the derivation of stellar
+parameters using optical spectra exist, the situation is different
+in the near-IR regime. In this paper we thus want to explore the
+possibility to create a line list of iron lines in the NIR which
+can be applied for FGK stars in a consistent way as it is currently
+done for these stars in the optical. The paper is organized as
+follows: In Sect.~\ref{sec:method} we present the method for deriving
+parameters with the equivalent width method for an iron line list.
+In Sect.~\ref{sec:results} we present the results for the derived
+parameters for the Sun and HD20010.
 
 
 
@@ -211,7 +214,7 @@ procedure reaches a minimum, the final atmospheric parameters are found.
 
 The other method is the equivalent width (EW) method \citep{Sousa2008a},
 which we use in this work. With this method the EWs are measured for all
-lines in a line list. The EW is given as
+lines in a list. The EW is given as
 \begin{align}
     \label{eq:EW}
     EW = \int_0^\infty \left(1 - \frac{F_\lambda}{F_0}\right) d\lambda,
@@ -240,16 +243,17 @@ emit more in this spectral region, where the continuum is at least
 easier to determine. In Fig~\ref{fig:spectral_region} we show a plot
 of three synthetic models created with the PHOENIX atmosphere models
 \citep{Husser2013}. We will focus at the spectral region covered by the
-J, H, and K bands, which expands more than $\SI{15000}{\AA}$.
+J, H, and K bands, which covers more than $\SI{15000}{\AA}$.
 
 \begin{figure}[tbp!]
     \centering
     \includegraphics[width=1.0\linewidth]{figures/spectral_region.pdf}
-    \caption{Synthetic spectra of varying effective temperature. The $\log g$
-    is 0.5 dex higher for the coolest model, and the flux of the two coolest models
-    have been multiplied by a factor of 10, in order to show it all in the same
-    scale. The maximum of light emitted is located at different wavelengths for
-    different effective temperatures according to Wien's displacement law.}
+    \caption{Synthetic spectra of stars with three different effective
+    temperatures. The $\log g$ is 0.5 dex higher for the coolest model,
+    and the flux of the two coolest models have been multiplied by a
+    factor of 10, in order to show it all in the same scale. The maximum
+    of light emitted is located at different wavelengths for different
+    effective temperatures according to Wien's displacement law.}
     \label{fig:spectral_region}
 \end{figure}
 
@@ -284,7 +288,7 @@ criteria:
 \begin{itemize}
     \item If the number of fitted lines by ARES for a given line is higher than 10,
         this line is rejected because it is believed to be severely blended.
-    \item If the EW is lower than $\SI{5}{m\AA}$ for a given line, the strength
+    \item If the EW is lower than $\SI{5}{m\AA}$ for an absorption line, the strength
         is too low and may be difficult to see in spectra with low S/N or a
         spectrum with many spectral features.
     \item If the EW is higher than $\SI{200}{m\AA}$ for a given line, the strength
@@ -308,7 +312,7 @@ point in order to allow us to select only the best lines.
 In this step we analyzed in detail small \SI{3}{\angstrom} wide spectral
 windows around each line. For each spectral window, the corresponding
 absorption lines for all elements were downloaded from the VALD3 data
-base. The location of these lines were plotted on top of the Solar
+base. The location of these lines were plotted on top of the solar
 spectrum, and iron lines were excluded when a line of another element
 was present at the same wavelength. Iron lines were also excluded when
 the absorption line was severely blended by other spectral lines. Many
@@ -368,14 +372,13 @@ the gf-value) to create a single line that can be analyzed with our
 method.
 
 
-\subsection{Recalibrating the atomic data}
+\subsection{Calibrating the line-list: astrophysical $\log$ gf values}
 \label{ssub:Recalibrating-the-atomic-data}
 
-At this point we ended up with 594 and 15 lines of FeI and FeII,
+At this point we ended up with 594 and 12 lines of FeI and FeII,
 respectively. The iron abundances for each line were then calculated
 using the same solar atmosphere model as described above for
-synthesis. Here the metallicity was set to [Fe/H]=0 for all
-calculations. We consider a solar iron abundance of 7.47 according to
+synthesis. We consider a solar iron abundance of 7.47 according to
 \cite{Gonzalez2000}. This step allowed us to remove possible outliers
 based on the assumption that errors in the $\log \mathrm{gf}$ values
 from the VALD3 data base would never lead to variations of the derived
@@ -386,15 +389,15 @@ Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. At this point we
 are down to 319 and 12 lines, for Fe I and Fe II respectively.
 
 After the removal of lines from the complete VALD3 line list we only
-need to recalibrate the strength of the lines ($\log \mathrm{gf}$)
-in order to match the adopted solar abundance. This is one of the
-ways to perform a differential analysis, which is a common thing
-to do for a star we know well \citep{Sousa2008a,Onehag2012}. In
-Fig~\ref{fig:Fe1_before_recal} the EWs of the Sun of the Fe I
-lines are plotted with respect to the excitation potential. This
-plot shows the distribution before recalibration of $\log gf$ and
+need to recalibrate the oscillator strength of the lines ($\log
+\mathrm{gf}$) in order to match the adopted solar abundance. This is
+one of the ways to perform a differential analysis, which is a common
+thing to do for a star we know well \citep{Sousa2008a,Onehag2012}.
+In Fig~\ref{fig:Fe1_before_recal} the EWs of the Sun of the Fe I
+lines are plotted as a function of the excitation potential. This
+plot shows the distribution after recalibration of $\log gf$ and
 cut for lines with abundances deviating more than 1 dex from the
-Solar value. The distribution of FeI and FeII lines are shown in
+solar value. The distribution of FeI and FeII lines are shown in
 Fig~\ref{fig:Fe1_after_recal} on top of the solar spectrum we have used
 for our analysis.
 
@@ -402,10 +405,9 @@ for our analysis.
 \begin{figure}[tpb]
     \centering
     \includegraphics[width=1.0\linewidth]{figures/EWvsEP.pdf}
-    \caption{The distribution of Fe I lines with. At the x axis is
+    \caption{The distribution of Fe I lines. At the x axis is
     the excitation potential, while the measured EWs for the Sun is
-    shown at the y axis. The color scale indicates the abundance before
-    recalibration.}
+    shown at the y axis.}
     \label{fig:Fe1_before_recal}
 \end{figure}
 
@@ -478,16 +480,19 @@ FeII.
 \subsection{Derived parameters for the Sun}
 \label{sec:derived_parameters_of_the_sun}
 
-As a test, we then derived the stellar parameters for the Sun using the
-resulting line list (including the solar calibrated, astrophysical $\log
-\mathrm{gf}$ values). We used the minimization procedure described in
-Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. Additionally,
-we repeated this test but after adding noise to the EW measurements and
+As a test, we then derived the stellar parameters for the Sun using
+the resulting line-list (including the solar calibrated, astrophysical
+$\log \mathrm{gf}$ values). We used the minimization procedure described
+in Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. Since the
+line-list and $\log$ gf values has been selected using the solar
+spectrum, it is with no surprise that the derived parameters for the
+Sun perfectly match the adopted solar values. In addition to this, we
+repeated this test but after adding noise to the EW measurements and
 derived parameters with different cuts in excitation potential (EP). The
 noisy EWs follow the procedure from \cite{Caryel1988}:
 
 \begin{align}
-    \sigma \simeq 1.6 \frac{\sqrt{\Delta\lambda\; \mathrm{EW}}}{\mathrm{SNR}},
+    \sigma \simeq 1.6 \frac{\sqrt{\Delta\lambda\; \mathrm{EW}}}{\mathrm{S/N}},
 \end{align}
 where $\Delta\lambda=0.1\si{\angstrom}$ and we consider two different
 signal-to-noise ratios, 100 and 300. This sigma is used to create a
@@ -496,27 +501,26 @@ normal distribution with a mean around the original EW.
 \begin{align}
     f(x, EW, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-EW)^2}{2\sigma^2}}
 \end{align}
+
 A new set of EWs is drawn from this distribution. We make 10 different
-draws in total for both SNR considered. From each new line list we
-applied a cut in excitation potential at \SI{5.0}{eV} and \SI{5.5}{eV}
-resulting in a total of 61 line lists. For each SNR we consider we have 30
-line lists in addition to the original line list. We make the cut in excitation
-potential after we tried to derive parameters for HD20010 without any cuts in
-excitation potential and overestimated the parameters (see more in
-Sect~\ref{sec:derived_parameters_of_hd20010}). With different cuts in EP
-we were able to get more reliable parameters. Hence we applied the cuts for
-the Sun as well in order to see the effect of the derived parameters.
+draws for 3 different cuts in excitation potential: \SI{5.0}{eV},
+\SI{5.5}{eV}, and not cut at all. This is done for both S/N considered.
+This gives us 60 different line-lists, and with the original line-list
+we have in total 61 line-lists. We make the cut in excitation
+potential for two reasons: 1) We do not see lines with that high
+excitation potential in a similar line list for the optical \citep[see
+e.g.][]{Tsantaki2013} and this might be a problem for future derivation
+of parameters. 2) We might have problems with the clump of lines at high
+excitation potential when we try to reach iron excitation balance.
 
 In Fig~\ref{fig:solar_parameters} the derived parameters are plotted
 with different EP cuts in the line list. The horizontal black lines
 are the derived atmospheric parameters without noise added to the EWs.
-The color shows the two different SNR considered (blue is SNR at 100,
-and green is SNR at 300). For a given SNR and EP cut, the 10 runs were
+The color shows the two different S/N considered (blue is S/N at 100,
+and green is S/N at 300). For a given S/N and EP cut, the 10 runs were
 combined to a single value by calculating the mean. Additionally,
-we show the 1$\sigma$ standard deviation. A few of the runs did not
-converge with our minimization routine. For these with manual changed
-the atmospheric model parameters untill we met the convergence criteria.
-The derived atmospheric parameters are presented in Table~\ref{tab:sun}.
+we show the 1$\sigma$ standard deviation. The derived atmospheric
+parameters are presented in Table~\ref{tab:sun}.
 
 \begin{figure}[t!]
     \centering
@@ -524,8 +528,8 @@ The derived atmospheric parameters are presented in Table~\ref{tab:sun}.
     \caption{Derived atmospheric parameters for the Sun. The horizontal
     black lines are the parameters for the calibrated line list, the
     three points shows the mean value of 10 runs with random noise
-    added, the blue points is the results for SNR=100, while the
-    green points is for SNR=300.}
+    added, the blue points is the results for S/N=100, while the
+    green points is for S/N=300.}
     \label{fig:solar_parameters}
 \end{figure}
 
@@ -545,7 +549,7 @@ are perfectly compatible with expected values.
     \centering
     \begin{tabular}{llllll}
       \hline\hline
-        EP cut (eV) &  SNR &  $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)     &  $\xi_\mathrm{micro}$ (km/s) &  [Fe/H]           \\
+        EP cut (eV) &  S/N &  $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)     &  $\xi_\mathrm{micro}$ (km/s) &  [Fe/H]           \\
         \hline
         5.0         &  100 &  $5771 \pm  41$       & $4.44   \pm  0.11$  & $1.04  \pm  0.14$            & $-0.01    \pm 0.03$\\
         5.5         &  100 &  $5770 \pm  34$       & $4.42   \pm  0.08$  & $1.04  \pm  0.13$            & $-0.01    \pm 0.02$\\
@@ -581,23 +585,28 @@ quality. Most of the spectra are stretched compared to e.g. a model or a
 solar spectrum in the same region.
 
 In order to measure the EWs of the lines in our line list, the
-correct absorption lines need to be identified. This was done by
-plotting the spectra for HD20010, a solar spectrum (the parameters
-are close enough so we can use the Sun as a reference), an observed
-telluric spectrum from the TAPAS web page \citep{Bertaux2014}, and
-the lines from our line list in the region we are looking at. The
-pieces of spectra are shifted in radial velocity as well to correct
-for radial velocity shifts from the motion of the star relative
-to Earth and the Earth's motion around the Sun. A software was
-developed that plots the three different spectra, the absorption
-line, and calculate the cross correlation function of the model (in
-this case the Sun), and the telluric spectra\footnote{The software
+correct absorption lines need to be identified. This is done
+with a software special developed for this\footnote{The software
 (plot\textunderscore{}fits) is open source and can be found here:
-\url{https://github.com/DanielAndreasen/astro_scripts}}. The two CCFs
-are fitted with a Gaussian, and the mid point is the RV. These two
-RVs are used to shift the model and telluric respectively. The lines
-from our line list are shifted with the same RV as for the model.
-Fig~\ref{fig:plot_fits} shows an example of this.
+\url{https://github.com/DanielAndreasen/astro_scripts}}. This software
+does the following:
+\begin{enumerate}
+    \item Plot the observed spectrum.
+    \item Over plot a model spectrum. In this particular the solar spectrum was
+        used since the atmospheric parameters are close enough, so the sun can
+        serve as a model.
+    \item Over plot a telluric spectrum from the TAPAS web page \citep{Bertaux2014}.
+    \item Over plot a vertical line at the location for lines in the list.
+    \item Calculate the cross correlation function (CCF) for the telluric spectrum
+        respect to the observed spectrum, locate the maximum value by a Gaussian fit
+        and use this to shift the telluric spectrum with the found RV.
+    \item Do the same as the step above, but for the model.
+\end{enumerate}
+The final plot shows the shifted spectra, and the CCFs at the sides. An example
+of the software in use is shown in Fig.~\ref{fig:plot_fits}. The two RVs are
+part of the title of the plot.
+
+
 
 \begin{figure*}[tbp!]
     \centering
@@ -636,7 +645,7 @@ fixed the surface gravity to the value found in \cite{Gonzalez2010}.
 Fig~\ref{fig:HD20010_parameters_cuts} shows the results from this
 exercise. A second degree polynomial is fitted for the effective
 temperature, iron abundance, and the micro turbulence with the
-95\% confidence interval. At a cut at $\SI{5.5}{eV}$ and below
+95\% confidence interval. At a cut at $\SI{5.3}{eV}$ and below
 the atmospheric parameters gets close to the values derived from
 \cite{Gonzalez2010} which is plotted as a horizontal black line. The
 exact values can be seen in Table~\ref{tab:hd20010}.
@@ -690,17 +699,24 @@ exact values can be seen in Table~\ref{tab:hd20010}.
 \section{Conclusion}
 In this work, we present a new iron line list for the NIR. The quality
 of the line list plays a key role for deriving atmospheric stellar
-parameters. While the line list was compiled from a Solar spectrum
+parameters. While the line list was compiled from a solar spectrum
 and calibrated for the same, we tested it extensively for the slightly
-hotter star, HD20010. The first results with this line list are promising,
-after we apply a cut in excitation potential around \SI{5.5}{eV}.
+hotter star, HD20010. The first results with this line list are promising.
 
-The line list still remains to be tested for a larger sample of other FGK
-stars, but as important for M stars. Currently, there is one M dwarf in the
-CRIRES-POP, Barnard's star which will be ideal for testing in the future.
+The line list still remains to be tested for a larger sample of FGK
+stars. Furthermore, it will be interesting to explore the use of this
+line-list to derive parameters for M-dwarf stars using high resolution
+and high S/N NIR spectra. Currently, there is one M dwarf in the
+CRIRES-POP, Barnard's star which will be ideal for testing in the
+future.
+
 
 Moreover, with the up-coming NIR spectrographs, this work and future
-continuation will help the community to derive atmospheric stellar parameters.
+continuation will help the community to derive atmospheric stellar
+parameters.
+
+
+
 
 
 \begin{acknowledgements}
