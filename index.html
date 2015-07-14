@@ -5,8 +5,8 @@
 		<title>Determination of stellar parameters for M-dwarf stars: the NIR approach</title>
 		<meta name="description" content="Evaluation report">
 		<meta name="author" content="Daniel T. Andreasen">
-		<!-- <meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css" id="theme">
@@ -23,51 +23,46 @@
 	</head>
 
 
-
-
-
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section id="fragments">
+				<section>
 					<h2>Determination of stellar parameters for M-dwarf stars</h2>
 					<h3>The NIR approach</h3>
-					<p>
-						<small>Daniel T. Andreasen</small>
-					</p>
-					<p>
-						<small>daniel.andreasen@astro.up.pt</small>
-					</p>
+					<p><small>Daniel T. Andreasen</small></p>
+					<p><small>daniel.andreasen@astro.up.pt</small></p>
 				</section>
 
 
 				<!-- Example of nested vertical slides -->
-				<section id="fragments">
-					<h2>Introduction</h2>
-					<h4>Importance of stellar atmospheric parameters</h4>
-					<ul>
-						<li class="fragment">Effective temperature</li>
-						<li class="fragment">Surface gravity</li>
-						<li class="fragment">Metallicity</li>
-						<li class="fragment">Micro turbulence</li>
-					</ul>
+				<section>
+					<section>
+						<h2>Introduction</h2>
+					</section>
+					<section id="introduction">
+						<h4>Stellar atmospheric parameters</h4>
+						<ul>
+							<li>Effective temperature</li>
+							<li>Surface gravity</li>
+							<li>Metallicity</li>
+							<li>Micro turbulence</li>
+							<li class="fragment fade-out">Macro turbulence</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Derived parameters from models</h4>
+						<ul>
+							<li>Mass</li>
+							<li>Radius</li>
+							<li>Luminosity</li>
+							<li>Age</li>
+						</ul>
+					</section>
 				</section>
 
 
-				<section id="fragments">
-					<h4>Derived parameters from models</h4>
-					<ul>
-						<li>Mass</li>
-						<li>Radius</li>
-						<li>Age</li>
-						<li>Luminosity</li>
-					</ul>
-				</section>
-
-
-				<section id="fragments">
-					<h4>Usage</h4>
-					<br>
+				<section id="motivation">
+					<h4>Motivation</h4>
 					<ul>
 						<li class="fragment highlight-green">Exoplanetary science</li>
 						<li class="fragment highlight-green">Stellar astrophysics</li>
@@ -76,26 +71,29 @@
 				</section>
 
 
-				<section id="fragments">
-					<h2>The method - The EW method</h2>
-					<ul>
-						<li class="fragment">Measure EW of absorption lines</li>
-						<li class="fragment">Calculate abundances with a tool like <a href="http://www.as.utexas.edu/~chris/moog.html">MOOG</a></li>
-						<li class="fragment">Remove correlations between by changing atmosphere model:</li>
-						<ul class="fragment">
-							<li>Abundances vs. EP (Teff)</li>
-							<li>Abundances vs. reduced EW (micro turbulence)</li>
-							<li>Abundance for FeI should equal abundance for FeII (logg)</li>
+				<section>
+					<section>
+						<h2>Method</h2>
+					</section>
+					<section id="method">
+						<h2>The EW method</h2>
+						<ul>
+							<li class="fragment">Measure EW of absorption lines</li>
+							<li class="fragment">Calculate abundances with a tool like <a href="http://www.as.utexas.edu/~chris/moog.html">MOOG</a></li>
+							<li class="fragment">Remove correlations between by changing atmosphere model:</li>
+							<ul class="fragment">
+								<li>Abundances vs. EP (Teff)</li>
+								<li>Abundances vs. reduced EW (micro turbulence)</li>
+								<li>Abundance for FeI should equal abundance for FeII (logg)</li>
+							</ul>
+							<li class="fragment">[Fe/H] when above is satisfied</li>
 						</ul>
-						<li class="fragment">[Fe/H] when above is satisfied</li>
-					</ul>
-				</section>
-
-
-				<section id="fragments">
-					<h2>Technicallities</h2>
-					<p>319 FeI lines, and 12 FeII lines calibrated for the Sun</p>
-					<img width="550" height="350" src="img/histogram.png" />
+					</section>
+					<section>
+						<h2>Technicallities</h2>
+						<p>319 FeI lines, and 12 FeII lines calibrated for the Sun</p>
+						<img width="550" height="350" src="img/histogram.png" />
+					</section>
 				</section>
 
 
@@ -103,7 +101,7 @@
 					<section>
 						<h1>Results</h1>
 					</section>
-					<section id="fragments">
+					<section id="results">
 						<h2>Results: The Sun</h2>
 						<ul>
 							<li class="fragment">Full list -> perfect agreement</li>
@@ -114,6 +112,9 @@
 							</ul>
 							<li class="fragment">Cut in EP (5.5, 5.0, and no cut)</li>
 						</ul>
+					</section>
+					<section>
+						<img width="650" height="500" src="img/solar.png" />
 					</section>
 				</section>
 
@@ -126,6 +127,7 @@
 			</div>
 
 		</div>
+
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
@@ -143,7 +145,9 @@
 				history: true,
 				center: true,
 
-				transition: 'cube', // none/fade/slide/convex/concave/zoom
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				zoomKey: 'shift',
 
 				// Optional reveal.js plugins
 				dependencies: [
