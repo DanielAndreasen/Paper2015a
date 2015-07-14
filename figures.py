@@ -190,7 +190,8 @@ def fig_EPcut_sun(fout=None):
     fig.subplots_adjust(right=0.87)
     fig.subplots_adjust(bottom=0.06)
     # plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
-    plt.show()
+    plt.savefig('figures/solar.png', format='png')
+    # plt.show()
 
     # d = data
     # d = d[d[:,1] > 100]  # Remove the non-converged results
@@ -530,8 +531,8 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    fig_abundance()
-    # fig_EPcut_sun()
+    # fig_abundance()
+    fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
     # fig_synthesis()
