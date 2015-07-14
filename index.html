@@ -98,18 +98,24 @@
 					<img width="550" height="350" src="img/histogram.png" />
 				</section>
 
+
 				<section>
-					<h1>Results</h1>
-					<section id="fragments">
+					<section>
+						<h1>Results</h1>
+					</section>
+					<section>
 						<h2>Results: The Sun</h2>
 						<ul>
-							<li class="fragment"><span class="highlight-green">Full list -> perfect agreement</span></li>
+							<li class="fragment">Full list -> perfect agreement</li>
+							<li class="fragment">Add noise for different S/N</li>
+							<ul class="fragment">
+								<li>$$\frac{1}{\sqrt{2\pi\sigma}}e^{-\frac{(x-EW)^2}{2\sigma^2}}$$</li>
+								<li>$$\sigma = 1.6\frac{\sqrt{\Delta\lambda\; EW}}{S/N}$$</li>
+							</ul>
+							<li class="fragment">Cut in EP (5.5, 5.0, and no cut)</li>
 						</ul>
 					</section>
 				</section>
-
-
-
 
 
 
@@ -126,27 +132,22 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<script src="plugin/math/math.js"></script>
 
 		<script>
-
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundImage: 'img/stars.jpg',
 				parallaxBackgroundImage: 'img/black.jpg',
 				parallaxBackgroundSize: '2560px 1600', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
-				// parallaxBackgroundImage: 'img/rainbow.png',
-				// parallaxBackgroundSize: '1280px 768px',
 				parallaxBackgroundHorizontal: 200,
-				// parallaxBackgroundVertical: 50,
 
 				controls: true,
 				progress: true,
 				history: true,
 				center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'zoom', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
@@ -158,7 +159,6 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
-
 		</script>
 
 	</body>
