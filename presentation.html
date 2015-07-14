@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Determination of stellar parameters for M-dwarf stars: the NIR approach</title>
+
+		<meta name="description" content="Evaluation report">
+		<meta name="author" content="Daniel T. Andreasen">
+
+		<!-- <meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section id="fragments">
+					<h2>Determination of stellar parameters for M-dwarf stars</h2>
+					<h3>The NIR approach</h3>
+					<p>
+						<small>Daniel T. Andreasen</small>
+					</p>
+					<p>
+						<small>daniel.andreasen@astro.up.pt</small>
+					</p>
+				</section>
+
+
+				<!-- Example of nested vertical slides -->
+				<section id="fragments">
+					<h2>Introduction</h2>
+					<h4>Importance of stellar atmospheric parameters</h4>
+					<ul>
+						<li class="fragment">Effective temperature</li>
+						<li class="fragment">Surface gravity</li>
+						<li class="fragment">Metallicity</li>
+						<li class="fragment">Micro turbulence</li>
+					</ul>
+				</section>
+
+
+				<section id="fragments">
+					<h4>Derived parameters from models</h4>
+					<ul>
+						<li>Mass</li>
+						<li>Radius</li>
+						<li>Age</li>
+						<li>Luminosity</li>
+					</ul>
+				</section>
+
+
+				<section id="fragments">
+					<h4>Usage</h4>
+					<br>
+					<ul>
+						<li class="fragment highlight-green">Exoplanetary science</li>
+						<li class="fragment highlight-green">Stellar astrophysics</li>
+						<li class="fragment highlight-red">Galactic population</li>
+					</ul>
+				</section>
+
+
+				<section id="fragments">
+					<h2>The method - The EW method</h2>
+					<ul>
+						<li class="fragment">Measure EW of absorption lines</li>
+						<li class="fragment">Calculate abundances with a tool like <a href="http://www.as.utexas.edu/~chris/moog.html">MOOG</a></li>
+						<li class="fragment">Remove correlations between by changing atmosphere model:</li>
+						<ul class="fragment">
+							<li>Abundances vs. EP (Teff)</li>
+							<li>Abundances vs. reduced EW (micro turbulence)</li>
+							<li>Abundance for FeI should equal abundance for FeII (logg)</li>
+						</ul>
+						<li class="fragment">[Fe/H] when above is satisfied</li>
+					</ul>
+				</section>
+
+
+				<section id="fragments">
+					<h2>Technicallities</h2>
+					<p>319 FeI lines, and 12 FeII lines calibrated for the Sun</p>
+					<img width="550" height="350" src="img/histogram.png" />
+				</section>
+
+				<section id="fragments">
+					<h2>Results: The Sun</h2>
+					<ul>
+						<li class="fragment"><span class="highlight-green">Full list -> perfect agreement</span></li>
+					</ul>
+				</section>
+
+
+
+
+
+
+
+
+
+				<section style="text-align: left;" id="fragments">
+					<h1>THANK YOU</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundImage: 'img/stars.jpg',
+				parallaxBackgroundImage: 'img/black.jpg',
+				parallaxBackgroundSize: '2560px 1600', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+				// parallaxBackgroundImage: 'img/rainbow.png',
+				// parallaxBackgroundSize: '1280px 768px',
+				parallaxBackgroundHorizontal: 200,
+				// parallaxBackgroundVertical: 50,
+
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
