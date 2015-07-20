@@ -45,7 +45,7 @@ Estrelas, PT4150-762 Porto, Portugal
 \and
 Departamento de F\'isica e Astronom\'ia, Faculdade de Ci\^encias, Universidade do Porto, Portugal
 \and
-Brasil, Natal
+Departamento de F\'{i}sica, Universidade Federal do Rio Grande do Norte, 59072-970 Natal, RN, Brazil
 }
 
 
@@ -79,7 +79,7 @@ oscillator strengths were calibrated for the Sun.}
 We also added noise to the EW measurements of the Sun and derived
 parameters in perfect agreement with calibrated line-list. Furthermore,
 we analysed HD20010, a F8IV star, from which we derived stellar
-atmospheric parameters. Due to a lack of measured FeII lines from the
+atmospheric parameters. Due to a lack of measured \ion{Fe}{ii} lines from the
 spectrum we used, we were not able to derive the surface gravity, which
 was fixed during the process. The rest of the stellar atmospheric
 parameters were derived at different cuts in excitation potential in
@@ -121,18 +121,17 @@ The derivation of precise stellar atmospheric parameters is not a
 simple task. Different approaches often lead to discrepant results
 \citep[see e.g.][]{Santos13}. Interferometry is usually considered as an
 accurate method to derive stellar radii \citep[e.g.][]{Boyajian2012},
-however is only applicable for bright nearby stars. Asteroseismology
-is another technique were stellar pulsation observed at the surface
-originates from deeper layers of a star, and therefore reveals the
-inner structure. From asteroseismology it is possible to measure
-the surface gravity and mean density, and therefore calculate the
+however, is only applicable for bright nearby stars. Asteroseismology,
+on the other hand, reveals the inner stellar structure by observing
+the stellar pulsations at the surface. From asteroseismology it is possible
+to measure the surface gravity and mean density, and therefore calculate the
 mass and radius \citep[e.g.][]{Kjeldsen1995}. Asteroseismology has
 been tested to great extent with e.g. \emph{Kepler} and \emph{CoRoT}
 \citep{Michel2008,Huber2011,Huber2012}. \cite{Campante2015} is a recent
 example of usage of asteroseismology for characterization of planetary
 system.
 
-As key to all these approaches is a correct determination
+A key to all these approaches is a correct determination
 of the effective temperature. In that respect, the IRFM
 is usually considered as one of the most reliable methods
 \citep{Blackwell1977,Ramirez2005b,Casagrande2010}. However, the IRFM
@@ -146,12 +145,11 @@ spectra, their resolution, and wavelength region. For low resolution
 spectra ($\lambda/\Delta\lambda$ below 20000) it is preferred to
 fit the overall observed spectrum with a synthetic one \citep[see
 e.g.][]{Recio2006}. For higher resolution spectra of slowly rotating
-stars (below 10 to 15 \si{km/s}) we can use the equivalent width (EW)
+stars (below 10 to 15 \si{km/s}) we can also use the equivalent width (EW)
 method (for details see Sect.~\ref{sec:method}).
 
-Derivation of stellar atmospheric parameters (effective temperature,
-surface gravity, and metallicity) from high resolution spectra in the
-optical is now a standard way to obtain those parameters. With the
+The derivation of stellar atmospheric parameters from high resolution spectra in the
+optical is now based on a standard procedure \citep[see e.g.][]{Valenti2005,Sousa2008a}. With the
 advancement of NIR instruments, we will now be able to explore a new
 domain. At the moment the GIANO spectrograph installed at TNC is already
 available\footnote{\url{http://www.bo.astro.it/giano/GIANO/GIANO_Overvie
@@ -165,7 +163,7 @@ CFHT\footnote{\url{http://cfht.hawaii.edu/en/news/SPIRou/}}. The
 spectral resolution for these spectrographs range between 50000 and
 100000.
 
-However, although reliable line lists for the derivation of stellar
+Even though reliable line lists for the derivation of stellar
 parameters using optical spectra exist, the situation is different
 in the near-IR regime. In this paper we thus want to explore the
 possibility to create a line list of iron lines in the NIR which
@@ -212,14 +210,15 @@ parameters for the Sun and HD20010.
 The two most widely used methods for deriving stellar atmosphere
 parameters from a spectrum are spectral synthesis and the equivalent
 width method. The spectral synthesis method compares a synthetic
-spectrum with an observed spectrum and by minimization procedure the
+spectrum with an observed spectrum and by a minimization procedure the
 best fit is found between the synthetic spectrum and the real spectrum
-\citep[see e.g.][]{Valenti2005,Onehag2012}. When the minimization
+\citep[see e.g.][]{Valenti2005,Onehag2012,Blanco2014}. When the minimization
 procedure reaches a minimum, the final atmospheric parameters are found.
 
-The other method is the equivalent width (EW) method \citep{Sousa2008a},
-which we use in this work. With this method the EWs are measured for all
-lines in a list. The EW is given as
+The other method, which we use in this work, is baed on the measurements
+of the equivalent width (EW) of a given line
+list \citep{Sousa2008a,Bensby2014,Mucciarelli2013}.
+The EW is given as:
 \begin{align}
     \label{eq:EW}
     EW = \int_0^\infty \left(1 - \frac{F_\lambda}{F_0}\right) d\lambda,
@@ -230,15 +229,15 @@ function of wavelength.
 Using the EW method, the abundance for individual lines can be found
 with a code like MOOG \citep{Sneden1973}. By changing atmospheric
 parameters in the input model for MOOG, we expect to retrieve the same
-abundances for every different spectral line of the same element when
+abundances for every spectral line of the same element when
 the best atmospheric parameters are chosen. Here we use neutral iron and
-single ionized iron: FeI and FeII, respectively, which are also used to
+single ionized iron: \ion{Fe}{i} and \ion{Fe}{ii}, respectively, which are also used to
 fix the surface gravity by achieving ionization balance. This allows
 us to derive stellar parameters using the principle of ionization and
 excitation equilibrium \citep{Gray2006}.
 
 A disadvantage for this method, and a general problem with spectroscopy,
-is the determination of the continuum flux level. Misplacement of the
+is the determination of the continuum flux level. A misplacement of the
 continuum leads to wrong measurements of the EW. Many spectroscopic
 features make it difficult to determine the continuum. This is
 especially true for cool stars in the optical where molecular depression
@@ -271,18 +270,21 @@ To compile the line list we use the VALD3
 database\footnote{The VALD3 database can be found here:
 \url{http://vald.astro.univie.ac.at/~vald3/php/vald.php}}. First we
 download all iron lines present in the spectral region of interest.
-In total 78537 lines (FeI: 50198 and FeII: 28339) are present in
+In total 78537 lines (\ion{Fe}{i}: 50198 and \ion{Fe}{ii}: 28339) are present in
 the spectral region (which covers 10000 to 25000 \si{\angstrom}).
 Many of these lines are too faint to be detected in the spectrum
 of a solar type star. A spectrum of the Sun was downloaded from
 the BASS2000 web page\footnote{The web page can be found here:
-\url{bass2000.obspm.fr/solar_spect.php}} to select the lines. The
-spectrum was downloaded in the highest possible resolution. We use
+\url{bass2000.obspm.fr/solar_spect.php}} to select the lines.
+The NIR part of the spectrum downloaded from this web page were obtained
+from the Kitt Peak telescope at a resolution of \SI{0.004}{\angstrom} at
+\SI{10000}{\angstrom} to \SI{0.1}{\angstrom} at \SI{50000}{\angstrom}.
+The spectrum was downloaded in the highest possible resolution. We use
 the ARES software\footnote{The ARES software can be found here:
 \url{http://www.astro.up.pt/~sousasag/ares/}}\citep{Sousa2007,Sousa2015a}
 to automatically measure EWs of all the lines. Since the first version
 of ARES expect a 1D spectrum, the solar spectrum was interpolated to a
-regular grid with constant wavelength step of $\SI{0.01}{\AA}$. The EWs
+regular grid with constant wavelength step of \SI{0.01}{\angstrom}. The EWs
 are measured by fitting Gaussian profiles to spectral lines. For a given
 line ARES outputs the central wavelength of the line, the number of
 lines fitted for the end result, the depth of the line, the FWHM of the
@@ -293,17 +295,17 @@ criteria:
 \begin{itemize}
     \item If the number of fitted lines by ARES for a given line is higher than 10,
         this line is rejected because it is believed to be severely blended.
-    \item If the EW is lower than $\SI{5}{m\AA}$ for an absorption line, the strength
+    \item If the EW is lower than \SI{5}{m\angstrom} for an absorption line, the strength
         is too low and may be difficult to see in spectra with low S/N or a
         spectrum with many spectral features.
-    \item If the EW is higher than $\SI{200}{m\AA}$ for a given line, the strength
+    \item If the EW is higher than \SI{200}{m\angstrom} for a given line, the strength
         is too high and we can no longer fit the line with a Gaussian profile.
     \item If the fitted central wavelength is more than $\SI{0.05}{\AA}$ away
         from the wavelength provided by VALD3, the line will also be rejected to
         avoid false identification.
 \end{itemize}
 After the automatic removal of lines following the above criteria
-we reduced the number of lines to 6060 and 2735 for FeI and FeII,
+we reduced the number of lines to 6060 and 2735 for \ion{Fe}{i} and \ion{Fe}{ii},
 respectively.
 
 
@@ -324,7 +326,7 @@ the absorption line was severely blended by other spectral lines. Many
 of the removed iron lines at this step have high excitation potential,
 compared to the final line list, since these lines are generally weaker
 than those with lower excitation potential. After this step
-we were down to 593 FeI lines and 22 FeII lines.
+we were down to 593 \ion{Fe}{i} lines and 22 \ion{Fe}{ii} lines.
 
 For some spectral regions it was not clear which element or elements
 caused an absorption line. In these cases the iron lines were marked for
@@ -372,7 +374,7 @@ absorption line in the synthetic spectra, then it will be the cause for
 the real absorption line.
 
 A few times two iron lines had identical wavelengths and excitation
-potential. In those cases the $\log \mathrm{gf}$ were combined (sum of
+potential. In those cases the $\log \mathit{gf}$ were combined (sum of
 the gf-value) to create a single line that can be analyzed with our
 method.
 
@@ -380,14 +382,14 @@ method.
 \subsection{Calibrating the line-list: astrophysical $\log$ gf values}
 \label{ssub:Recalibrating-the-atomic-data}
 
-At this point we ended up with 594 and 12 lines of FeI and FeII,
+At this point we ended up with 593 and 12 lines of \ion{Fe}{i} and \ion{Fe}{ii},
 respectively. The iron abundances for each line were then calculated
 using the same solar atmosphere model as described above for
 synthesis. We consider a solar iron abundance of 7.47 according to
 \cite{Gonzalez2000}. This step allowed us to remove possible outliers
-based on the assumption that errors in the $\log \mathrm{gf}$ values
+based on the assumption that errors in the $\log \mathit{gf}$ values
 from the VALD3 data base would never lead to variations of the derived
-iron abundance of more than 1 dex. Note that we only removed FeI lines
+iron abundance of more than 1 dex. Note that we only removed \ion{Fe}{i} lines
 here, since the Fe II lines are sparse and essential to determine the
 surface gravity when we reach ionization balance, as explained in
 Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. At this point we
@@ -395,14 +397,14 @@ are down to 319 and 12 lines, for Fe I and Fe II respectively.
 
 After the removal of lines from the complete VALD3 line list we only
 need to recalibrate the oscillator strength of the lines ($\log
-\mathrm{gf}$) in order to match the adopted solar abundance. This is
+\mathit{gf}$) in order to match the adopted solar abundance. This is
 one of the ways to perform a differential analysis, which is a common
 thing to do for a star we know well \citep{Sousa2008a,Onehag2012}.
 In Fig~\ref{fig:Fe1_before_recal} the EWs of the Sun of the Fe I
 lines are plotted as a function of the excitation potential. This
 plot shows the distribution after recalibration of $\log gf$ and
 cut for lines with abundances deviating more than 1 dex from the
-solar value. The distribution of FeI and FeII lines are shown in
+solar value. The distribution of \ion{Fe}{i} and \ion{Fe}{ii} lines are shown in
 Fig~\ref{fig:Fe1_after_recal} on top of the solar spectrum we have used
 for our analysis.
 
@@ -420,7 +422,7 @@ for our analysis.
 \begin{figure}[tpb]
     \centering
     \includegraphics[width=1.05\linewidth]{figures/EWvsEP_cut.pdf}
-    \caption{Distribution of both FeI and FeII lines on top of the solar
+    \caption{Distribution of both \ion{Fe}{i} and \ion{Fe}{ii} lines on top of the solar
     spectrum. The distributions are after recalibration and exclusion
     of lines which deviate more than 1 dex from the expected solar iron
     abundance. There are two areas in the spectrum with high telluric
@@ -453,9 +455,9 @@ For a given atmosphere model, abundances of all the lines in the line
 list are calculated. By removing any correlation between the excitation
 potential and abundance of all lines (from same element) the effective
 temperature is constrained. In a similar way, the micro turbulence can
-be constrained be removing any correlation between the reduced EW ($\log
-EW$) and abundances, and the surface gravity is found when there is
-ionization balance, i.e. the mean abundance of FeI and FeII are equal.
+be constrained be removing any correlation between the reduced EW ($\log RW$)
+and abundances, and the surface gravity is found when there is
+ionization balance, i.e. the mean abundance of \ion{Fe}{i} and \ion{Fe}{ii} are equal.
 Lastly, the iron abundance comes from calculating the mean of
 all the iron abundances.
 
@@ -469,8 +471,8 @@ searches in the parameter space for the best fitting model. The
 convergence criteria for the correlation between excitation potential
 and abundances gives a slope less than 0.001, a slope less than 0.002
 for the correlation between the reduced EW and the abundances, and a
-difference of less than 0.005 between the mean abundances for FeI and
-FeII.
+difference of less than 0.005 between the mean abundances for \ion{Fe}{i} and
+\ion{Fe}{ii}.
 
 
 
@@ -487,7 +489,7 @@ FeII.
 
 As a test, we then derived the stellar parameters for the Sun using
 the resulting line-list (including the solar calibrated, astrophysical
-$\log \mathrm{gf}$ values). We used the minimization procedure described
+$\log \mathit{gf}$ values). We used the minimization procedure described
 in Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. Since the
 line-list and $\log$ gf values has been selected using the solar
 spectrum, it is with no surprise that the derived parameters for the
@@ -618,7 +620,7 @@ part of the title of the plot.
     \includegraphics[width=1.0\linewidth]{figures/plot_fits.pdf}
     \caption{The middle plot shows a piece of HD20010 (black), the model
     spectrum, in this case the Sun (green), a telluric spectrum (red), and two
-    lines from our line list (magenta vertical lines). The plot to the left
+    % lines from our line list (magenta vertical lines). The plot to the left
     shows the CCF of the Sun with a fitted Gaussian. The right plot shows the
     same as the one to the left, but for the telluric spectrum.}
     \label{fig:plot_fits}
@@ -627,8 +629,8 @@ part of the title of the plot.
 Once the lines are identified the EWs were measured with the splot
 routine in IRAF. The reason not to choose ARES for this task was to
 visually confirm the identification of the line given the relative poor
-wavelength calibration at the moment. We were able to measure 249 FeI
-lines and 5 FeII lines compared to 344 FeI lines and 13 FeII lines for
+wavelength calibration at the moment. We were able to measure 249 \ion{Fe}{i}
+lines and 5 \ion{Fe}{ii} lines compared to 344 \ion{Fe}{i} lines and 13 \ion{Fe}{ii} lines for
 the Sun.
 
 We then derived the stellar parameters using the standard procedure
@@ -642,8 +644,8 @@ $\log g=3.93\pm0.02$, $\xi_\mathrm{micro}=1.70\pm0.09\,\si{km/s}$, and
 [Fe/H]=$-0.206\pm0.025$. To overcome the overestimation of parameters
 we tried to remove lines above different EPs and re-determine the
 stellar atmospheric parameters. In this process we did not remove
-any of the very few remaining FeII lines. The reason not to remove
-the FeII lines is, that they are essential to determine the surface
+any of the very few remaining \ion{Fe}{ii} lines. The reason not to remove
+the \ion{Fe}{ii} lines is, that they are essential to determine the surface
 gravity from the ionization balance. However, 5 lines were too few to
 satisfactory constrain the surface gravity. To overcome this issue, we
 fixed the surface gravity to the value found in \cite{Gonzalez2010}.
@@ -656,14 +658,14 @@ the atmospheric parameters gets close to the values derived from
 exact values can be seen in Table~\ref{tab:hd20010}.
 
 
-TO DANIEL:
-Explain why we get so high errors. Here is a possible way to do it.
-
-1) Take 10-15 lines with multiple EW measurements.
-2) Calculate std for each line.
-3) Derive parameters in the limits of the mean±std and hopefully, this can explain the high errors.
-
-If so, the reasons for the high errors are the bad quality of the spectra at the current time.
+% TO DANIEL:
+% Explain why we get so high errors. Here is a possible way to do it.
+%
+% 1) Take 10-15 lines with multiple EW measurements.
+% 2) Calculate std for each line.
+% 3) Derive parameters in the limits of the mean±std and hopefully, this can explain the high errors.
+%
+% If so, the reasons for the high errors are the bad quality of the spectra at the current time.
 
 
 
@@ -724,7 +726,7 @@ stars. Furthermore, it will be interesting to explore the use of this
 line-list to derive parameters for M-dwarf stars using high resolution
 and high S/N NIR spectra. M-dwarf stars are especially interesting
 targets for an exoplanetary viewpoint, since they are prone to form low
-mass exoplanets \cite{Bonfils2013}. Hence, a detailed analysis of the
+mass exoplanets \citep{Bonfils2013}. Hence, a detailed analysis of the
 host star's atmospheric parameters greatly improve our characterization
 of the possible exoplanets orbiting these low mass stars. Currently,
 there is one M dwarf in the CRIRES-POP, Barnard's star which will be
