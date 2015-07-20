@@ -189,8 +189,8 @@ def fig_EPcut_sun(fout=None):
     fig.subplots_adjust(top=0.95)
     fig.subplots_adjust(right=0.87)
     fig.subplots_adjust(bottom=0.06)
-    # plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
-    plt.savefig('figures/solar.png', format='png')
+    plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
+    # plt.savefig('figures/solar.png', format='png')
     # plt.show()
 
     # d = data
@@ -284,13 +284,13 @@ def fig_HD20010_parameters():
                 data[index, 3] = np.nan  # microturbulence
                 data[index, 4] = float(z[-1])  # metalicity
 
-    df = pd.DataFrame({  'EP': data[0:-1, 0],
+    df = pd.DataFrame({  'Ep': data[0:-1, 0],
                        'Teff': data[0:-1, 1],
                        'logg': data[0:-1, 2],
                          'vt': data[0:-1, 3],
                         'feh': data[0:-1, 4]})
-
     df = pd.read_csv('HD20010_params.dat')
+
     l = df[df.Ep < 6.5]
     u = df[df.Ep > 6.5]
 
@@ -410,9 +410,9 @@ def fig_HD20010_parameters():
     fig.subplots_adjust(bottom=0.12)
     fig.subplots_adjust(right=0.97)
 
-    plt.show()
-    # plt.savefig('figures/HD20010_parameters_cuts.pdf')
-    plt.savefig('figures/HD20010_parameters_cuts.png')
+    # plt.show()
+    plt.savefig('figures/HD20010_parameters_cuts.pdf')
+    # plt.savefig('figures/HD20010_parameters_cuts.png')
     return df
 
 
@@ -448,7 +448,7 @@ def fig_spectral_region():
     # plt.plot(w, fl)
     # plt.plot(w, fm)
     # plt.setp(ax, xticks=[], yticks=[])
-    # plt.savefig('figures/spectral_region.pdf', format='pdf')
+    plt.savefig('figures/spectral_region.pdf', format='pdf')
     plt.show()
 
 
