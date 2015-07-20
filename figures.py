@@ -412,6 +412,7 @@ def fig_HD20010_parameters():
 
     plt.show()
     # plt.savefig('figures/HD20010_parameters_cuts.pdf')
+    plt.savefig('figures/HD20010_parameters_cuts.png')
     return df
 
 
@@ -532,8 +533,8 @@ def main():
     """Main function
     """
     # fig_abundance()
-    fig_EPcut_sun()
-    # fig_HD20010_parameters()
+    # fig_EPcut_sun()
+    fig_HD20010_parameters()
     # fig_spectral_region()
     # fig_synthesis()
 
