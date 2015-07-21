@@ -42,14 +42,20 @@ def fig_abundance(fout=None):
     color = sns.color_palette()
 
     # df = pd.read_csv('%sFe1_PreSynth_rec.log' % p, delimiter=r'\s+')
-    df = pd.read_csv('%sFe1_PostSynth_cut_rec.log' % p, delimiter=r'\s+')
-    df.rename(columns={'abund': 'Abundance'}, inplace=True)
-
-    ax1 = sns.jointplot('EP', 'EW', df, stat_func=None, kind='scatter', space=0)
-    ax1.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
+    df1 = pd.read_csv('%sFe1_PostSynth_cut_rec.log' % p, delimiter=r'\s+')
+    df1.rename(columns={'abund': 'Abundance'}, inplace=True)
+    df2 = pd.read_csv('%sFe2_PostSynth_rec.log' % p, delimiter=r'\s+')
+    df2.rename(columns={'abund': 'Abundance'}, inplace=True)
+    g = sns.jointplot('EP', 'EW', df1, stat_func=None, kind='scatter', space=0)
+    # stackoverflow.com/questions/31539815/plotting-two-distributions-in-seaborn-jointplot
+    g.x = df2.EP
+    g.y = df2.EW
+    g.plot_joint(plt.scatter, c='r', s=30, alpha=0.6)
+    g.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
+    plt.show()
     # plt.draw()
 
-    plt.savefig('figures/EWvsEP.pdf', format='pdf')
+    # plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
     # fe1 = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
     # fe2 = pd.read_csv('%sFe2_PostSynth_rec.log' % p, delimiter=r'\s+')
@@ -529,10 +535,10 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    # fig_abundance()
+    fig_abundance()
     # fig_EPcut_sun()
     # fig_HD20010_parameters()
-    fig_spectral_region()
+    # fig_spectral_region()
     # fig_synthesis()
 
 
