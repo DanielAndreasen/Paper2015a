@@ -86,7 +86,8 @@ parameters were derived at different cuts in excitation potential in
 order to get parameters closer to literature values. At a \SI{5.3}{eV}
 cut in excitation potential and a fixed $\log g$ at 3.93 we derive:
 $T_\mathrm{eff}=6096\pm196$K, $\xi_\mathrm{micro}=1.37\pm0.16\si{km/s}$,
-and [Fe/H]=$-0.29\pm0.73$ dex.}
+and [Fe/H]=$-0.29\pm0.73$ dex, which is consistent with the values
+found in the literature using spectroscopy in the visible.}
 % Conclusions
 {}
 
@@ -133,10 +134,9 @@ system.
 
 A key to all these approaches is a correct determination
 of the effective temperature. In that respect, the IRFM
-is usually considered as one of the most reliable methods
-\citep{Blackwell1977,Ramirez2005b,Casagrande2010}. However, the IRFM
+is usually considered as one of the most reliable methods. However, the IRFM
 needs a priori knowledge of the bolometric flux, surface gravity and
-stellar metallicity.
+stellar metallicity \citep{Blackwell1977,Ramirez2005b,Casagrande2010}.
 
 Finally, the use of high resolution spectroscopy, together with stellar
 atmospheric models, is also often used to derive key atmospheric stellar
@@ -148,20 +148,20 @@ e.g.][]{Recio2006}. For higher resolution spectra of slowly rotating
 stars (below 10 to 15 \si{km/s}) we can also use the equivalent width (EW)
 method (for details see Sect.~\ref{sec:method}).
 
-The derivation of stellar atmospheric parameters from high resolution spectra in the
-optical is now based on a standard procedure \citep[see e.g.][]{Valenti2005,Sousa2008a}. With the
-advancement of NIR instruments, we will now be able to explore a new
+The derivation of stellar atmospheric parameters from high resolution spectra in
+the optical is now based on a standard procedure \citep[see e.g.][]{Valenti2005,Sousa2008a}.
+With the advancement of NIR instruments, we will now be able to explore a new
 domain. At the moment the GIANO spectrograph installed at TNC is already
 available\footnote{\url{http://www.bo.astro.it/giano/GIANO/GIANO_Overvie
 w.html}}, as well as the IRD spectrograph installed
-at Subaru \citep{IRD}. Three future spectrographs
+at Subaru \citep{IRD}. Three new spectrographs
 are planned for the near future: 1) CRIRES+ at
 VLT\footnote{\url{http://www.eso.org/sci/facilities/develop/instrume
-nts/crires_up.html}}, 2) CARMENES for the 3.5 m telescope at
-Calar Alto Observatory \citep{CARMENES}, and 3) SPIRou at
-CFHT\footnote{\url{http://cfht.hawaii.edu/en/news/SPIRou/}}. The
-spectral resolution for these spectrographs range between 50000 and
-100000.
+nts/crires_up.html}} with expected first light in 2017, 2) CARMENES for the 3.5
+m telescope at Calar Alto Observatory \citep{CARMENES} with expected first light
+at December 2015, and 3) SPIRou at CFHT\footnote{\url{http://cfht.hawaii.edu/en/news/SPIRou/}} with expected first
+light in 2017 as well. The spectral resolution for these spectrographs range
+between 50000 and 100000.
 
 Even though reliable line lists for the derivation of stellar
 parameters using optical spectra exist, the situation is different
@@ -236,7 +236,7 @@ fix the surface gravity by achieving ionization balance. This allows
 us to derive stellar parameters using the principle of ionization and
 excitation equilibrium \citep{Gray2006}.
 
-A disadvantage for this method, and a general problem with spectroscopy,
+A disadvantage for these method, and a general problem with spectroscopy,
 is the determination of the continuum flux level. A misplacement of the
 continuum leads to wrong measurements of the EW. Many spectroscopic
 features make it difficult to determine the continuum. This is
@@ -253,7 +253,8 @@ J, H, and K bands, which covers more than $\SI{15000}{\AA}$.
     \centering
     \includegraphics[width=1.0\linewidth]{figures/spectral_region.pdf}
     \caption{Synthetic spectra of stars with three different effective
-    temperatures. The $\log g$ is 0.5 dex higher for the coolest model,
+    temperatures. The $\log g$ is 0.5 dex higher for the coolest model
+    to resemble a more realistic model of a dwarf star,
     and the flux of the two coolest models have been multiplied by a
     factor of 10, in order to show it all in the same scale. The maximum
     of light emitted is located at different wavelengths for different
@@ -343,7 +344,8 @@ atmosphere model is a ATLAS9 atmosphere model \citep{Kurucz1993} with
 the following atmospheric parameters: $T_\mathrm{eff}=\SI{5777}{K}$,
 $\log g = 4.438$, and $\xi_\mathrm{micro} = \SI{1.0}{km/s}$ to resemble
 the Sun. We used 3 different iron abundances for the synthesis. One
-with solar iron abundance, and then two $\pm0.2$ dex. If the synthetic
+with solar iron abundance, and then two $\pm0.2$ dex. We consider a solar iron
+abundance of 7.47 according to \cite{Gonzalez2000}. If the synthetic
 spectra shows variation at the absorption line of interest with respect
 to the different iron abundances, then it's likely to be an iron line.
 We also changed abundances of other elements in the proximity to see if
@@ -385,22 +387,21 @@ method.
 At this point we ended up with 593 and 12 lines of \ion{Fe}{i} and \ion{Fe}{ii},
 respectively. The iron abundances for each line were then calculated
 using the same solar atmosphere model as described above for
-synthesis. We consider a solar iron abundance of 7.47 according to
-\cite{Gonzalez2000}. This step allowed us to remove possible outliers
+synthesis. This step allowed us to remove possible outliers
 based on the assumption that errors in the $\log \mathit{gf}$ values
 from the VALD3 data base would never lead to variations of the derived
 iron abundance of more than 1 dex. Note that we only removed \ion{Fe}{i} lines
-here, since the Fe II lines are sparse and essential to determine the
+here, since the \ion{Fe}{ii} lines are sparse and essential to determine the
 surface gravity when we reach ionization balance, as explained in
 Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. At this point we
-are down to 319 and 12 lines, for Fe I and Fe II respectively.
+are down to 319 and 12 lines, for \ion{Fe}{i} and \ion{Fe}{ii} respectively.
 
 After the removal of lines from the complete VALD3 line list we only
 need to recalibrate the oscillator strength of the lines ($\log
 \mathit{gf}$) in order to match the adopted solar abundance. This is
 one of the ways to perform a differential analysis, which is a common
 thing to do for a star we know well \citep{Sousa2008a,Onehag2012}.
-In Fig~\ref{fig:Fe1_before_recal} the EWs of the Sun of the Fe I
+In Fig~\ref{fig:Fe1_before_recal} the EWs of the Sun of the iron
 lines are plotted as a function of the excitation potential. This
 plot shows the distribution after recalibration of $\log gf$ and
 cut for lines with abundances deviating more than 1 dex from the
@@ -412,7 +413,8 @@ for our analysis.
 \begin{figure}[tpb]
     \centering
     \includegraphics[width=1.0\linewidth]{figures/EWvsEP.pdf}
-    \caption{The distribution of Fe I lines. At the x axis is
+    \caption{The distribution of \ion{Fe}{i} and \ion{Fe}{ii} lines,
+    colored blue and red, respectively. At the x axis is
     the excitation potential, while the measured EWs for the Sun is
     shown at the y axis.}
     \label{fig:Fe1_before_recal}
@@ -511,14 +513,14 @@ normal distribution with a mean around the original EW.
 
 A new set of EWs is drawn from this distribution. We make 10 different
 draws for 3 different cuts in excitation potential: \SI{5.0}{eV},
-\SI{5.5}{eV}, and not cut at all. This is done for both S/N considered.
-This gives us 60 different line-lists, and with the original line-list
-we have in total 61 line-lists. We make the cut in excitation
-potential for two reasons: 1) We do not see lines with that high
-excitation potential in a similar line list for the optical \citep[see
-e.g.][]{Tsantaki2013} and this might be a problem for future derivation
-of parameters. 2) We might have problems with the clump of lines at high
-excitation potential when we try to reach iron excitation balance.
+\SI{5.5}{eV}, and no cut at all. This is done for both S/N considered.
+This gives us 60 different line-lists plus the original line-list. We
+make the cut in excitation potential for two reasons: 1) We do not see
+lines with that high excitation potential in a similar line list for the
+optical \citep[see e.g.][]{Tsantaki2013} and this might be a problem for
+future derivation of parameters. 2) We might have problems with the clump
+of lines at high excitation potential when we try to reach iron excitation
+balance.
 
 In Fig~\ref{fig:solar_parameters} the derived parameters are plotted
 with different EP cuts in the line list. The horizontal black lines
@@ -650,9 +652,7 @@ gravity from the ionization balance. However, 5 lines were too few to
 satisfactory constrain the surface gravity. To overcome this issue, we
 fixed the surface gravity to the value found in \cite{Gonzalez2010}.
 Fig~\ref{fig:HD20010_parameters_cuts} shows the results from this
-exercise. A second degree polynomial is fitted for the effective
-temperature, iron abundance, and the micro turbulence with the
-95\% confidence interval. At a cut at $\SI{5.3}{eV}$ and below
+exercise. At a cut at $\SI{5.3}{eV}$ and below
 the atmospheric parameters gets close to the values derived from
 \cite{Gonzalez2010} which is plotted as a horizontal black line. The
 exact values can be seen in Table~\ref{tab:hd20010}.
@@ -706,8 +706,7 @@ exact values can be seen in Table~\ref{tab:hd20010}.
     and the bottom panel is the micro turbulence. The parameters are
     derived with different cuts in EP. Here the horizontal black lines
     are literature values. The parameters for the full line list are
-    plotted to the right for all three plots. The shaded areas are the
-    95\% confidence interval for the fit.}
+    plotted to the right for all three plots.}
     \label{fig:HD20010_parameters_cuts}
 \end{figure}
 
