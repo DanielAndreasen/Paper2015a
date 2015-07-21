@@ -424,13 +424,14 @@ def fig_spectral_region():
     pth = '/home/daniel/Documents/Uni/phdproject/data/HD20010/article/figures/'
     suffix = '.PHOENIX-ACES-AGSS-COND-2011-HiRes.fits'
     w = fits.getdata('%sWAVE_PHOENIX-ACES-AGSS-COND-2011.fits' % pth)
-    fl = fits.getdata('%slte02700-4.50-0.0%s' % (pth, suffix))
-    fm = fits.getdata('%slte03500-4.00-0.0%s' % (pth, suffix))
-    fh = fits.getdata('%slte06200-4.00-0.0%s' % (pth, suffix))
+    i = w <= 20000
+    fl = fits.getdata('%slte02700-4.50-0.0%s' % (pth, suffix))[i]
+    fm = fits.getdata('%slte03500-4.00-0.0%s' % (pth, suffix))[i]
+    fh = fits.getdata('%slte06200-4.00-0.0%s' % (pth, suffix))[i]
     h = fits.getheader('%slte02700-4.50-0.0%s' % (pth, suffix))
 
     r = 500
-    w = w[::r]
+    w = w[i][::r]
     fl = fl[::r]
     fm = fm[::r]
     fh = fh[::r]
@@ -442,14 +443,10 @@ def fig_spectral_region():
     plt.xlabel(r'$\lambda$ Angstrom')
     plt.ylabel(r'Flux erg/(s cm$^2$ cm)')
     plt.legend(loc='best', frameon=False)
-    plt.xlim(1000, 40000)
+    plt.xlim(1000, 20000)
 
-    # ax = plt.axes([0.35, 0.3, 0.2, 0.3])
-    # plt.plot(w, fl)
-    # plt.plot(w, fm)
-    # plt.setp(ax, xticks=[], yticks=[])
     plt.savefig('figures/spectral_region.pdf', format='pdf')
-    plt.show()
+    # plt.show()
 
 
 def fig_synthesis():
@@ -534,8 +531,8 @@ def main():
     """
     # fig_abundance()
     # fig_EPcut_sun()
-    fig_HD20010_parameters()
-    # fig_spectral_region()
+    # fig_HD20010_parameters()
+    fig_spectral_region()
     # fig_synthesis()
 
 
