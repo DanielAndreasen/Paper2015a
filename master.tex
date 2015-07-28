@@ -56,43 +56,43 @@ Departamento de F\'{i}sica, Universidade Federal do Rio Grande do Norte, 59072-9
 \abstract
 % Context
 {Effective temperature, surface gravity, and metallicity are basic
-spectroscopic stellar atmospheric parameters necessary to characterize
-a star or a planetary system. Reliable atmospheric parameters for
-FGK stars have been obtained mostly from methods that relay on high
-resolution and high signal to noise optical spectroscopy. With the
-advent of a new generation of high resolution near-IR spectrographs, it
-is interesting to investigate the use of this "new" spectral window.}
+spectroscopic stellar atmospheric parameters necessary to characterize a
+star or a planetary system. Reliable atmospheric parameters for FGK stars
+have been obtained mostly from methods that relay on high resolution and
+high signal to noise optical spectroscopy.
+With the advent of a new generation of high resolution
+near-IR spectrographs, it is interesting to investigate the use of this
+"new" spectral window.}
 % Aims
 {We aim to compile a new iron line list in the NIR from a solar
-spectrum, to derive precise stellar atmospheric parameters,
-comparable to the ones already obtained from high resolution optical
-spectra. The spectral range will be from \SI{10000}{\angstrom} to
-\SI{25000}{\angstrom}.}
+spectrum, to derive precise stellar atmospheric parameters, comparable
+to the ones already obtained from high resolution optical spectra.
+The spectral range will be from \SI{10000}{\angstrom} to \SI{25000}{\angstrom}.}
 % Methods
 {Our spectroscopic analysis is based on the iron excitation and
 ionization balance. The abundance analysis was done using the MOOG code
-after measuring equivalent widths of 357 iron lines. We use a high
-resolution and high signal-to-noise ratio spectrum of the Sun from the
-Kitt Peak telescope as a starting point to compile the iron line-list.
-The oscillator strengths were calibrated for the Sun.}
+after measuring equivalent widths of 357 iron lines.
+We use a high resolution and high signal-to-noise ratio spectrum
+of the Sun from the Kitt Peak telescope as a starting point to compile
+the iron line-list. The oscillator strengths were calibrated for the Sun.}
 % Results
 {We successfully derived stellar atmospheric parameters for the Sun.
 We also added noise to the EW measurements of the Sun and derived
-parameters in perfect agreement with the calibrated line-list.
-Furthermore, we analysed HD20010, a F8IV star, from which we derived
-stellar atmospheric parameters. The spectrum was obtained from the
-CRIRES-POP data base. We were not able to measure all iron lines in
-the spectrum of HD20010. In some cases they were not present while in
-other cases they were blended with either other elements or tellurics.
-With the lack of \ion{Fe}{ii} lines from the spectrum we used, we were
-not able to derive the surface gravity, which was fixed during the
-process. The rest of the stellar atmospheric parameters were derived at
-different cuts in excitation potential in order to get parameters closer
-to literature values. At a \SI{5.3}{eV} cut in excitation potential
-and a fixed $\log g$ at 3.93 we derive: $T_\mathrm{eff}=6096\pm196$K,
-$\xi_\mathrm{micro}=1.37\pm0.16\si{km/s}$, and [Fe/H]=$-0.29\pm0.73$
-dex, which is consistent with the values found in the literature using
-spectroscopy in the visible.}
+parameters in perfect agreement with the calibrated line-list. Furthermore,
+we analysed HD20010, a F8IV star, from which we derived stellar
+atmospheric parameters. The spectrum was obtained from the CRIRES-POP
+data base. We were not able to measure all iron lines in the
+spectrum of HD20010. In some cases they were not present while in other
+cases they were blended with either other elements or tellurics.
+With the lack of \ion{Fe}{ii} lines from the
+spectrum we used, we were not able to derive the surface gravity, which
+was fixed during the process. The rest of the stellar atmospheric
+parameters were derived at different cuts in excitation potential in
+order to get parameters closer to literature values. At a \SI{5.3}{eV}
+cut in excitation potential and a fixed $\log g$ at 3.93 we derive:
+$T_\mathrm{eff}=6096\pm196$K, $\xi_\mathrm{micro}=1.37\pm0.16\si{km/s}$,
+and [Fe/H]=$-0.29\pm0.73$ dex, which is consistent with the values
+found in the literature using spectroscopy in the visible.}
 % Conclusions
 {}
 
@@ -109,16 +109,15 @@ spectroscopy in the visible.}
 \label{sec:introduction}
 
 Effective temperature ($T_\mathrm{eff}$), surface gravity ($\log g$),
-and metallicity ([M/H], where [Fe/H] is usually used as a proxy)
+and metallicity ([Fe/H], where iron is normally used as a proxy)
 are fundamental atmospheric parameters necessary to characterise a
-star, as well as to determine indirectly other fundamental parameters,
+star, as well as to determine other indirect fundamental parameters,
 such as mass, radius, and age from stellar evolutionary models
 \citep[e.g.][]{Girardi2000}.
 
-Precise and accurate stellar parameters are essential in
-exoplanet searches. The masses and radii of planets are inferred
-from lightcurve and radial velocity analysis of the host star,
-respectively. The
+Precise and accurate stellar parameters are also essential in
+exoplanet searches. Planetary radius and mass are mainly found from
+lightcurve analysis and radial velocity analysis, respectively. The
 determination of the mass of the planet implies a knowledge of the
 stellar mass, while the measurement of the radius of the planet
 is dependent on our capability to derive the radius of the star
@@ -127,15 +126,16 @@ is dependent on our capability to derive the radius of the star
 The derivation of precise stellar atmospheric parameters is not a
 simple task. Different approaches often lead to discrepant results
 \citep[see e.g.][]{Santos13}. Interferometry is usually considered as an
-accurate method to derive stellar radii and effective temperature
-\citep[e.g.][]{Boyajian2012},
+accurate method to derive stellar radii \citep[e.g.][]{Boyajian2012},
 however, is only applicable for bright nearby stars. Asteroseismology,
 on the other hand, reveals the inner stellar structure by observing
 the stellar pulsations at the surface. From asteroseismology it is possible
 to measure the surface gravity and mean density, and therefore calculate the
 mass and radius \citep[e.g.][]{Kjeldsen1995}. Asteroseismology has
-been tested to great extent with \emph{Kepler} and \emph{CoRoT}
-\citep{Michel2008,Huber2011,Huber2012}.
+been tested to great extent with e.g. \emph{Kepler} and \emph{CoRoT}
+\citep{Michel2008,Huber2011,Huber2012}. \cite{Campante2015} is a recent
+example of usage of asteroseismology for characterization of planetary
+system.
 
 A key to all these approaches is a correct determination
 of the effective temperature. In that respect, the IRFM
@@ -147,7 +147,7 @@ Finally, the use of high resolution spectroscopy, together with stellar
 atmospheric models, is also often used to derive key atmospheric stellar
 parameters. The selected procedures often depends on the quality of the
 spectra, their resolution, and wavelength region. For low resolution
-spectra ($\lambda/\Delta\lambda < 20\,000$) it is preferred to
+spectra ($\lambda/\Delta\lambda$ below 20000) it is preferred to
 fit the overall observed spectrum with a synthetic one \citep[see
 e.g.][]{Recio2006}. For higher resolution spectra of slowly rotating
 stars (below 10 to 15 \si{km/s}) we can also use the equivalent width (EW)
@@ -165,7 +165,7 @@ VLT\footnote{\url{http://www.eso.org/sci/facilities/develop/instrume
 nts/crires_up.html}} with expected first light in 2017, 2) CARMENES for the 3.5
 m telescope at Calar Alto Observatory \citep{CARMENES} with expected first light
 at December 2015, and 3) SPIRou at CFHT\footnote{\url{http://cfht.hawaii.edu/en/news/SPIRou/}} with expected first
-light in 2017 as well. The spectral resolutions for these spectrographs range
+light in 2017 as well. The spectral resolution for these spectrographs range
 between 50000 and 100000.
 
 Even though reliable line lists for the derivation of stellar
