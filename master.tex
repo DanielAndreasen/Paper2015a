@@ -139,24 +139,26 @@ system.
 
 A key to all these approaches is a correct determination
 of the effective temperature. In that respect, the IRFM
-is usually considered as one of the most reliable methods. However, the IRFM
-needs a priori knowledge of the bolometric flux, surface gravity and
-stellar metallicity \citep{Blackwell1977,Ramirez2005b,Casagrande2010}.
+is usually considered as one of the most reliable methods for FGK dwarf
+and subgiant stars. However, the IRFM needs a priori knowledge of the bolometric
+flux, surface gravity and stellar metallicity
+\citep{Blackwell1977,Ramirez2005b,Casagrande2010}.
 
-Finally, the use of high resolution spectroscopy, together with stellar
-atmospheric models, is also often used to derive key atmospheric stellar
-parameters. The selected procedures often depends on the quality of the
+Finally, the use of high resolution spectroscopy along with stellar
+atmospheric models is an extensively tested method that allows the
+derivation of the fundamental parameters of a star \citep[see e.g.][]{Santos13}
+The procedure depends on the quality of the
 spectra, their resolution, and wavelength region. For low resolution
-spectra ($\lambda/\Delta\lambda$ below 20000) it is preferred to
+spectra ($\lambda/\Delta\lambda < 20\,000$) it is preferred to
 fit the overall observed spectrum with a synthetic one \citep[see
 e.g.][]{Recio2006}. For higher resolution spectra of slowly rotating
-stars (below 10 to 15 \si{km/s}) we can also use the equivalent width (EW)
-method (for details see Sect.~\ref{sec:method}).
+stars (below 10 to 15 \si{km/s}) we are in the regime where the equivalent
+width (EW) method can be used (for details see Sect.~\ref{sec:method}).
 
 The derivation of stellar atmospheric parameters from high resolution spectra in
 the optical is now based on a standard procedure \citep[see e.g.][]{Valenti2005,Sousa2008a}.
 With the advancement of NIR instruments, we will now be able to explore a new
-domain. At the moment the GIANO spectrograph installed at TNC is already
+wavelength domain. At the moment the GIANO spectrograph installed at TNC is already
 available\footnote{\url{http://www.bo.astro.it/giano/GIANO/GIANO_Overvie
 w.html}}, as well as the IRD spectrograph installed
 at Subaru \citep{IRD}. Three new spectrographs
@@ -165,8 +167,8 @@ VLT\footnote{\url{http://www.eso.org/sci/facilities/develop/instrume
 nts/crires_up.html}} with expected first light in 2017, 2) CARMENES for the 3.5
 m telescope at Calar Alto Observatory \citep{CARMENES} with expected first light
 at December 2015, and 3) SPIRou at CFHT\footnote{\url{http://cfht.hawaii.edu/en/news/SPIRou/}} with expected first
-light in 2017 as well. The spectral resolution for these spectrographs range
-between 50000 and 100000.
+light in 2017 as well. The spectral resolutions for these spectrographs range
+between $50\,000$ and $100\,000$.
 
 Even though reliable line lists for the derivation of stellar
 parameters using optical spectra exist, the situation is different
@@ -214,16 +216,15 @@ parameters for the Sun and HD20010.
 
 The two most widely used methods for deriving stellar atmosphere
 parameters from a spectrum are spectral synthesis and the equivalent
-width method. The spectral synthesis method compares a synthetic
-spectrum with an observed spectrum and by a minimization procedure the
-best fit is found between the synthetic spectrum and the real spectrum
+width method. The spectral synthesis method compares synthetic spectra
+to an observed spectrum and finds the best model by a minimization procedure
 \citep[see e.g.][]{Valenti2005,Onehag2012,Blanco2014}. When the minimization
 procedure reaches a minimum, the final atmospheric parameters are found.
 
-The other method, which we use in this work, is baed on the measurements
-of the equivalent width (EW) of a given line
-list \citep{Sousa2008a,Bensby2014,Mucciarelli2013}.
-The EW is given as:
+The equivalent width (EW) method \citep{Sousa2008a,Bensby2014,Mucciarelli2013},
+which we use in this work, is based on the measurements
+of EWs of a given line list of atomic data of absorption lines visible in the
+stellar spectrum of interest. The EW for a single line is given as:
 \begin{align}
     \label{eq:EW}
     EW = \int_0^\infty \left(1 - \frac{F_\lambda}{F_0}\right) d\lambda,
@@ -231,7 +232,7 @@ The EW is given as:
 where $F_0$ is the continuum level and $F_\lambda$ is the flux as a
 function of wavelength.
 
-Using the EW method, the abundance for individual lines can be found
+Using the EW method, the abundance for individual lines can be calculated
 with a code like MOOG \citep{Sneden1973}. By changing atmospheric
 parameters in the input model for MOOG, we expect to retrieve the same
 abundances for every spectral line of the same element when
