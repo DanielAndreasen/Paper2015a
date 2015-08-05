@@ -17,5 +17,5 @@
 ## From Vasco
     + Calculate abundance for all lines for the Sun with 100 random draws.
       Plot the MAD for all lines vs. wavelength.
-    - Try remove EWs<10mÅ and 20mÅ for the Sun and see how telluric line
+    + Try remove EWs below 10mÅ and 20mÅ for the Sun and see how telluric line
       contamination affects the derivation. Also try this for HD20010.
