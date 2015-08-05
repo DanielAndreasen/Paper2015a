@@ -86,14 +86,7 @@ the spectrum of HD20010. In some cases they were not present while in
 other cases they were blended with either other elements or tellurics.
 With the lack of \ion{Fe}{ii} lines from the spectrum we used, we were
 not able to derive the surface gravity, which was fixed during the
-process. The rest of the stellar atmospheric parameters were derived at
-different cuts in excitation potential to obtain a more flat distribution
-of lines. These cuts also gives parameters closer
-to literature values. At a \SI{5.3}{eV} cut in excitation potential
-and a fixed $\log g$ at 4.00 we derive: $T_\mathrm{eff}=6096\pm196\si{K}$,
-$\xi_\mathrm{micro}=1.37\pm0.16\si{km/s}$, and [Fe/H]=$-0.29\pm0.73$
-dex, which is consistent with the values found in the literature using
-spectroscopy in the visible.}
+process.}
 % Conclusions
 {}
 
@@ -486,7 +479,7 @@ spectrum, it is with no surprise that the derived parameters for the
 Sun perfectly match the adopted solar values within the error bars. In addition
 to this, we
 repeated this test but after adding noise to the EW measurements and
-derived parameters with different cuts in excitation potential (EP). The
+derived parameters with different emulated signal-to-noise ratios. The
 noisy EWs follow the procedure from \cite{Caryel1988}:
 
 \begin{align}
@@ -501,66 +494,29 @@ distribution with a mean around the original EW.
     f(x, EW, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-EW)^2}{2\sigma^2}}
 \end{align}
 
-A new set of EWs is drawn from this distribution. We make 10 different
-draws for 3 different cuts in excitation potential: \SI{5.0}{eV},
-\SI{5.5}{eV}, and no cut at all. This is done for both S/N considered.
-This gives us 60 different line-lists plus the original line-list. By
-applying cuts in excitation potential we make a more flat distribution
-of the iron lines. This can be crucial when we derive the effective
-temperature (excitation balance). A skew distribution might give
-problems when a line is fitted for the abundance versus excitation
-potential.
-
-In Fig~\ref{fig:solar_parameters} the derived parameters are plotted
-with different EP cuts in the line list. The horizontal black lines
-are the derived atmospheric parameters without noise added to the EWs.
-The color shows the two different S/N considered (blue is S/N at 100,
-and green is S/N at 300). For a given S/N and EP cut, the 10 runs were
-combined to a single value by calculating the mean. Additionally,
-we show the 1$\sigma$ standard deviation. The derived atmospheric
-parameters are presented in Table~\ref{tab:sun}.
-
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=1.0\linewidth]{figures/solar_parameters_10runs.pdf}
-    \caption{Derived atmospheric parameters for the Sun. The horizontal
-    black lines are the parameters for the calibrated line list, the
-    three points shows the mean value of 10 runs with random noise
-    added, the blue points is the results for S/N=100, while the
-    green points is for S/N=300.}
-    \label{fig:solar_parameters}
-\end{figure}
-
-By adding noise to the EW measurements and calculate the atmospheric
-parameters with different cuts in EP, we see that the final derived
-parameters are perfectly compatible with expected values. This means the
-line list is robust for the derivation of parameters for the Sun at the
-signal-to-noise considered.
 
 
 
-
-
-\begin{table*}[tb!]
-    \caption{The derived parameters for the Sun with two different cuts
-    in EP, and with no cut. For all the line lists here, there is noise
-    added to the EW measurements.}
-    \label{tab:sun}
-    \centering
-    \begin{tabular}{llllll}
-      \hline\hline
-        EP cut (eV) &  S/N &  $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)     &  $\xi_\mathrm{micro}$ (km/s) &  [Fe/H]           \\
-      \hline
-        5.0         &  100 &  $5771 \pm  41$       & $4.44   \pm  0.11$  & $1.04  \pm  0.14$            & $-0.01    \pm 0.03$\\
-        5.5         &  100 &  $5770 \pm  34$       & $4.42   \pm  0.08$  & $1.04  \pm  0.13$            & $-0.01    \pm 0.02$\\
-        No cut      &  100 &  $5776 \pm  23$       & $4.44   \pm  0.04$  & $1.01  \pm  0.12$            & $-0.00    \pm 0.01$\\
-      \hline
-        5.0         &  300 &  $5776 \pm  9 $       & $4.43   \pm  0.02$  & $1.00  \pm  0.05$            &  $0.00    \pm 0.00$\\
-        5.5         &  300 &  $5774 \pm  11$       & $4.43   \pm  0.04$  & $1.01  \pm  0.04$            & $-0.00    \pm 0.01$\\
-        No cut      &  300 &  $5778 \pm  9 $       & $4.44   \pm  0.01$  & $1.00  \pm  0.03$            &  $0.00    \pm 0.00$\\
-      \hline
-    \end{tabular}
-\end{table*}
+% \begin{table*}[tb!]
+%     \caption{The derived parameters for the Sun with two different cuts
+%     in EP, and with no cut. For all the line lists here, there is noise
+%     added to the EW measurements.}
+%     \label{tab:sun}
+%     \centering
+%     \begin{tabular}{llllll}
+%       \hline\hline
+%         EP cut (eV) &  S/N &  $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)     &  $\xi_\mathrm{micro}$ (km/s) &  [Fe/H]           \\
+%       \hline
+%         5.0         &  100 &  $5771 \pm  41$       & $4.44   \pm  0.11$  & $1.04  \pm  0.14$            & $-0.01    \pm 0.03$\\
+%         5.5         &  100 &  $5770 \pm  34$       & $4.42   \pm  0.08$  & $1.04  \pm  0.13$            & $-0.01    \pm 0.02$\\
+%         No cut      &  100 &  $5776 \pm  23$       & $4.44   \pm  0.04$  & $1.01  \pm  0.12$            & $-0.00    \pm 0.01$\\
+%       \hline
+%         5.0         &  300 &  $5776 \pm  9 $       & $4.43   \pm  0.02$  & $1.00  \pm  0.05$            &  $0.00    \pm 0.00$\\
+%         5.5         &  300 &  $5774 \pm  11$       & $4.43   \pm  0.04$  & $1.01  \pm  0.04$            & $-0.00    \pm 0.01$\\
+%         No cut      &  300 &  $5778 \pm  9 $       & $4.44   \pm  0.01$  & $1.00  \pm  0.03$            &  $0.00    \pm 0.00$\\
+%       \hline
+%     \end{tabular}
+% \end{table*}
 
 
 
@@ -664,62 +620,50 @@ We then derived the stellar parameters using the standard procedure
 (see Sect.~\ref{sec:deriving_parameters_with_the_ew_method}) as
 done for the Sun. The final derived parameters for the full line
 list are overestimated compared to literature values listed above.
-To overcome the overestimation of parameters we
-tried to remove lines above different EPs and re-determine the stellar
-atmospheric parameters. In this process we did not remove any of the
-very few remaining \ion{Fe}{ii} lines. The reason not to remove the
-\ion{Fe}{ii} lines is, that they are essential to determine the surface
-gravity from the ionization balance. However, 5 lines were too few to
-satisfactory constrain the surface gravity. Hence, we adopted the mean
-surface gravity from previous studies: $\log g = 4.00$ dex.
-Fig~\ref{fig:HD20010_parameters_cuts} shows the results from this
-exercise. At a cut at $\SI{5.3}{eV}$ and below the atmospheric
-parameters are close to the mean values
-which are plotted as a horizontal black line. The exact values can be
-seen in Table~\ref{tab:hd20010}.
 
-$T_\mathrm{eff} = 6101\si{K}$, $\log(g) = 4.00$ dex,
-$\xi_\mathrm{micro} = 1.65\si{km/s}$, and [Fe/H]=$-0.26$.
-\begin{table*}[htb!]
-    \caption{The derived parameters for HD20010 at different EP cut. $\log g$
-        were fixed at 4.00 for all calculations.}
-    \label{tab:hd20010}
-    \centering
-    \begin{tabular}{lllll}
-      \hline\hline
-        EP cut (eV) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H]                \\
-      \hline
-        Literature  & $6101        $       & $1.65         $             & $-0.26         $      \\
-      \hline
-        5.0         & $6112 \pm 121$       & $0.78 \pm 0.08$             & $-0.25 \pm 0.44$      \\
-        5.1         & $6067 \pm 209$       & $1.39 \pm 0.17$             & $-0.29 \pm 0.74$      \\
-        5.2         & $6093 \pm 196$       & $1.37 \pm 0.16$             & $-0.29 \pm 0.71$      \\
-        5.3         & $6096 \pm 196$       & $1.37 \pm 0.16$             & $-0.29 \pm 0.73$      \\
-        5.4         & $6294 \pm 353$       & $2.00 \pm 0.30$             & $-0.27 \pm 1.52$      \\
-        5.5         & $6337 \pm 558$       & $2.14 \pm 0.49$             & $-0.26 \pm 2.48$      \\
-        5.6         & $6367 \pm 714$       & $2.21 \pm 0.63$             & $-0.26 \pm 3.33$      \\
-        5.7         & $6621 \pm 248$       & $2.18 \pm 0.20$             & $-0.20 \pm 1.35$      \\
-        5.8         & $6624 \pm 241$       & $2.17 \pm 0.19$             & $-0.20 \pm 1.31$      \\
-        5.9         & $7000 \pm 218$       & $2.09 \pm 0.09$             & $-0.11 \pm 1.29$      \\
-        6.0         & $6999 \pm 181$       & $2.08 \pm 0.08$             & $-0.10 \pm 1.06$      \\
-        No cut      & $7150 \pm 467$       & $2.99 \pm 0.30$             & $-0.09 \pm 3.04$      \\
-      \hline
-    \end{tabular}
-\end{table*}
+
+% $T_\mathrm{eff} = 6101\si{K}$, $\log(g) = 4.00$ dex,
+% $\xi_\mathrm{micro} = 1.65\si{km/s}$, and [Fe/H]=$-0.26$.
+% \begin{table*}[htb!]
+%     \caption{The derived parameters for HD20010 at different EP cut. $\log g$
+%         were fixed at 4.00 for all calculations.}
+%     \label{tab:hd20010}
+%     \centering
+%     \begin{tabular}{lllll}
+%       \hline\hline
+%         EP cut (eV) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H]                \\
+%       \hline
+%         Literature  & $6101        $       & $1.65         $             & $-0.26         $      \\
+%       \hline
+%         5.0         & $6112 \pm 121$       & $0.78 \pm 0.08$             & $-0.25 \pm 0.44$      \\
+%         5.1         & $6067 \pm 209$       & $1.39 \pm 0.17$             & $-0.29 \pm 0.74$      \\
+%         5.2         & $6093 \pm 196$       & $1.37 \pm 0.16$             & $-0.29 \pm 0.71$      \\
+%         5.3         & $6096 \pm 196$       & $1.37 \pm 0.16$             & $-0.29 \pm 0.73$      \\
+%         5.4         & $6294 \pm 353$       & $2.00 \pm 0.30$             & $-0.27 \pm 1.52$      \\
+%         5.5         & $6337 \pm 558$       & $2.14 \pm 0.49$             & $-0.26 \pm 2.48$      \\
+%         5.6         & $6367 \pm 714$       & $2.21 \pm 0.63$             & $-0.26 \pm 3.33$      \\
+%         5.7         & $6621 \pm 248$       & $2.18 \pm 0.20$             & $-0.20 \pm 1.35$      \\
+%         5.8         & $6624 \pm 241$       & $2.17 \pm 0.19$             & $-0.20 \pm 1.31$      \\
+%         5.9         & $7000 \pm 218$       & $2.09 \pm 0.09$             & $-0.11 \pm 1.29$      \\
+%         6.0         & $6999 \pm 181$       & $2.08 \pm 0.08$             & $-0.10 \pm 1.06$      \\
+%         No cut      & $7150 \pm 467$       & $2.99 \pm 0.30$             & $-0.09 \pm 3.04$      \\
+%       \hline
+%     \end{tabular}
+% \end{table*}
 
 
 
-\begin{figure}[tpb!]
-    \centering
-    \includegraphics[width=1.0\linewidth]{figures/HD20010_parameters_cuts.pdf}
-    \caption{Atmospheric parameters for HD20010. In the top panel is
-    the effective temperature. The middle panel is the iron abundance,
-    and the bottom panel is the micro turbulence. The parameters are
-    derived with different cuts in EP. Here the horizontal black lines
-    are literature values. The parameters for the full line list are
-    plotted to the right for all three plots.}
-    \label{fig:HD20010_parameters_cuts}
-\end{figure}
+% \begin{figure}[tpb!]
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{figures/HD20010_parameters_cuts.pdf}
+%     \caption{Atmospheric parameters for HD20010. In the top panel is
+%     the effective temperature. The middle panel is the iron abundance,
+%     and the bottom panel is the micro turbulence. The parameters are
+%     derived with different cuts in EP. Here the horizontal black lines
+%     are literature values. The parameters for the full line list are
+%     plotted to the right for all three plots.}
+%     \label{fig:HD20010_parameters_cuts}
+% \end{figure}
 
 
 
