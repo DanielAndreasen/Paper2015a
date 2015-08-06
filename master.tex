@@ -394,26 +394,94 @@ Fig~\ref{fig:Fe1_after_recal}.
     \label{fig:Fe1_after_recal}
 \end{figure}
 
-% \begin{table*}[tb!]
-%     \caption{The derived parameters for the Sun with two different cuts
-%     in EP, and with no cut. For all the line lists here, there is noise
-%     added to the EW measurements.}
-%     \label{tab:sun}
-%     \centering
-%     \begin{tabular}{llllll}
-%       \hline\hline
-%         EP cut (eV) &  S/N &  $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)     &  $\xi_\mathrm{micro}$ (km/s) &  [Fe/H]           \\
-%       \hline
-%         5.0         &  100 &  $5771 \pm  41$       & $4.44   \pm  0.11$  & $1.04  \pm  0.14$            & $-0.01    \pm 0.03$\\
-%         5.5         &  100 &  $5770 \pm  34$       & $4.42   \pm  0.08$  & $1.04  \pm  0.13$            & $-0.01    \pm 0.02$\\
-%         No cut      &  100 &  $5776 \pm  23$       & $4.44   \pm  0.04$  & $1.01  \pm  0.12$            & $-0.00    \pm 0.01$\\
-%       \hline
-%         5.0         &  300 &  $5776 \pm  9 $       & $4.43   \pm  0.02$  & $1.00  \pm  0.05$            &  $0.00    \pm 0.00$\\
-%         5.5         &  300 &  $5774 \pm  11$       & $4.43   \pm  0.04$  & $1.01  \pm  0.04$            & $-0.00    \pm 0.01$\\
-%         No cut      &  300 &  $5778 \pm  9 $       & $4.44   \pm  0.01$  & $1.00  \pm  0.03$            &  $0.00    \pm 0.00$\\
-%       \hline
-%     \end{tabular}
-% \end{table*}
+
+\subsection{Removal of unstable lines}
+\label{sub:removal_of_unstable_lines}
+We want to check the stability of the lines selected at thie point.
+The recipie for this is very simple. A gaussian distribution is made
+for the EW of each line following the formula presented in \citet{Caryel1988}
+presented below.
+
+\begin{align}
+    \sigma \simeq 1.6 \frac{\sqrt{\Delta\lambda\; \mathrm{EW}}}{\mathrm{S/N}},
+\end{align}
+where $\Delta\lambda=0.1\si{\angstrom}$ and we consider a
+signal-to-noise ratio of 50, much lower than the signal-to-noise
+ratio of the spectrum. This sigma is used to create a normal
+distribution with a mean around the original EW.
+\begin{align}
+    f(x, EW, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-EW)^2}{2\sigma^2}}.
+\end{align}
+We make 100 draws and derive the abundance for each line with Solar parameters,
+using the same atmospheric model as described above. The mean absolute deviation
+(MAD) is calculated for all lines and plotted against the EW, since low EW will
+naturally have higher MAD values. The curve is detrended with an exponential
+function, and from the residuals we iteratively remove the point furthest away
+above $3\sigma$. In this process 23 lines are removed as shown in
+Fig.~\ref{fig:unstable_lines}.
+
+\begin{figure*}[tbp!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/unstable_lines.pdf}
+    \caption{The upper plot shows the MAD values of 100 noisy lines with
+    a simulated signal-to-noise ratio of 30. The red points are the 23
+    detected unstable lines, and the red curve is the last fit in the
+    iterative removal of unstable lines.
+    The lower plot show the detrended points from the upper plot, from
+    where the $3\sigma$ is calculated for each iteration.}
+    \label{fig:unstable_lines}
+\end{figure*}
+
+The final line list is presented in Tab.~\ref{tab:linelist}
+
+\begin{table*}[tb!]
+    \caption{The final line list as found for the Sun.}
+    \label{tab:linelist}
+    \centering
+    \begin{tabular}{lllll}
+      \hline\hline
+        Wavelength &  Element      &  Excitation potential & $\log\mathrm{gf}$ &    EW   \\
+      \hline
+        10070.521  &   \ion{Fe}{i} &          5.51         &        -1.527     &     6.6 \\
+        10080.415  &   \ion{Fe}{i} &          5.10         &        -2.008     &     5.3 \\
+        10081.394  &   \ion{Fe}{i} &          2.42         &        -4.551     &     6.2 \\
+        10086.242  &   \ion{Fe}{i} &          2.95         &        -4.059     &     5.8 \\
+        10137.100  &   \ion{Fe}{i} &          5.09         &        -1.768     &     9.2 \\
+        10142.844  &   \ion{Fe}{i} &          5.06         &        -1.574     &    14.4 \\
+        10155.163  &   \ion{Fe}{i} &          2.18         &        -4.340     &    15.8 \\
+        10156.507  &   \ion{Fe}{i} &          4.59         &        -2.125     &    11.8 \\
+        10167.469  &   \ion{Fe}{i} &          2.20         &        -4.199     &    19.8 \\
+        10195.106  &   \ion{Fe}{i} &          2.73         &        -3.625     &    21.9 \\
+        10198.427  &   \ion{Fe}{i} &          6.02         &        -1.152     &     5.4 \\
+        10227.991  &   \ion{Fe}{i} &          6.12         &        -0.449     &    19.4 \\
+        10230.796  &   \ion{Fe}{i} &          6.12         &        -0.414     &    21.0 \\
+        10265.218  &   \ion{Fe}{i} &          2.22         &        -4.668     &     7.7 \\
+        10283.776  &   \ion{Fe}{i} &          5.51         &        -1.621     &     5.5 \\
+        10307.450  &   \ion{Fe}{i} &          4.59         &        -2.500     &     5.5 \\
+        10327.340  &   \ion{Fe}{i} &          5.54         &         0.504     &   134.4 \\
+        10332.328  &   \ion{Fe}{i} &          3.63         &        -3.145     &    10.1 \\
+        10347.966  &   \ion{Fe}{i} &          5.39         &        -0.754     &    36.9 \\
+        10353.805  &   \ion{Fe}{i} &          5.39         &        -1.035     &    23.2 \\
+        10364.063  &   \ion{Fe}{i} &          5.45         &        -1.129     &    17.3 \\
+        10379.000  &   \ion{Fe}{i} &          2.22         &        -4.246     &    18.0 \\
+        10388.746  &   \ion{Fe}{i} &          5.45         &        -1.527     &     7.8 \\
+        10423.029  &   \ion{Fe}{i} &          2.69         &        -3.660     &    22.6 \\
+        10427.305  &  \ion{Fe}{ii} &          6.08         &        -1.662     &    12.4 \\
+        10501.498  &  \ion{Fe}{ii} &          5.55         &        -1.926     &    18.2 \\
+        10862.644  &  \ion{Fe}{ii} &          5.59         &        -2.043     &    14.8 \\
+        11125.580  &  \ion{Fe}{ii} &          5.62         &        -2.301     &     9.1 \\
+        11833.056  &  \ion{Fe}{ii} &          2.84         &        -3.379     &    81.7 \\
+        12913.876  &  \ion{Fe}{ii} &          6.50         &         0.045     &    97.7 \\
+        13251.144  &  \ion{Fe}{ii} &          9.41         &         0.860     &    13.0 \\
+        13277.306  &  \ion{Fe}{ii} &          5.29         &        -2.043     &    35.9 \\
+        13294.853  &  \ion{Fe}{ii} &          3.22         &        -3.613     &    56.9 \\
+        13419.109  &  \ion{Fe}{ii} &          3.81         &        -3.484     &    32.8 \\
+        15247.133  &  \ion{Fe}{ii} &          6.84         &        -1.691     &    10.5 \\
+        15350.156  &  \ion{Fe}{ii} &          8.95         &         0.602     &    29.0 \\
+        20460.070  &  \ion{Fe}{ii} &          1.67         &        -5.758     &    36.5 \\
+      \hline
+    \end{tabular}
+\end{table*}
 
 
 
