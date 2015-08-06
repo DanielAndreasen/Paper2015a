@@ -420,7 +420,7 @@ function, and from the residuals we iteratively remove the point furthest away
 above $3\sigma$. In this process 23 lines are removed as shown in
 Fig.~\ref{fig:unstable_lines}.
 
-\begin{figure*}[tbp!]
+\begin{figure}[tbp!]
     \centering
     \includegraphics[width=1.0\linewidth]{figures/unstable_lines.pdf}
     \caption{The upper plot shows the MAD values of 100 noisy lines with
@@ -430,7 +430,7 @@ Fig.~\ref{fig:unstable_lines}.
     The lower plot show the detrended points from the upper plot, from
     where the $3\sigma$ is calculated for each iteration.}
     \label{fig:unstable_lines}
-\end{figure*}
+\end{figure}
 
 The final line list is presented in Tab.~\ref{tab:linelist}
 
@@ -440,7 +440,7 @@ The final line list is presented in Tab.~\ref{tab:linelist}
     \centering
     \begin{tabular}{lllll}
       \hline\hline
-        Wavelength &  Element      &  Excitation potential & $\log\mathrm{gf}$ &    EW   \\
+        Wavelength &  Element      &  Excitation potential & $\log\mathit{gf}$ &    EW   \\
       \hline
         10070.521  &   \ion{Fe}{i} &          5.51         &        -1.527     &     6.6 \\
         10080.415  &   \ion{Fe}{i} &          5.10         &        -2.008     &     5.3 \\
@@ -466,6 +466,7 @@ The final line list is presented in Tab.~\ref{tab:linelist}
         10379.000  &   \ion{Fe}{i} &          2.22         &        -4.246     &    18.0 \\
         10388.746  &   \ion{Fe}{i} &          5.45         &        -1.527     &     7.8 \\
         10423.029  &   \ion{Fe}{i} &          2.69         &        -3.660     &    22.6 \\
+        \ldots     &   \ldots      &          \ldots       &        \ldots     &   \ldots\\
         10427.305  &  \ion{Fe}{ii} &          6.08         &        -1.662     &    12.4 \\
         10501.498  &  \ion{Fe}{ii} &          5.55         &        -1.926     &    18.2 \\
         10862.644  &  \ion{Fe}{ii} &          5.59         &        -2.043     &    14.8 \\
@@ -542,49 +543,37 @@ As a test, we then derived the stellar parameters for the Sun using
 the resulting line-list (including the solar calibrated, astrophysical
 $\log \mathit{gf}$ values). We used the minimization procedure described
 in Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. Since the
-line-list and $\log$ gf values have been selected using the solar
+line-list and $\log\mathit{gf}$ values have been selected using the solar
 spectrum, it is with no surprise that the derived parameters for the
-Sun perfectly match the adopted solar values within the error bars. In addition
-to this, we
-repeated this test but after adding noise to the EW measurements and
-derived parameters with different emulated signal-to-noise ratios. The
-noisy EWs follow the procedure from \cite{Caryel1988}:
+Sun perfectly match the adopted solar values within the error bars.
 
-\begin{align}
-    \sigma \simeq 1.6 \frac{\sqrt{\Delta\lambda\; \mathrm{EW}}}{\mathrm{S/N}},
-\end{align}
-where $\Delta\lambda=0.1\si{\angstrom}$ and we consider two different
-signal-to-noise ratios, 100 and 300, much lower than the signal-to-noise
-ratio of the spectrum. This sigma is used to create a normal
-distribution with a mean around the original EW.
+Moreover we derive parameters for different signal-to-noise ratios, namely
+10, 25, 50, 100, 150, and 300. The signal-to-noise ratios are obtained by
+drawing EW from a gaussian distribution with widths dependent on the EW
+itself and the signal-to-noise as described above in
+Sec.\ref{sub:removal_of_unstable_lines}. For each signal-to-noise we consider
+we make 10 line lists, giving us a total of 60 line lists. This exercise
+show the expected precision we for different signal-to-noises, with the
+presented line list. The final results are presented in Fig.\ref{fig:snr_sun}.
+The error is the $3 \sigma$ standard deviation from the 10 different runs.
+As seen from the figure, we expect to be able to derive precise parameters,
+ERROR BARS HERE, down to a signal-to-noise ratio of SNR HERE!
 
-\begin{align}
-    f(x, EW, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-EW)^2}{2\sigma^2}}
-\end{align}
+\begin{figure*}[tbp!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/plot_fits.pdf}
+    \caption{All plots shows derived parameters as a function of the
+    signal-to-noise. The error is the 3$\sigma$ standard deviation from
+    the 10 different runs for each signal-to-noise. The upper left plot
+    shows the effective temperature. The upper right plot show the surface
+    gravity ($\log g$). The lower left shows the iron abundance, used as a
+    proxy for the metallicity. Finally, in the lower right plot is shown
+    the microturbulence.}
+    \label{fig:snr_sun}
+\end{figure*}
 
 
 
-
-% \begin{table*}[tb!]
-%     \caption{The derived parameters for the Sun with two different cuts
-%     in EP, and with no cut. For all the line lists here, there is noise
-%     added to the EW measurements.}
-%     \label{tab:sun}
-%     \centering
-%     \begin{tabular}{llllll}
-%       \hline\hline
-%         EP cut (eV) &  S/N &  $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)     &  $\xi_\mathrm{micro}$ (km/s) &  [Fe/H]           \\
-%       \hline
-%         5.0         &  100 &  $5771 \pm  41$       & $4.44   \pm  0.11$  & $1.04  \pm  0.14$            & $-0.01    \pm 0.03$\\
-%         5.5         &  100 &  $5770 \pm  34$       & $4.42   \pm  0.08$  & $1.04  \pm  0.13$            & $-0.01    \pm 0.02$\\
-%         No cut      &  100 &  $5776 \pm  23$       & $4.44   \pm  0.04$  & $1.01  \pm  0.12$            & $-0.00    \pm 0.01$\\
-%       \hline
-%         5.0         &  300 &  $5776 \pm  9 $       & $4.43   \pm  0.02$  & $1.00  \pm  0.05$            &  $0.00    \pm 0.00$\\
-%         5.5         &  300 &  $5774 \pm  11$       & $4.43   \pm  0.04$  & $1.01  \pm  0.04$            & $-0.00    \pm 0.01$\\
-%         No cut      &  300 &  $5778 \pm  9 $       & $4.44   \pm  0.01$  & $1.00  \pm  0.03$            &  $0.00    \pm 0.00$\\
-%       \hline
-%     \end{tabular}
-% \end{table*}
 
 
 
@@ -688,36 +677,38 @@ We then derived the stellar parameters using the standard procedure
 (see Sect.~\ref{sec:deriving_parameters_with_the_ew_method}) as
 done for the Sun. The final derived parameters for the full line
 list are overestimated compared to literature values listed above.
+Therefore, since the spectrum for HD20010 is not corrected for telluric
+contamination, we make four cuts in EW and remove lines below this
+threshold before deriving parameters again. Since the relative affect
+by tellurics are larger for weak lines we expect to obtain parameters
+in better agreement with the litterature. However, a too high cut start
+to remove valuable information from the analysis, and therefore we
+expect worse results. This is exactly was is presented in Tab.~\ref{tab:hd20010}
+and Fig.~\ref{fig:HD20010_parameters_cuts}. We choose to cut at
+5, 10, 15, and 20 \si{m\angstrom} respectively. The agreement with litterature
+is best at a cut at $\SI{15}{m\angstrom}$ where we have removed lines affected
+by blends with tellurics.
 
 
-% $T_\mathrm{eff} = 6101\si{K}$, $\log(g) = 4.00$ dex,
-% $\xi_\mathrm{micro} = 1.65\si{km/s}$, and [Fe/H]=$-0.26$.
-% \begin{table*}[htb!]
-%     \caption{The derived parameters for HD20010 at different EP cut. $\log g$
-%         were fixed at 4.00 for all calculations.}
-%     \label{tab:hd20010}
-%     \centering
-%     \begin{tabular}{lllll}
-%       \hline\hline
-%         EP cut (eV) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H]                \\
-%       \hline
-%         Literature  & $6101        $       & $1.65         $             & $-0.26         $      \\
-%       \hline
-%         5.0         & $6112 \pm 121$       & $0.78 \pm 0.08$             & $-0.25 \pm 0.44$      \\
-%         5.1         & $6067 \pm 209$       & $1.39 \pm 0.17$             & $-0.29 \pm 0.74$      \\
-%         5.2         & $6093 \pm 196$       & $1.37 \pm 0.16$             & $-0.29 \pm 0.71$      \\
-%         5.3         & $6096 \pm 196$       & $1.37 \pm 0.16$             & $-0.29 \pm 0.73$      \\
-%         5.4         & $6294 \pm 353$       & $2.00 \pm 0.30$             & $-0.27 \pm 1.52$      \\
-%         5.5         & $6337 \pm 558$       & $2.14 \pm 0.49$             & $-0.26 \pm 2.48$      \\
-%         5.6         & $6367 \pm 714$       & $2.21 \pm 0.63$             & $-0.26 \pm 3.33$      \\
-%         5.7         & $6621 \pm 248$       & $2.18 \pm 0.20$             & $-0.20 \pm 1.35$      \\
-%         5.8         & $6624 \pm 241$       & $2.17 \pm 0.19$             & $-0.20 \pm 1.31$      \\
-%         5.9         & $7000 \pm 218$       & $2.09 \pm 0.09$             & $-0.11 \pm 1.29$      \\
-%         6.0         & $6999 \pm 181$       & $2.08 \pm 0.08$             & $-0.10 \pm 1.06$      \\
-%         No cut      & $7150 \pm 467$       & $2.99 \pm 0.30$             & $-0.09 \pm 3.04$      \\
-%       \hline
-%     \end{tabular}
-% \end{table*}
+\begin{table*}[htb!]
+    \caption{The derived parameters for HD20010 at different EW cut. $\log g$
+        were fixed at 4.00 for all calculations.}
+    \label{tab:hd20010}
+    \centering
+    \begin{tabular}{lllll}
+      \hline\hline
+        EW cut (\si{m\angstrom}) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H]             \\
+      \hline
+        Literature               & $6101        $       & $1.65         $             & $-0.26         $   \\
+      \hline
+        No cut                   & $6417 \pm 153$       & $5.03 \pm 0.06$             & $-0.17 \pm 0.36$   \\
+        5.0                      & $6437 \pm 209$       & $5.00 \pm 0.23$             & $-0.16 \pm 0.65$   \\
+       10.0                      & $6350 \pm 370$       & $5.00 \pm 1.39$             & $-0.17 \pm 2.35$   \\
+       15.0                      & $6040 \pm 237$       & $4.49 \pm 0.35$             & $-0.17 \pm 0.22$   \\
+       20.0                      & $5841 \pm 910$       & $5.00 \pm 4.10$             & $-0.20 \pm 2.58$   \\
+      \hline
+    \end{tabular}
+\end{table*}
 
 
 
@@ -727,7 +718,7 @@ list are overestimated compared to literature values listed above.
 %     \caption{Atmospheric parameters for HD20010. In the top panel is
 %     the effective temperature. The middle panel is the iron abundance,
 %     and the bottom panel is the micro turbulence. The parameters are
-%     derived with different cuts in EP. Here the horizontal black lines
+%     derived with different cuts in EW. Here the horizontal black lines
 %     are literature values. The parameters for the full line list are
 %     plotted to the right for all three plots.}
 %     \label{fig:HD20010_parameters_cuts}
@@ -743,7 +734,8 @@ of the line list plays a key role for deriving atmospheric stellar
 parameters. While the line list was compiled from a solar spectrum and
 calibrated for the same, we tested it extensively for the slightly
 hotter star, HD20010. The first results with this line list are
-promising.
+promising. We also show that for a spectrum that contain telluric lines
+best results appear when removing lines with a low EW around $\SI{15}{m\angstrom}$.
 
 The line list still remains to be tested for a larger sample of FGK
 stars. Furthermore, it will be interesting to explore the use of this
