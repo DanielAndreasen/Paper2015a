@@ -1,6 +1,6 @@
 ## From Maria
     + Curve of growth
-    - At which S/N can we no longer determine reliable parameters?
+    + At which S/N can we no longer determine reliable parameters?
     + Add table of line list
 
 
