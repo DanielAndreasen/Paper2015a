@@ -528,6 +528,7 @@ def fig_synthesis():
     for i in range(3-1):
         ax2.plot(data[i+1][:, 0], data[i+1][:, 1] - data1)
     ax2.legend((r'$\Delta_{21}$', r'$\Delta_{31}$'), loc='best', frameon=False)
+    plt.tight_layout()
     # plt.savefig('figures/synthetic_spectrum.pdf', format='pdf')
     plt.show()
 
