@@ -314,7 +314,7 @@ def fig_HD20010_parameters():
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
 
-    ax1.plot(xlim1, [6170]*2, '--k')
+    ax1.plot(xlim1, [6101]*2, '--k')
     ax1.errorbar(l.Ep, l.Teff, yerr=l.Tefferr, fmt='o', color=c[0])
     ax1.set_ylabel('Teff [K]')
     ax2.errorbar(u.Ep, u.Teff, yerr=u.Tefferr, fmt='o', color=c[0])
@@ -326,7 +326,7 @@ def fig_HD20010_parameters():
     ax2.spines['left'].set_visible(False)
     ax2.yaxis.tick_right()
     ax2.tick_params(labelright='off')
-    plt.setp(ax2, xticks=[7.0], xticklabels=['No EP cut'])
+    plt.setp(ax2, xticks=[7.0], xticklabels=['No EW cut'])
 
     ax2.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
     kwargs = dict(color='k', clip_on=False, linewidth=1)
@@ -348,7 +348,7 @@ def fig_HD20010_parameters():
     plt.setp(ax3.get_xticklabels(), visible=False)
     plt.setp(ax4.get_xticklabels(), visible=False)
 
-    ax3.plot(xlim1, [-0.21]*2, '--k')
+    ax3.plot(xlim1, [-0.26]*2, '--k')
     ax3.errorbar(l.Ep, l.feh, yerr=l.feherr, fmt='o', color=c[1])
     ax3.set_ylabel('[Fe/H]')
     ax4.errorbar(u.Ep, u.feh, yerr=u.feherr, fmt='o', color=c[1])
@@ -360,7 +360,7 @@ def fig_HD20010_parameters():
     ax4.spines['left'].set_visible(False)
     ax4.yaxis.tick_right()
     ax4.tick_params(labelright='off')
-    plt.setp(ax4, xticks=[7.0], xticklabels=['No EP cut'])
+    plt.setp(ax4, xticks=[7.0], xticklabels=['No EW cut'])
 
     ax4.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
     kwargs = dict(color='k', clip_on=False, linewidth=1)
@@ -383,7 +383,7 @@ def fig_HD20010_parameters():
     # plt.setp(ax5.get_xticklabels(), visible=False)
     # plt.setp(ax6.get_xticklabels(), visible=False)
 
-    ax5.plot(xlim1, [1.7]*2, '--k')
+    ax5.plot(xlim1, [1.65]*2, '--k')
     ax5.errorbar(l.Ep, l.vt, yerr=l.vterr, fmt='o', color=c[2])
     ax5.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
     ax6.errorbar(u.Ep, u.vt, yerr=u.vterr, fmt='o', color=c[2])
@@ -395,7 +395,7 @@ def fig_HD20010_parameters():
     ax6.spines['left'].set_visible(False)
     ax6.yaxis.tick_right()
     ax6.tick_params(labelright='off')
-    plt.setp(ax6, xticks=[7.0], xticklabels=['No\nEP cut'])
+    plt.setp(ax6, xticks=[7.0], xticklabels=['No\nEW cut'])
 
     ax6.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
     kwargs = dict(color='k', clip_on=False, linewidth=1)
@@ -418,7 +418,6 @@ def fig_HD20010_parameters():
 
     # plt.show()
     plt.savefig('figures/HD20010_parameters_cuts.pdf')
-    # plt.savefig('figures/HD20010_parameters_cuts.png')
     return df
 
 
