@@ -245,181 +245,38 @@ def fig_EPcut_sun(fout=None):
 
 def fig_HD20010_parameters():
     """
-    Derived parameters for HD20010 at different cuts in EP
+    Derived parameters for HD20010 at different cuts in EW
     """
-    def _get_parameters(file):
-        with open(file, 'r') as lines:
-            for _ in range(2):
-                lines.readline()
-            line = lines.readline()
-        z = line.strip().replace(' ', '').split('=')
-        return z
 
-    p = '/home/daniel/Software/SPECPAR/HD20010/'
-    N = len(glob(p+'Out*.moog'))
-    data = np.zeros((N-1, 5))
-
-    prefixes = (p+'Out_moog_b.', p+'Out_moog_')
-    with open(p+'star_file', 'r') as files:
-        # Dealing with the header.
-        for _ in range(2):
-            files.readline()
-        for index, file in enumerate(files):
-            if 'final' in file:
-                continue
-            ep = file.split('.moog')[0].split('_')[-1]
-            ep = float(ep)
-            file = file.split(' ')[0]
-            file1 = prefixes[0] + file
-            file2 = prefixes[1] + file
-            if os.path.isfile(file1):
-                z = _get_parameters(file1)
-            else:
-                z = _get_parameters(file2)
-            try:
-                if ep == 1.0:
-                    ep = 6.2
-                data[index, 0] = ep
-                data[index, 1] = int(z[1][:4])  # Teff
-                data[index, 2] = float(z[2][:4])  # logg
-                data[index, 3] = float(z[3][:4])  # microturbulence
-                data[index, 4] = float(z[-1])  # metalicity
-            except ValueError:
-                data[index, 0] = ep
-                data[index, 1] = int(z[1][:4])  # Teff
-                data[index, 2] = float(z[2][:4])  # logg
-                data[index, 3] = np.nan  # microturbulence
-                data[index, 4] = float(z[-1])  # metalicity
-
-    df = pd.DataFrame({  'Ep': data[0:-1, 0],
-                       'Teff': data[0:-1, 1],
-                       'logg': data[0:-1, 2],
-                         'vt': data[0:-1, 3],
-                        'feh': data[0:-1, 4]})
-    df = pd.read_csv('HD20010_params.dat')
-
-    l = df[df.Ep < 6.5]
-    u = df[df.Ep > 6.5]
-
-    xlim1 = [4.95, 6.05]
-    xlim2 = [6.95, 7.05]
-    xlim1ratio = (xlim1[1]-xlim1[0])/(xlim2[1]-xlim2[0]+xlim1[1]-xlim1[0])
-    xlim2ratio = (xlim2[1]-xlim2[0])/(xlim2[1]-xlim2[0]+xlim1[1]-xlim1[0])
-    gs = gridspec.GridSpec(3, 2, width_ratios=[xlim1ratio, xlim2ratio])
-
+    df = pd.read_csv('HD20010_params_EWcut.dat')
     c = sns.color_palette()
 
     fig = plt.figure()
-    ax1 = fig.add_subplot(gs[0])
-    ax2 = fig.add_subplot(gs[1])
+    ax1 = fig.add_subplot(311)
     plt.setp(ax1.get_xticklabels(), visible=False)
-    plt.setp(ax2.get_xticklabels(), visible=False)
-
-    ax1.plot(xlim1, [6101]*2, '--k')
-    ax1.errorbar(l.Ep, l.Teff, yerr=l.Tefferr, fmt='o', color=c[0])
+    ax1.errorbar(df.EW, df.Teff, yerr=df.Tefferr, fmt='o', color=c[0])
+    ax1.hlines(6101, 0, 20, linestyle='--')
+    ax1.set_xlim(-1, 21)
     ax1.set_ylabel('Teff [K]')
-    ax2.errorbar(u.Ep, u.Teff, yerr=u.Tefferr, fmt='o', color=c[0])
-    ax1.set_xlim(xlim1)
-    ax2.set_xlim(xlim2)
-    plt.subplots_adjust(wspace=0.03)
 
-    ax1.spines['right'].set_visible(False)
-    ax2.spines['left'].set_visible(False)
-    ax2.yaxis.tick_right()
-    ax2.tick_params(labelright='off')
-    plt.setp(ax2, xticks=[7.0], xticklabels=['No EW cut'])
+    ax2 = fig.add_subplot(312)
+    plt.setp(ax2.get_xticklabels(), visible=False)
+    ax2.errorbar(df.EW, df.feh, yerr=df.feherr, fmt='o', color=c[1])
+    ax2.hlines(-0.26, 0, 20, linestyles='--')
+    ax2.set_xlim(-1, 21)
+    ax2.set_ylabel('[Fe/H]')
 
-    ax2.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
-    kwargs = dict(color='k', clip_on=False, linewidth=1)
+    ax3 = fig.add_subplot(313)
+    plt.setp(ax3, xticks=[0, 5, 10, 15, 20], xticklabels=['No cut', 5, 10, 15, 20])
+    ax3.errorbar(df.EW, df.vt, yerr=df.vterr, fmt='o', color=c[2])
+    ax3.hlines(1.65, 0, 20, linestyles='--')
+    ax3.set_xlim(-1, 21)
+    ax3.set_xlabel(r'EW cuts [m$\AA$]')
+    ax3.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
 
-    ylim = (5600, 7800)
-    dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
-    dy = 0.02 * (ylim[1]-ylim[0])
-    ax1.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
-    ax1.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
-    ax2.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
-    ax2.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
-
-    ax1.set_ylim(ylim)
-    ax2.set_ylim(ylim)
-
-    # [Fe/H]
-    ax3 = fig.add_subplot(gs[2])
-    ax4 = fig.add_subplot(gs[3])
-    plt.setp(ax3.get_xticklabels(), visible=False)
-    plt.setp(ax4.get_xticklabels(), visible=False)
-
-    ax3.plot(xlim1, [-0.26]*2, '--k')
-    ax3.errorbar(l.Ep, l.feh, yerr=l.feherr, fmt='o', color=c[1])
-    ax3.set_ylabel('[Fe/H]')
-    ax4.errorbar(u.Ep, u.feh, yerr=u.feherr, fmt='o', color=c[1])
-    ax3.set_xlim(xlim1)
-    ax4.set_xlim(xlim2)
-    plt.subplots_adjust(wspace=0.03)
-
-    ax3.spines['right'].set_visible(False)
-    ax4.spines['left'].set_visible(False)
-    ax4.yaxis.tick_right()
-    ax4.tick_params(labelright='off')
-    plt.setp(ax4, xticks=[7.0], xticklabels=['No EW cut'])
-
-    ax4.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
-    kwargs = dict(color='k', clip_on=False, linewidth=1)
-
-    ylim = (-4.00, 4.00)
-    dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
-    dy = 0.02 * (ylim[1]-ylim[0])
-    ax3.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
-    ax3.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
-    ax4.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
-    ax4.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
-
-    ax3.set_ylim(ylim)
-    ax4.set_ylim(ylim)
-    # ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
-
-    # micorturbulence
-    ax5 = fig.add_subplot(gs[4])
-    ax6 = fig.add_subplot(gs[5])
-    # plt.setp(ax5.get_xticklabels(), visible=False)
-    # plt.setp(ax6.get_xticklabels(), visible=False)
-
-    ax5.plot(xlim1, [1.65]*2, '--k')
-    ax5.errorbar(l.Ep, l.vt, yerr=l.vterr, fmt='o', color=c[2])
-    ax5.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
-    ax6.errorbar(u.Ep, u.vt, yerr=u.vterr, fmt='o', color=c[2])
-    ax5.set_xlim(xlim1)
-    ax6.set_xlim(xlim2)
-    plt.subplots_adjust(wspace=0.03)
-
-    ax5.spines['right'].set_visible(False)
-    ax6.spines['left'].set_visible(False)
-    ax6.yaxis.tick_right()
-    ax6.tick_params(labelright='off')
-    plt.setp(ax6, xticks=[7.0], xticklabels=['No\nEW cut'])
-
-    ax6.xaxis.set_label_coords(0.05, 0.5, transform=fig.transFigure)
-    kwargs = dict(color='k', clip_on=False, linewidth=1)
-
-    ylim = (0.00, 4.30)
-    dx = 0.01 * (xlim1[1]-xlim1[0])/xlim1ratio
-    dy = 0.02 * (ylim[1]-ylim[0])
-    ax5.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
-    ax5.plot((xlim1[1]-dx, xlim1[1]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
-    ax6.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[1]-dy, ylim[1]+dy), **kwargs)
-    ax6.plot((xlim2[0]-dx, xlim2[0]+dx), (ylim[0]-dy, ylim[0]+dy), **kwargs)
-
-    ax5.set_ylim(ylim)
-    ax6.set_ylim(ylim)
-
-    fig = plt.gcf()
-    fig.subplots_adjust(top=0.97)
-    fig.subplots_adjust(bottom=0.12)
-    fig.subplots_adjust(right=0.97)
-
+    plt.tight_layout()
     # plt.show()
     plt.savefig('figures/HD20010_parameters_cuts.pdf')
-    return df
 
 
 def fig_spectral_region():
@@ -536,9 +393,9 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    fig_abundance()
+    # fig_abundance()
     # fig_EPcut_sun()
-    # fig_HD20010_parameters()
+    fig_HD20010_parameters()
     # fig_spectral_region()
     # fig_synthesis()
 
