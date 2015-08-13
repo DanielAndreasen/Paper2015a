@@ -41,40 +41,41 @@ def fig_abundance(fout=None):
     p_spec = '/home/daniel/Documents/Uni/phdproject/data/atlas/BASS2000/solarspectrum_01.fits'
     color = sns.color_palette()
 
-    # df = pd.read_csv('%sFe1_PreSynth_rec.log' % p, delimiter=r'\s+')
-    df1 = pd.read_csv('%sFe1_PostSynth_cut_rec.log' % p, delimiter=r'\s+')
+    df1 = pd.read_csv('figures/Fe1.dat', delimiter=r'\s+')
     df1.rename(columns={'abund': 'Abundance'}, inplace=True)
-    df2 = pd.read_csv('%sFe2_PostSynth_rec.log' % p, delimiter=r'\s+')
+    df2 = pd.read_csv('figures/Fe2.dat', delimiter=r'\s+')
     df2.rename(columns={'abund': 'Abundance'}, inplace=True)
-    g = sns.jointplot('EP', 'EW', df1, stat_func=None, kind='scatter', space=0)
+
+    # g = sns.jointplot('EP', 'EW', df1, stat_func=None, kind='scatter', space=0)
     # stackoverflow.com/questions/31539815/plotting-two-distributions-in-seaborn-jointplot
-    g.x = df2.EP
-    g.y = df2.EW
-    g.plot_joint(plt.scatter, c='r', s=30, alpha=0.6)
-    g.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
-    plt.show()
-    # plt.draw()
+    # g.x = df2.EP
+    # g.y = df2.EW
+    # g.plot_joint(plt.scatter, c='r', s=30, alpha=0.6)
+    # g.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
+    # plt.ylim(-5, 210)
+    # plt.show()
 
     # plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
     # fe1 = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
     # fe2 = pd.read_csv('%sFe2_PostSynth_rec.log' % p, delimiter=r'\s+')
-    # I = fits.getdata(p_spec)
-    # I /= np.median(I)
-    # I *= 40
-    # w = get_wavelength(fits.getheader(p_spec))
-    # w, I = w[(w>9500) & (w<25000)], I[(w>9500) & (w<25000)]
-    # plt.plot(w[::50], I[::50], '-k', alpha=0.3)
-    # plt.hist(fe1.wavelength, color=color[1], bins=30, label='FeI')
-    # plt.hist(fe2.wavelength, color=color[0], bins=20, label='FeII')
-    # plt.xlabel(r'Wavelength $\AA$', fontsize=24)
-    # plt.ylabel('Number of lines', fontsize=24)
-    # plt.title('Recalibrated iron lines', fontsize=26)
-    # plt.legend(loc=2, frameon=False)
-    # fig = plt.gcf()
+    I = fits.getdata(p_spec)
+    I /= np.median(I)
+    I *= 40
+    w = get_wavelength(fits.getheader(p_spec))
+    w, I = w[(w>9500) & (w<25000)], I[(w>9500) & (w<25000)]
+    plt.plot(w[::50], I[::50], '-k', alpha=0.3)
+    plt.hist(df1.wavelength, color=color[1], bins=30, label='FeI')
+    plt.hist(df2.wavelength, color=color[0], bins=20, label='FeII')
+    plt.xlabel(r'Wavelength $\AA$', fontsize=24)
+    plt.ylabel('Number of lines', fontsize=24)
+    plt.title('Recalibrated iron lines', fontsize=27)
+    plt.legend(loc=2, frameon=False)
+    fig = plt.gcf()
     # fig.subplots_adjust(bottom=0.15)
-    # plt.xticks(np.arange(8000, 26001, 3000), np.arange(8000, 26001, 3000))
-    # plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
+    plt.xticks(np.arange(8000, 26001, 3000), np.arange(8000, 26001, 3000))
+    plt.tight_layout()
+    plt.savefig('figures/EWvsEP_cut.pdf', format='pdf')
     # plt.show()
 
 
@@ -535,11 +536,11 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    # fig_abundance()
+    fig_abundance()
     # fig_EPcut_sun()
     # fig_HD20010_parameters()
     # fig_spectral_region()
-    fig_synthesis()
+    # fig_synthesis()
 
 
 if __name__ == '__main__':
