@@ -408,7 +408,7 @@ Fig~\ref{fig:Fe1_after_recal}.
 \subsection{Removal of unstable lines}
 \label{sub:removal_of_unstable_lines}
 
-We want to check the stability of the lines selected at thie point. The
+We want to check the stability of the lines selected at this point. The
 recipie for this is very simple. A Gaussian distribution is made for the
 EW of each line. We use the width for the Gaussian distribution following
 he formula presented in \citet{Caryel1988} presented below:
@@ -546,6 +546,15 @@ mean abundances for \ion{Fe}{i} and \ion{Fe}{ii} as used in e.g.
 \citet{Tsantaki2013,Sousa2008a}. With the minimization routine
 developed it is possible to fix the surface graviy at a constant value.
 
+The error estimated is based on the same method presented in \citet{Gonzalez1998}.
+The uncertainty in $\xi_\mathrm{micro}$ is determined from the standard deviation
+in the slope of abundance versus reduced equivalent width, the uncertainty of
+$T_\mathrm{eff}$ is determined from the uncertainty in the slope of abundance
+versus excitation potential in addition to the uncertainty in $\xi_\mathrm{micro}$,
+the uncertainty in the \ion{Fe} abundance is a combination of the uncertainties
+in $T_\mathrm{eff}$, $\xi_\mathrm{micro}$ and the scatter of the individual
+\ion{Fe}{i} abundances. The uncertainty in the surface gravity is based on
+the uncertainty in $T_\mathrm{eff}$ and the scatter in \ion{Fe}{ii} abundances.
 
 
 \section{Results}
@@ -607,14 +616,15 @@ was calibrate for the Sun.
       \hline\hline
         SNR & $T_\mathrm{eff}$ (K) & $\log g$ (cgs)  &       [Fe/H]     & $\xi_\mathrm{micro}$ (km/s)  \\
       \hline
-  Original  &    $5776 \pm ll$     & $4.43 \pm llll$ & $-0.00 \pm llll$ &     $0.98 \pm llll$          \\
+  Original  &  $5776 \pm 0$        & $4.43 \pm 0.00$ & $0.00 \pm 0.00$  & $0.99 \pm 0.00$              \\
       \hline
-        10  &    $5874 \pm 429$    & $4.92 \pm 0.20$ & $-0.05 \pm 0.13$ &     $4.75 \pm 2.05$          \\
-        25  &    $5795 \pm 89$     & $4.52 \pm 0.20$ & $-0.01 \pm 0.04$ &     $1.34 \pm 0.52$          \\
-        50  &    $5781 \pm 46$     & $4.45 \pm 0.08$ & $ 0.00 \pm 0.03$ &     $1.04 \pm 0.22$          \\
-       100  &    $5784 \pm 25$     & $4.44 \pm 0.04$ & $ 0.00 \pm 0.01$ &     $1.02 \pm 0.11$          \\
-       150  &    $5779 \pm 17$     & $4.43 \pm 0.04$ & $-0.00 \pm 0.03$ &     $1.03 \pm 0.17$          \\
-       300  &    $5776 \pm 10$     & $4.43 \pm 0.01$ & $ 0.00 \pm 0.00$ &     $0.99 \pm 0.08$          \\
+        10  &  $5870 \pm 222$      & $4.89 \pm 0.43$ & $-0.04 \pm 0.11$ & $4.71 \pm 2.01$              \\
+        25  &  $5808 \pm 119$      & $4.50 \pm 0.20$ & $0.00 \pm 0.06$  & $1.28 \pm 0.51$              \\
+        50  &  $5780 \pm 41$       & $4.45 \pm 0.09$ & $0.00 \pm 0.02$  & $1.06 \pm 0.26$              \\
+       100  &  $5776 \pm 22$       & $4.44 \pm 0.03$ & $0.00 \pm 0.01$  & $1.02 \pm 0.10$              \\
+       150  &  $5776 \pm 12$       & $4.44 \pm 0.02$ & $0.00 \pm 0.00$  & $1.01 \pm 0.09$              \\
+       225  &  $5779 \pm 10$       & $4.44 \pm 0.01$ & $0.00 \pm 0.00$  & $1.01 \pm 0.07$              \\
+       300  &  $5777 \pm 10$       & $4.43 \pm 0.02$ & $0.00 \pm 0.00$  & $1.01 \pm 0.06$              \\
       \hline
     \end{tabular}
 \end{table*}
@@ -738,7 +748,7 @@ high cut start to remove valuable information from the analysis, and
 therefore we expect worse results. This is exactly was is presented in
 Tab.~\ref{tab:hd20010} and Fig.~\ref{fig:HD20010_parameters_cuts}. We
 choose to cut at 5, 10, 15, and 20 \si{m\angstrom} respectively. The
-agreement with litterature is best at a $\SI{15}{m\angstrom}$ cut,
+agreement with litterature is best at a $\SI{10}{m\angstrom}$ cut,
 where we have removed lines affected by blends with tellurics.
 
 
@@ -747,34 +757,34 @@ where we have removed lines affected by blends with tellurics.
         were fixed at 4.00 for all calculations.}
     \label{tab:hd20010}
     \centering
-    \begin{tabular}{lllll}
+    \begin{tabular}{llllll}
       \hline\hline
-        EW cut (\si{m\angstrom}) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s) & [Fe/H]             \\
+        EW cut (\si{m\angstrom}) & $T_\mathrm{eff}$ (K) & $\log g$ (cgs)   & $\xi_\mathrm{micro}$ (km/s)  & [Fe/H]           \\
       \hline
-        Literature               & $6101        $       & $1.65         $             & $-0.26         $   \\
+        Literature               & $6101        $       & $4.00         $  & $1.65         $              & $-0.26         $ \\
       \hline
-        No cut                   & $6417 \pm 153$       & $5.03 \pm 0.06$             & $-0.17 \pm 0.36$   \\
-        5.0                      & $6437 \pm 209$       & $5.00 \pm 0.23$             & $-0.16 \pm 0.65$   \\
-       10.0                      & $6350 \pm 370$       & $5.00 \pm 1.39$             & $-0.17 \pm 2.35$   \\
-       15.0                      & $6040 \pm 237$       & $4.49 \pm 0.35$             & $-0.17 \pm 0.22$   \\
-       20.0                      & $5841 \pm 910$       & $5.00 \pm 4.10$             & $-0.20 \pm 2.58$   \\
+        0                        & $6307 \pm 329$       & $4.81 \pm 0.49$  & $9.11 \pm 1.21$              & $-0.06 \pm 0.20$ \\
+        5                        & $6253 \pm 278$       & $4.67 \pm 0.51$  & $4.61 \pm 2.09$              & $-0.06 \pm 0.20$ \\
+       10                        & $6086 \pm 654$       & $4.34 \pm 0.83$  & $3.73 \pm 2.70$              & $-0.11 \pm 0.38$ \\
+       15                        & $5824 \pm 283$       & $3.76 \pm 0.65$  & $3.67 \pm 1.02$              & $-0.21 \pm 0.20$ \\
+       20                        & $5655 \pm 261$       & $3.32 \pm 0.63$  & $4.42 \pm 1.58$              & $-0.31 \pm 0.23$ \\
       \hline
     \end{tabular}
 \end{table*}
 
 
 
-% \begin{figure}[tpb!]
-%     \centering
-%     \includegraphics[width=1.0\linewidth]{figures/HD20010_parameters_cuts.pdf}
-%     \caption{Atmospheric parameters for HD20010. In the top panel is
-%     the effective temperature. The middle panel is the iron abundance,
-%     and the bottom panel is the micro turbulence. The parameters are
-%     derived with different cuts in EW. Here the horizontal black lines
-%     are literature values. The parameters for the full line list are
-%     plotted to the right for all three plots.}
-%     \label{fig:HD20010_parameters_cuts}
-% \end{figure}
+\begin{figure}[tpb!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/HD20010_parameters_cuts.pdf}
+    \caption{Atmospheric parameters for HD20010. In the top panel is
+    the effective temperature. The middle panel is the iron abundance,
+    and the bottom panel is the micro turbulence. The parameters are
+    derived with different cuts in EW. Here the horizontal black lines
+    are literature values. The parameters for the full line list are
+    plotted to the right for all three plots.}
+    \label{fig:HD20010_parameters_cuts}
+\end{figure}
 
 
 
