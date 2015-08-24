@@ -784,13 +784,29 @@ iteratively untill there are no more outliers present.
     the effective temperature. The middle panel is the iron abundance,
     and the bottom panel is the micro turbulence. The parameters are
     derived with different cuts in EW. Here the horizontal black lines
-    are literature values, and the shaded area shows the $3 \sigma$ standard
+    are literature values, and the shaded area shows the $3\sigma$ standard
     deviation calculated from the litterature values. The parameters for
     the full line list are plotted to the right for all three plots.}
     \label{fig:HD20010_parameters_cuts}
 \end{figure}
 
 
+The errors on the atmospheric parameters for HD20010 are quite high
+compared to what is achievable with other measurements in the litterature,
+as presented above. In order to explain these large errors, we calculate
+the abundances for all lines which have at least two measurements of the EW.
+We then calculate the abundances for the highest measured EW and the lowest.
+The difference is presented in Fig.~\ref{fig:abundance_error}. Here we see
+some very large differences, which translates to the high errors in the parameters.
+
+\begin{figure}[tpb!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/abundance_error.pdf}
+    \caption{The difference in abundance for lines in HD20010 which have at
+    least two measurements of EW. The difference is calculated between the
+    highest measured EW and the lowest. For the line list used for HD20010
+    we used the mean of all measurements available.}
+\end{figure}
 
 
 \section{Conclusion}
@@ -803,7 +819,8 @@ calibrated for the same, we tested it extensively for the slightly
 hotter star, HD20010. The first results with this line list are
 promising. We also show that for a spectrum that contain telluric
 lines best results appear when removing lines with a low EW around
-$\SI{15}{m\angstrom}$.
+$\SI{10}{m\angstrom}$. However, we need more high quality spectra
+to test the line list presented.
 
 The line list still remains to be tested for a larger sample of FGK
 stars. Furthermore, it will be interesting to explore the use of this
