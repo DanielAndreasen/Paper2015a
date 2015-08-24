@@ -22,11 +22,11 @@ from astropy import units as u
 from plot_fits import get_wavelength
 
 
-matplotlib.rc('xtick', labelsize=24)
-matplotlib.rc('ytick', labelsize=24)
+matplotlib.rc('xtick', labelsize=17)
+matplotlib.rc('ytick', labelsize=17)
 params = {'legend.fontsize': 24}
 matplotlib.rcParams.update(params)
-matplotlib.rcParams.update({'font.size': 24})
+matplotlib.rcParams.update({'font.size': 17})
 
 
 def fig_abundance(fout=None):
@@ -248,35 +248,42 @@ def fig_HD20010_parameters():
     Derived parameters for HD20010 at different cuts in EW
     """
 
-    df = pd.read_csv('HD20010_params_EWcut.dat')
+    df = pd.read_csv('HD20010_params_EWcut_fixlogg_3sigma.dat')
     c = sns.color_palette()
 
     fig = plt.figure()
     ax1 = fig.add_subplot(311)
     plt.setp(ax1.get_xticklabels(), visible=False)
     ax1.errorbar(df.EW, df.Teff, yerr=df.Tefferr, fmt='o', color=c[0])
+    ax1.fill_between([0, 20], [6101-182]*2, [6101+182]*2, color='k', alpha=0.2, edgecolor='w')
     ax1.hlines(6101, 0, 20, linestyle='--')
     ax1.set_xlim(-1, 21)
+    ax1.set_ylim(5800, 7800)
     ax1.set_ylabel('Teff [K]')
 
     ax2 = fig.add_subplot(312)
     plt.setp(ax2.get_xticklabels(), visible=False)
     ax2.errorbar(df.EW, df.feh, yerr=df.feherr, fmt='o', color=c[1])
+    ax2.fill_between([0, 20], [-0.26-0.14]*2, [-0.26+0.14]*2, color='k', alpha=0.2, edgecolor='w')
     ax2.hlines(-0.26, 0, 20, linestyles='--')
     ax2.set_xlim(-1, 21)
+    ax2.set_ylim(-1.5, 1.5)
     ax2.set_ylabel('[Fe/H]')
 
     ax3 = fig.add_subplot(313)
     plt.setp(ax3, xticks=[0, 5, 10, 15, 20], xticklabels=['No cut', 5, 10, 15, 20])
     ax3.errorbar(df.EW, df.vt, yerr=df.vterr, fmt='o', color=c[2])
+    ax3.fill_between([0, 20], [1.65-0.15]*2, [1.65+0.15]*2, color='k', alpha=0.2, edgecolor='w')
     ax3.hlines(1.65, 0, 20, linestyles='--')
     ax3.set_xlim(-1, 21)
+    ax3.set_ylim(1, 5)
+    ax3.set_yticks(range(1, 6))
     ax3.set_xlabel(r'EW cuts [m$\AA$]')
     ax3.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
 
     plt.tight_layout()
-    # plt.show()
-    plt.savefig('figures/HD20010_parameters_cuts.pdf')
+    plt.show()
+    # plt.savefig('figures/HD20010_parameters_cuts.pdf')
 
 
 def fig_spectral_region():
