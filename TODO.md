@@ -6,7 +6,7 @@
 
 ## From Sérgio
     + Include FeII in fig. 3
-    - Justify the large errors for HD20010
+    + Justify the large errors for HD20010
 
 
 ## From Bárbara
