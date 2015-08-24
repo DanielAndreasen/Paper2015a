@@ -666,9 +666,10 @@ from analysis of both neutral and singly ionized iron lines, and the
 surface gravity was derived from mass estimates based on theoretical
 isohcornes analysis and trigonometric \emph{Hipparcos} parallaxes. The
 above works are just few of many studies of this star. We compare our
-result for this star with the mean of the above mentioned results,
-which yield: $T_\mathrm{eff} = 6101\si{K}$, $\log(g) = 4.00$ dex,
-$\xi_\mathrm{micro} = 1.65\si{km/s}$, and [Fe/H]=$-0.26$.
+result for this star with the mean and $3 \sigma$ standard deviation of
+the above mentioned results, which yield: $T_\mathrm{eff} = 6101\pm182\si{K}$,
+$\log(g) = 4.00\pm0.33$ dex, $\xi_\mathrm{micro} = 1.65\pm0.15\si{km/s}$, and
+[Fe/H]=$-0.26\pm0.14$ dex.
 
 The data available at CRIRES-POP is currently pipeline reduced, while
 three small pieces of the spectra are fully reduced on
@@ -744,30 +745,32 @@ telluric contamination, we make four cuts in EW and remove lines below
 these thresholds before deriving parameters again. Since the relative
 affect by tellurics are larger for weak lines we expect to obtain
 parameters in better agreement with the litterature. However, a too
-high cut start to remove valuable information from the analysis, and
+high cut start to remove valuable information from the derivation, and
 therefore we expect worse results. This is exactly was is presented in
 Tab.~\ref{tab:hd20010} and Fig.~\ref{fig:HD20010_parameters_cuts}. We
 choose to cut at 5, 10, 15, and 20 \si{m\angstrom} respectively. The
 agreement with litterature is best at a $\SI{10}{m\angstrom}$ cut,
 where we have removed lines affected by blends with tellurics.
+At each cut we make a $3 \sigma$ outlier removal in the abundance
+iteratively untill there are no more outliers present.
 
 
 \begin{table*}[htb!]
-    \caption{The derived parameters for HD20010 at different EW cut. $\log g$
-        were fixed at 4.00 for all calculations.}
+    \caption{The derived parameters for HD20010 at different EW cut after 3$\sigma$ outlier removal.
+    $\log g$ were fixed at 4.00 for all calculations.}
     \label{tab:hd20010}
     \centering
-    \begin{tabular}{llllll}
+    \begin{tabular}{lllll}
       \hline\hline
-        EW cut (\si{m\angstrom}) & $T_\mathrm{eff}$ (K) & $\log g$ (cgs)   & $\xi_\mathrm{micro}$ (km/s)  & [Fe/H]           \\
+        EW cut (\si{m\angstrom}) & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s)  & [Fe/H]           \\
       \hline
-        Literature               & $6101        $       & $4.00         $  & $1.65         $              & $-0.26         $ \\
+        Literature               & $6101 \pm 182$       & $1.65 \pm0.15$              & $-0.26 \pm 0.14$ \\
       \hline
-        0                        & $6307 \pm 329$       & $4.81 \pm 0.49$  & $9.11 \pm 1.21$              & $-0.06 \pm 0.20$ \\
-        5                        & $6253 \pm 278$       & $4.67 \pm 0.51$  & $4.61 \pm 2.09$              & $-0.06 \pm 0.20$ \\
-       10                        & $6086 \pm 654$       & $4.34 \pm 0.83$  & $3.73 \pm 2.70$              & $-0.11 \pm 0.38$ \\
-       15                        & $5824 \pm 283$       & $3.76 \pm 0.65$  & $3.67 \pm 1.02$              & $-0.21 \pm 0.20$ \\
-       20                        & $5655 \pm 261$       & $3.32 \pm 0.63$  & $4.42 \pm 1.58$              & $-0.31 \pm 0.23$ \\
+               5                 & $6660 \pm 190$       & $3.33 \pm 0.43$              & $0.19 \pm 1.35$  \\
+               0                 & $6590 \pm 149$       & $4.05 \pm 0.43$              & $0.13 \pm 1.16$  \\
+              10                 & $6556 \pm 230$       & $2.57 \pm 0.37$              & $0.17 \pm 1.12$  \\
+              15                 & $7304 \pm 320$       & $3.58 \pm 0.64$              & $0.54 \pm 3.63$  \\
+              20                 & $6960 \pm 297$       & $3.48 \pm 0.76$              & $0.35 \pm 3.15$  \\
       \hline
     \end{tabular}
 \end{table*}
@@ -781,8 +784,9 @@ where we have removed lines affected by blends with tellurics.
     the effective temperature. The middle panel is the iron abundance,
     and the bottom panel is the micro turbulence. The parameters are
     derived with different cuts in EW. Here the horizontal black lines
-    are literature values. The parameters for the full line list are
-    plotted to the right for all three plots.}
+    are literature values, and the shaded area shows the $3 \sigma$ standard
+    deviation calculated from the litterature values. The parameters for
+    the full line list are plotted to the right for all three plots.}
     \label{fig:HD20010_parameters_cuts}
 \end{figure}
 
