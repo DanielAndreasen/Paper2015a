@@ -22,8 +22,8 @@ from astropy import units as u
 from plot_fits import get_wavelength
 
 
-matplotlib.rc('xtick', labelsize=17)
-matplotlib.rc('ytick', labelsize=17)
+matplotlib.rc('xtick', labelsize=20)
+matplotlib.rc('ytick', labelsize=20)
 params = {'legend.fontsize': 24}
 matplotlib.rcParams.update(params)
 matplotlib.rcParams.update({'font.size': 17})
@@ -282,8 +282,8 @@ def fig_HD20010_parameters():
     ax3.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
 
     plt.tight_layout()
-    plt.show()
-    # plt.savefig('figures/HD20010_parameters_cuts.pdf')
+    # plt.show()
+    plt.savefig('figures/HD20010_parameters_cuts.pdf')
 
 
 def fig_spectral_region():
