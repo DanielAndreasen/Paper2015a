@@ -255,8 +255,8 @@ def fig_HD20010_parameters():
     ax1 = fig.add_subplot(311)
     plt.setp(ax1.get_xticklabels(), visible=False)
     ax1.errorbar(df.EW, df.Teff, yerr=df.Tefferr, fmt='o', color=c[0])
-    ax1.fill_between([0, 20], [6101-182]*2, [6101+182]*2, color='k', alpha=0.2, edgecolor='w')
-    ax1.hlines(6101, 0, 20, linestyle='--')
+    ax1.fill_between([0, 20], [6131-255]*2, [6131+255]*2, color='k', alpha=0.2, edgecolor='w')
+    ax1.hlines(6131, 0, 20, linestyle='--')
     ax1.set_xlim(-1, 21)
     ax1.set_ylim(5800, 7800)
     ax1.set_ylabel('Teff [K]')
@@ -264,8 +264,8 @@ def fig_HD20010_parameters():
     ax2 = fig.add_subplot(312)
     plt.setp(ax2.get_xticklabels(), visible=False)
     ax2.errorbar(df.EW, df.feh, yerr=df.feherr, fmt='o', color=c[1])
-    ax2.fill_between([0, 20], [-0.26-0.14]*2, [-0.26+0.14]*2, color='k', alpha=0.2, edgecolor='w')
-    ax2.hlines(-0.26, 0, 20, linestyles='--')
+    ax2.fill_between([0, 20], [-0.23-0.14]*2, [-0.23+0.14]*2, color='k', alpha=0.2, edgecolor='w')
+    ax2.hlines(-0.23, 0, 20, linestyles='--')
     ax2.set_xlim(-1, 21)
     ax2.set_ylim(-1.5, 1.5)
     ax2.set_ylabel('[Fe/H]')
@@ -273,8 +273,8 @@ def fig_HD20010_parameters():
     ax3 = fig.add_subplot(313)
     plt.setp(ax3, xticks=[0, 5, 10, 15, 20], xticklabels=['No cut', 5, 10, 15, 20])
     ax3.errorbar(df.EW, df.vt, yerr=df.vterr, fmt='o', color=c[2])
-    ax3.fill_between([0, 20], [1.65-0.15]*2, [1.65+0.15]*2, color='k', alpha=0.2, edgecolor='w')
-    ax3.hlines(1.65, 0, 20, linestyles='--')
+    ax3.fill_between([0, 20], [1.90-1.08]*2, [1.90+1.08]*2, color='k', alpha=0.2, edgecolor='w')
+    ax3.hlines(1.90, 0, 20, linestyles='--')
     ax3.set_xlim(-1, 21)
     ax3.set_ylim(1, 5)
     ax3.set_yticks(range(1, 6))
@@ -282,8 +282,8 @@ def fig_HD20010_parameters():
     ax3.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s]')
 
     plt.tight_layout()
-    # plt.show()
-    plt.savefig('figures/HD20010_parameters_cuts.pdf')
+    plt.show()
+    # plt.savefig('figures/HD20010_parameters_cuts.pdf')
 
 
 def fig_spectral_region():
