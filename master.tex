@@ -724,23 +724,28 @@ lines and 13 \ion{Fe}{ii} lines for the Sun over the whole NIR spectral
 region. Whenever we had more than one measurement of a line, the average
 was used for the final EW.
 
-We derived the stellar parameters using the standard procedure
-(see Sect.~\ref{sec:deriving_parameters_with_the_ew_method}) as
-done for the Sun. The final derived parameters for the full line
-list are overestimated compared to literature values listed above.
-Therefore, since the spectrum for HD20010 is not corrected for
-telluric contamination, we make a cut in EW at 5\si{m\angstrom},
-in order to remove the lines which are mostly affected by contamination
-from either telluric or other line blends. Additionally, we make a cut
-in EP at \SI{5.5}{eV}. We make this cut since \ion{Fe}{i} and \ion{Fe}{ii}
-lines in the optical are also limited to similar
-values \citep[see e.g.][]{Sousa2008a}. Higher excitation potential lines
-are also more likely to be affected by non-LTE effects.
-When deriving the atmospheric parameters, we make a $3 \sigma$ outlier
-removal in the abundance iteratively untill there are no more outliers present.
-The results for both with and without the EP cut is presented in Tab.~\ref{tab:hd20010}.
-With the cut in EP the only parameter we overestimate is the micro turbulence.
-The effective temperature and metallicity agree within the errors.
+We derived the stellar parameters using the standard procedure (see
+Sect.~\ref{sec:deriving_parameters_with_the_ew_method})as done for the Sun.
+Given the relatively low quality of the spectrum of HD20010 (see below) and due
+to the fact that it is not corrected for telluric contamination, we make a
+cut in EW at 5\si{m\angstrom}, in order to remove the lines which are mostly
+affected by contamination from either telluric or other line blends. Additionally,
+we make a cut in EP at \SI{5.5}{eV}. We make this cut since the \ion{Fe}{i} and
+\ion{Fe}{ii} lines usually used for stellar parameter determination in the
+optical regime are also limited to similar values \citep[see e.g.][]{Sousa2008a}.
+Higher excitation potential lines are also more likely to be affected by
+non-LTE effects\footnote{We also tested to derive the stellar parameters without
+any cut in the EP, but the resulting values were always overestimated (e.g.,
+fixing logg to 4.01 we obtained a temperature of 6660K and metallicity of
++0.19 dex).}. When deriving the atmospheric parameters, we make a $3 \sigma$
+outlier removal in the abundance iteratively until there are no more outliers
+present. Since we could only measure 5 \ion{Fe}{ii} lines, for comparison we
+also decided to derive parameters using the same method, but fixing the surface
+gravity to the average literature value. The resulting atmospheric parameters
+and iron abundances are presented in Tab.~\ref{tab:hd20010}. As can be seen from the table,
+the effective temperature, surface gravity, and metallicity agree within the errors with the
+literature values. Similar parameters are obtained by fixing logg to the
+average literature value or by letting it free.
 
 \begin{table*}[htb!]
     \caption{The derived parameters for HD20010 with and without the
@@ -749,14 +754,12 @@ The effective temperature and metallicity agree within the errors.
     \centering
     \begin{tabular}{lllll}
       \hline\hline
-        EP cut       & $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)  &   $\xi_\mathrm{micro}$ (km/s)  & [Fe/H]           \\
+                     & $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)  &   $\xi_\mathrm{micro}$ (km/s)  & [Fe/H]           \\
       \hline
-        Literature   & $6101 \pm 182$       &                  &    $1.65 \pm0.15$               & $-0.26 \pm 0.14$ \\
+        Literature   & $6101 \pm 182$       &  $4.01 \pm 0.60$ &    $1.65 \pm 0.15$              & $-0.26 \pm 0.14$ \\
       \hline
-            No       & $6414 \pm 147$       &  $4.93 \pm 0.55$ &    $1.41 \pm 0.41$              & $ 0.05 \pm 0.09$ \\
-            No       & $6660 \pm 190$       &  4.01 (fixed)    &    $3.33 \pm 0.43$              & $ 0.19 \pm 1.35$ \\
-            Yes      & $6116 \pm 224$       &  $4.21 \pm 0.58$ &    $2.45 \pm 0.45$              & $-0.14 \pm 0.14$ \\
-            Yes      & $6144 \pm 212$       &  4.01 (fixed)    &    $2.66 \pm 0.42$              & $-0.13 \pm 0.29$ \\
+                     & $6116 \pm 224$       &  $4.21 \pm 0.58$ &    $2.45 \pm 0.45$              & $-0.14 \pm 0.14$ \\
+                     & $6144 \pm 212$       &  4.01 (fixed)    &    $2.66 \pm 0.42$              & $-0.13 \pm 0.29$ \\
       \hline
     \end{tabular}
 \end{table*}
