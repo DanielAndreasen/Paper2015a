@@ -29,36 +29,38 @@ matplotlib.rcParams.update(params)
 matplotlib.rcParams.update({'font.size': 17})
 
 
-def fig_abundance(fout=None):
-    """Figures of abundance before and after recalibration
-
-    :fname: Name of input file
-    :mean: mean value of abundance
-    :fout: file name the figures should be written to
-    """
+def fig_EWvsEP(fout=None):
+    """Figures of EW vs EP"""
 
     p = '../../../programs/moog/results/'
-    p_spec = '/home/daniel/Documents/Uni/phdproject/data/atlas/BASS2000/solarspectrum_01.fits'
-    color = sns.color_palette()
 
     df1 = pd.read_csv('figures/Fe1.dat', delimiter=r'\s+')
     df1.rename(columns={'abund': 'Abundance'}, inplace=True)
     df2 = pd.read_csv('figures/Fe2.dat', delimiter=r'\s+')
     df2.rename(columns={'abund': 'Abundance'}, inplace=True)
 
-    # g = sns.jointplot('EP', 'EW', df1, stat_func=None, kind='scatter', space=0)
+    g = sns.jointplot('EP', 'EW', df1, stat_func=None, kind='scatter', space=0)
     # stackoverflow.com/questions/31539815/plotting-two-distributions-in-seaborn-jointplot
-    # g.x = df2.EP
-    # g.y = df2.EW
-    # g.plot_joint(plt.scatter, c='r', s=30, alpha=0.6)
-    # g.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
-    # plt.ylim(-5, 210)
-    # plt.show()
+    g.x = df2.EP
+    g.y = df2.EW
+    g.plot_joint(plt.scatter, c='r', s=30, alpha=0.6)
+    g.set_axis_labels(xlabel='Excitation potential [eV]', ylabel=r'EW [m$\AA$]')
+    plt.ylim(-5, 210)
+    plt.show()
 
-    # plt.savefig('figures/EWvsEP.pdf', format='pdf')
+    plt.savefig('figures/EWvsEP.pdf', format='pdf')
 
-    # fe1 = pd.read_csv('%sFe1_PostSynth_cut.log' % p, delimiter=r'\s+')
-    # fe2 = pd.read_csv('%sFe2_PostSynth_rec.log' % p, delimiter=r'\s+')
+
+def fig_solarspectrum():
+    """Figure of the solar spectrum with the distribution of iron lines on top"""
+    color = sns.color_palette()
+    p_spec = '/home/daniel/Documents/Uni/phdproject/data/atlas/BASS2000/solarspectrum_01.fits'
+    p = '../../../programs/moog/results/'
+    df1 = pd.read_csv('figures/Fe1.dat', delimiter=r'\s+')
+    df1.rename(columns={'abund': 'Abundance'}, inplace=True)
+    df2 = pd.read_csv('figures/Fe2.dat', delimiter=r'\s+')
+    df2.rename(columns={'abund': 'Abundance'}, inplace=True)
+
     I = fits.getdata(p_spec)
     I /= np.median(I)
     I *= 40
@@ -79,168 +81,86 @@ def fig_abundance(fout=None):
     # plt.show()
 
 
-def fig_EPcut_sun(fout=None):
-    """Figure for the parameters of the Sun as function of the cut in EP
+def fig_solarparams():
+    '''Solar parameters at different SNR'''
+    df = pd.read_csv('solar_snr_params.dat', delimiter=r'\s+')
+    snrs = sorted(list(set(df.SNR)))
+    params = np.zeros((len(snrs), 9))
 
-    :fname: file name with result
-    :fout: File name figure is written to
-    """
+    fig = plt.figure()
+    for i, snr in enumerate(snrs):
+        # Teff
+        t = np.mean(df['Teff'][df.SNR == snr])
+        s = 3*np.std(df['Teff'][df.SNR == snr])
+        ax1 = fig.add_subplot(221)
+        ax1.errorbar(snr, t-5777, yerr=s, fmt='ok')
+        ax1.set_xticklabels([])
+        params[i, 0] = snr
+        params[i, 1] = t
+        params[i, 2] = s
 
-    def get_params(fname):
-        with open(fname, 'r') as lines:
-            line = lines.readline()
-            while True:
-                if line.startswith('#') or line.startswith('Wavelength'):
-                    line = lines.readline()
-                    break
-                else:
-                    line = lines.readline()
-            line = line.strip().split()
-        T = int(line[1])
-        logg = float(line[4])
-        vt = float(line[6])
-        if len(line) == 8:
-            feh = float(line[-1][4:])
-        else:
-            feh = float(line[-1])
-        return T, logg, vt, feh
+        # logg
+        t = np.mean(df['logg'][df.SNR == snr])
+        s = 3*np.std(df['logg'][df.SNR == snr])
+        ax2 = fig.add_subplot(222)
+        plt.errorbar(snr, t-4.438, yerr=s, fmt='ok')
+        ax2.set_xticklabels([])
+        params[i, 3] = t
+        params[i, 4] = s
 
+        # feh
+        t = np.mean(df['feh'][df.SNR == snr])
+        s = 3*np.std(df['feh'][df.SNR == snr])
+        ax3 = fig.add_subplot(223)
+        ax3.errorbar(snr, t, yerr=s, fmt='ok')
+        params[i, 5] = t
+        params[i, 6] = s
 
-    def plot_result(data, xlabel=None, ylabel=None, solar=None, color=None):
-        ep, y = data
-        plt.errorbar(5.0, np.mean(y[ep==5.0]), yerr=np.std(y[ep==5.0]), marker='o', color=color)
-        plt.errorbar(5.5, np.mean(y[ep==5.5]), yerr=np.std(y[ep==5.5]), marker='o', color=color)
-        plt.errorbar(6.0, np.mean(y[ep==6.0]), yerr=np.std(y[ep==6.0]), marker='o', color=color)
-        sns.regplot(ep[ep!=6.0], y[ep!=6.0], x_estimator=np.mean, truncate=True, color=color, scatter=False)
-        plt.xticks([5.0, 5.5, 6.0], ['5.0', '5.5', 'No cut'])
-        if ylabel:
-            plt.ylabel(ylabel, fontsize=24)
-        if solar:
-            plt.hlines(solar, 5.0, 6.0)
-        plt.xlim(4.95, 6.05)
+        # vt
+        t = np.mean(df['vt'][df.SNR == snr])
+        s = 3*np.std(df['vt'][df.SNR == snr])
+        ax4 = fig.add_subplot(224)
+        ax4.errorbar(snr, t-1.0, yerr=s, fmt='ok')
+        params[i, 7] = t
+        params[i, 8] = s
 
+    # for i in range(params.shape[0]):
+    #     print "{0:.0f} &  ${1:.0f} \\pm {2:.0f}$  & ${3:.2f} \\pm {4:.2f}$ & ${5:.2f} \\pm {6:.2f}$ & ${7:.2f} \\pm {8:.2f}$ \\\\".format(*params[i, :])
 
-    def get_run(fname):
-        tmp = fname[::-1]
-        n = tmp.find('N')
-        if tmp[n+2] == '10':
-            return 10
-        else:
-            return int(tmp[n+1])
+    ax1.grid(True)
+    ax1.set_ylabel('Teff [K] - 5777K')
+    ax1.set_xlim((15, 320))
+    ax1.set_ylim(-100, 200)
+    ax1.set_xticks([25, 50, 100, 150, 225, 300])
 
-    # results1: initial (5777, 4.44, 0.00, 1.00)
-    # results2: initial (5777, 4.44, 0.10, 1.00)
-    p = '/home/daniel/Software/SPECPAR/Sun/snr_results2/'
-    files = glob(p + 'Out_moog*.moog')
-    N = len(files)
-    data = np.empty((N, 7))
-    data[:, 5] = 6.0
-
-    eps = [5.0, 5.5]
-    snrs = [100, 300]
-    for i, file in enumerate(files):
-        if 'SNR' not in file:
-            solar = get_params(file)
-            # Skip the original line list
-            continue
-        if 'b' in file:
-            # Skip file, it it didn't converge
-            continue
-        T, logg, vt, feh = get_params(file)
-        run = get_run(file)
-        data[i, 0] = run
-        data[i, 1] = T
-        data[i, 2] = logg
-        data[i, 3] = vt
-        data[i, 4] = feh
-        for ep in eps:
-            if str(ep) in file:
-                data[i, 5] = float(ep)
-        for snr in snrs:
-            if str(snr) in file:
-                data[i, 6] = snr
-
-    run, T, logg, vt, feh, epcut, snr = data.T
-
-    # Divide in SNR and make sure the file converged
-    i1 = (snr == 100) & (T > 100)
-    i2 = (snr == 300) & (T > 100)
-    color = sns.color_palette()
-
-    ax1 = plt.subplot(221)
-    plot_result(data=(epcut[i1], T[i1]), ylabel=r'$\mathrm{T_{eff}}$', solar=solar[0], color=color[0])
-    plot_result(data=(epcut[i2], T[i2]), solar=solar[0], color=color[1])
-    ax1.set_ylim(solar[0]-40, solar[0]+20)
-
-    ax2 = plt.subplot(222, sharex=ax1)
+    ax2.grid(True)
     ax2.yaxis.tick_right()
-    ax2.yaxis.set_label_position('left')
-    plot_result(data=(epcut[i1], logg[i1]), solar=solar[1], color=color[0])
-    plot_result(data=(epcut[i2], logg[i2]), ylabel=r'$\log(g)$', solar=solar[1], color=color[1])
-    ax2.set_ylim(solar[1]-0.07, solar[1]+0.07)
+    ax2.yaxis.set_label_position('right')
+    ax2.set_ylabel('logg - 4.438')
+    ax2.set_xlim((15, 320))
+    ax2.set_ylim(-0.3, 0.3)
+    ax2.set_xticks([25, 50, 100, 150, 225, 300])
 
-    ax3 = plt.subplot(223, sharex=ax1)
-    plot_result(data=(epcut[i1], vt[i1]), solar=solar[2], color=color[0])
-    plot_result(data=(epcut[i2], vt[i2]), ylabel=r'$\xi_\mathrm{micro}$', solar=solar[2], color=color[1])
-    ax3.set_ylim(solar[2]-0.06, solar[2]+0.16)
+    ax3.grid(True)
+    ax3.set_ylabel('[Fe/H]')
+    ax3.set_xlabel('SNR')
+    ax3.set_xlim((15, 320))
+    ax3.set_ylim(-0.1, 0.1)
+    ax3.set_xticks([25, 50, 100, 150, 225, 300])
 
-    ax4 = plt.subplot(224, sharex=ax1)
+    ax4.grid(True)
     ax4.yaxis.tick_right()
-    ax4.yaxis.set_label_position('left')
-    plot_result(data=(epcut[i1], feh[i1]), solar=solar[3], color=color[0])
-    plot_result(data=(epcut[i2], feh[i2]), ylabel='[Fe/H]', solar=solar[3], color=color[1])
-    plt.hlines(0.0, 5.0, 6.0)
-    ax4.set_ylim(solar[3]-0.025, solar[3]+0.015)
+    ax4.yaxis.set_label_position('right')
+    ax4.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s] - 1.0km/s')
+    ax4.set_xlabel('SNR')
+    ax4.set_xlim((15, 320))
+    ax4.set_ylim(-1, 1)
+    ax4.set_xticks([25, 50, 100, 150, 225, 300])
 
-    fig = plt.gcf()
-    fig.subplots_adjust(top=0.95)
-    fig.subplots_adjust(right=0.87)
-    fig.subplots_adjust(bottom=0.06)
-    plt.savefig('figures/solar_parameters_10runs.pdf', format='pdf')
-    # plt.savefig('figures/solar.png', format='png')
+
+    plt.tight_layout()
+    plt.savefig('figures/solar_parameters_snr.pdf')
     # plt.show()
-
-    # d = data
-    # d = d[d[:,1] > 100]  # Remove the non-converged results
-    # # Divide in the two SNR
-    # is100 = d[:, 6] == 100
-    # is300 = d[:, 6] == 300
-    # s1 = d[is100, :]
-    # s3 = d[is300, :]
-
-    # eps = (5.0, 5.5, 6.0)
-
-    # t = np.empty((6, 10))
-    # for i, ep in enumerate(eps):
-    #     j = s1[:, 5] == ep
-    #     t[i, 0] = ep
-    #     t[i, 1] = 100
-    #     t[i, 2] = np.mean(s1[j, 1])
-    #     t[i, 3] = 3*np.std(s1[j, 1])
-    #     t[i, 4] = np.mean(s1[j, 2])
-    #     t[i, 5] = 3*np.std(s1[j, 2])
-    #     t[i, 6] = np.mean(s1[j, 3])
-    #     t[i, 7] = 3*np.std(s1[j, 3])
-    #     t[i, 8] = np.mean(s1[j, 4])
-    #     t[i, 9] = 3*np.std(s1[j, 4])
-
-    # for i, ep in enumerate(eps):
-    #     i += 3
-    #     j = s1[:, 5] == ep
-    #     t[i, 0] = ep
-    #     t[i, 1] = 300
-    #     t[i, 2] = np.mean(s3[j, 1])
-    #     t[i, 3] = 3*np.std(s3[j, 1])
-    #     t[i, 4] = np.mean(s3[j, 2])
-    #     t[i, 5] = 3*np.std(s3[j, 2])
-    #     t[i, 6] = np.mean(s3[j, 3])
-    #     t[i, 7] = 3*np.std(s3[j, 3])
-    #     t[i, 8] = np.mean(s3[j, 4])
-    #     t[i, 9] = 3*np.std(s3[j, 4])
-
-    # fmt = ['%.1f', '%i', '%i', '%i', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f']
-    # np.savetxt('table_sun_new.dat', t, fmt=fmt, delimiter=' & ',
-    #         newline='\\\\\n')
 
 
 def fig_HD20010_parameters():
@@ -284,39 +204,6 @@ def fig_HD20010_parameters():
     plt.tight_layout()
     plt.show()
     # plt.savefig('figures/HD20010_parameters_cuts.pdf')
-
-
-def fig_spectral_region():
-    """
-    Plot a high Teff synthetic spectra and a low Teff synthetic spectra
-    """
-
-    pth = '/home/daniel/Documents/Uni/phdproject/data/HD20010/article/figures/'
-    suffix = '.PHOENIX-ACES-AGSS-COND-2011-HiRes.fits'
-    w = fits.getdata('%sWAVE_PHOENIX-ACES-AGSS-COND-2011.fits' % pth)
-    i = w <= 20000
-    fl = fits.getdata('%slte02700-4.50-0.0%s' % (pth, suffix))[i]
-    fm = fits.getdata('%slte03500-4.00-0.0%s' % (pth, suffix))[i]
-    fh = fits.getdata('%slte06200-4.00-0.0%s' % (pth, suffix))[i]
-    h = fits.getheader('%slte02700-4.50-0.0%s' % (pth, suffix))
-
-    r = 500
-    w = w[i][::r]
-    fl = fl[::r]
-    fm = fm[::r]
-    fh = fh[::r]
-
-    plt.plot(w, fh, label=r'$T_\mathrm{eff}=6200\mathrm{K, }\log g=4.00$')
-    plt.plot(w, fm*1e1, label=r'$T_\mathrm{eff}=3500\mathrm{K, }\log g=4.00$')
-    plt.plot(w, fl*1e1, label=r'$T_\mathrm{eff}=2700\mathrm{K, }\log g=4.50$')
-
-    plt.xlabel(r'$\lambda$ Angstrom')
-    plt.ylabel(r'Flux erg/(s cm$^2$ cm)')
-    plt.legend(loc='best', frameon=False)
-    plt.xlim(1000, 20000)
-
-    plt.savefig('figures/spectral_region.pdf', format='pdf')
-    # plt.show()
 
 
 def fig_synthesis():
@@ -400,10 +287,10 @@ def fig_synthesis():
 def main():
     """Main function
     """
-    # fig_abundance()
-    # fig_EPcut_sun()
+    # fig_EWvsEP()
+    # fig_solarspectrum()
+    # fig_solarparams()
     fig_HD20010_parameters()
-    # fig_spectral_region()
     # fig_synthesis()
 
 
