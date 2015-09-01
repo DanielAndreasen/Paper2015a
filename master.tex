@@ -27,19 +27,19 @@
 
 
 \author{ D.~T.~Andreasen\inst{1,2}
-    \and S.~G.~Sousa\inst{1,2}
-    \and E.~Delgado Mena\inst{1,2}
+    \and S.~G.~Sousa\inst{1}
+    \and E.~Delgado Mena\inst{1}
     \and N.~C.~Santos\inst{1,2}
-    \and M.~Tsantaki\inst{1,2}
+    \and M.~Tsantaki\inst{1}
     \and B.~Rojas-Ayala\inst{1}
     \and V.~Neves\inst{3}}
 
 
 \institute{
-Instituto de Astrof\'isica e Ci\^encias do Espa\c{c}o, Universidade do Porto, CAUP, Rua das Estrelas, PT4150-762 Porto, Portugal
+Instituto de Astrof\'isica e Ci\^encias do Espa\c{c}o, Universidade do Porto, CAUP, Rua das Estrelas, 4150-762 Porto, Portugal
 \email{daniel.andreasen@astro.up.pt}
 \and
-Departamento de F\'isica e Astronom\'ia, Faculdade de Ci\^encias, Universidade do Porto, Portugal
+Departamento de F\'isica e Astronomia, Faculdade de Ci\^encias, Universidade do Porto, Rua Campo Alegre, 4169-007 Porto, Portugal
 \and
 Departamento de F\'{i}sica, Universidade Federal do Rio Grande do Norte, 59072-970 Natal, RN, Brazil
 }
@@ -81,7 +81,8 @@ Furthermore, we analysed
 HD20010, a F8IV star, from which we derived stellar atmospheric
 parameters. The spectrum was obtained from the CRIRES-POP database.
 The results are compatible with the ones found in the literature,
-confirming the reliability of our line-list.}
+confirming the reliability of our line-list. However, we get high
+errors mainly due to the quality of the spectrum at this stage.}
 % Conclusions
 {}
 
@@ -204,16 +205,16 @@ input model for MOOG, we expect to retrieve the same abundances for
 every spectral line of the same element when the best atmospheric
 parameters are chosen. Here we use neutral iron and single ionized
 iron: \ion{Fe}{i} and \ion{Fe}{ii}, respectively, which are also used
-to fix the surface gravity by achieving ionization balance. This allows
+to derive the surface gravity by achieving ionization balance. This allows
 us to derive stellar parameters using the principle of ionization and
-excitation equilibrium \citep{Gray2006}.
+excitation equilibrium \citep[see e.g.][]{Gray2006}.
 
-A disadvantage of the EW method, is a miscalculation of the EW. This
+A disadvantage of the EW method, may be a miscalculation of the EW. This
 can have the source in e.g. a misplacement of the continuum level,
 which leads to and over- or underestimation of the EW for the given line.
 Another source of error is contamination with either telluric lines
 or other lines. The
-relative error is larger for the weak lines. In this work we
+relative error is typically larger for the weak lines. In this work we
 will focus at the spectral region covered by the J, H, and K bands,
 which covers more than $\SI{15000}{\AA}$.
 
@@ -407,8 +408,9 @@ Fig~\ref{fig:solarspectrum}.
 \subsection{Removal of high dispersion lines}
 \label{sub:removal_of_unstable_lines}
 
-We want to check the dispersion of the lines selected at this point. The
-recipie for this is very simple. A Gaussian distribution is made for the
+To chose which line-derived abundances are less prone to errors caused by the
+uncertaities in the EW measure,emt, we decided to do the following test.
+A Gaussian distribution is made for the
 EW of each line. We use the width for the Gaussian distribution following
 he formula presented in \citet{Caryel1988} presented below:
 \begin{align}
@@ -539,8 +541,7 @@ potential and abundances is a slope less than 0.001, a slope
 less than 0.002 for the correlation between the reduced EW and
 the abundances, and a difference of less than 0.005 between the
 mean abundances for \ion{Fe}{i} and \ion{Fe}{ii} as used in e.g.
-\citet{Tsantaki2013,Sousa2008a}. With the minimization routine
-developed it is possible to fix the surface graviy at a constant value.
+\citet{Tsantaki2013,Sousa2008a}.
 
 The error estimated is based on the same method presented in \citet{Gonzalez1998}.
 The uncertainty in $\xi_\mathrm{micro}$ is determined from the standard deviation
@@ -729,15 +730,12 @@ done for the Sun. The final derived parameters for the full line
 list are overestimated compared to literature values listed above.
 Therefore, since the spectrum for HD20010 is not corrected for
 telluric contamination, we make a cut in EW at 5\si{m\angstrom},
-in order to remove the lines which are most affected by contamination
+in order to remove the lines which are mostly affected by contamination
 from either telluric or other line blends. Additionally, we make a cut
-in EP at \SI{5.5}{eV}. Without this cut in EP, the distribution of
-iron lines as a function of EP is skew as seen in Fig.~\ref{fig:EWvsEP}.
-This leads to difficulties when deriving the effective temperature, since
-we here try to remove any correlation between the abundances of iron
-lines and the EP. With the cut, the distribution becomes more flat,
-and we are able to derive more reliable effective temperatures, and
-the other atmospheric parameters are likewise derived.
+in EP at \SI{5.5}{eV}. We make this cut since \ion{Fe}{i} and \ion{Fe}{ii}
+lines in the optical are also limited to similar
+values \citep[see e.g.][]{Sousa2008a}. Higher excitation potential lines
+are also more likely to be affected by non-LTE effects.
 When deriving the atmospheric parameters, we make a $3 \sigma$ outlier
 removal in the abundance iteratively untill there are no more outliers present.
 The results for both with and without the EP cut is presented in Tab.~\ref{tab:hd20010}.
@@ -746,24 +744,25 @@ The effective temperature and metallicity agree within the errors.
 
 \begin{table}[htb!]
     \caption{The derived parameters for HD20010 with and without the
-    \SI{5.5}{eV} cut after 3$\sigma$ outlier removal. $\log g$ were fixed at
-    4.01 for all calculations.}
+    \SI{5.5}{eV} cut after 3$\sigma$ outlier removal.}
     \label{tab:hd20010}
     \centering
-    \begin{tabular}{llll}
+    \begin{tabular}{lllll}
       \hline\hline
-        EP cut       & $T_\mathrm{eff}$ (K) & $\xi_\mathrm{micro}$ (km/s)  & [Fe/H]           \\
+        EP cut       & $T_\mathrm{eff}$ (K) &  $\log g$ (cgs)  &   $\xi_\mathrm{micro}$ (km/s)  & [Fe/H]           \\
       \hline
-        Literature   & $6101 \pm 182$       & $1.65 \pm0.15$               & $-0.26 \pm 0.14$ \\
+        Literature   & $6101 \pm 182$       &                  &    $1.65 \pm0.15$               & $-0.26 \pm 0.14$ \\
       \hline
-            No       & $6660 \pm 190$       & $3.33 \pm 0.43$              & $0.19 \pm 1.35$  \\
-            Yes      & $6144 \pm 212$       & $2.66 \pm 0.42$              & $-0.13 \pm 0.29$ \\
+            No       & $6414 \pm 147$       &  $4.93 \pm 0.55$ &    $1.41 \pm 0.41$              & $ 0.05 \pm 0.09$ \\
+            No       & $6660 \pm 190$       &  4.01 (fixed)    &    $3.33 \pm 0.43$              & $ 0.19 \pm 1.35$ \\
+            Yes      & $6116 \pm 224$       &  $4.21 \pm 0.58$ &    $2.45 \pm 0.45$              & $-0.14 \pm 0.14$ \\
+            Yes      & $6144 \pm 212$       &  4.01 (fixed)    &    $2.66 \pm 0.42$              & $-0.13 \pm 0.29$ \\
       \hline
     \end{tabular}
 \end{table}
 
 The errors on the atmospheric parameters for HD20010 are quite high
-compared to what is achievable with other measurements in the litterature,
+compared to what is achievable with other measurements in the literature,
 as presented above in Tab.~\ref{tab:parameters}. In order to explain these large errors, we calculate
 the abundances for all lines which have at least two measurements of the EW.
 We then calculate the abundances for the highest measured EW and the lowest.
@@ -798,7 +797,7 @@ Fig.~\ref{fig:slopes}.
 \end{figure}
 
 This test strongly suggest that errors in the EWs, likely due to the poor
-quality of the spectrum, are responsible for the relatively large error bars
+quality of this spectrum, are responsible for the relatively large error bars
 in the derived stellar parameters. Systematic errors (e.g. due to a possible
 non-optimal reduction of the spectrum) may also be responsible for the
 systematic shift observed in the derived parameters.
@@ -813,11 +812,12 @@ calibrated for the same, we tested it extensively for the slightly
 hotter star, HD20010. The first results with this line list are
 promising. We also show that for a spectrum that contain telluric
 lines best results appear when removing lines with an EW lower than
-$\SI{5}{m\angstrom}$ and possible a cut at $\SI{5.5}{eV}$. However,
-we need more high quality spectra to test the line list presented.
+$\SI{5}{m\angstrom}$. In the future, the development of new high
+resolution NIR spectrographs will allow us to obtain more high
+quality spectra of stars in the whole FGK spectral range, thus
+allowing us to better test and refine this line-list.
 
-The line list still remains to be tested for a larger sample of FGK
-stars. Furthermore, it will be interesting to explore the use of this
+Furthermore, it will be interesting to explore the use of this
 line list to derive parameters for M-dwarf stars using high resolution
 and high signal-to-noise NIR spectra. M-dwarf stars are especially interesting
 targets for an exoplanetary viewpoint, since they are prone to form
