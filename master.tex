@@ -65,7 +65,7 @@ high resolution and high signal-to-noise in the NIR spectral window.}
 spectrum to derive precise stellar atmospheric parameters,
 comparable to the ones already obtained from high resolution optical
 spectra. The spectral range covers \SI{10000}{\angstrom} to
-\SI{25000}{\angstrom}, which is equivalent to the J, H, and K bands.}
+\SI{25000}{\angstrom}, which is equivalent to the \textbf{Y}, J, H, and K bands.}
 % Methods
 {Our spectroscopic analysis is based on the iron excitation and
 ionization balance done in LTE. We
@@ -148,7 +148,7 @@ procedure \citep[see e.g.][]{Valenti2005,Sousa2008a}. With the
 advancement of high resolution NIR instruments, we will now be able to use a similar
 technique as used in the optical part of the spectrum
 \citep[see e.g.][]{Melendez1999,Sousa2008a,Tsantaki2013,Mucciarelli2013,Bensby2014}.
-At the moment, the GIANO spectrograph installed at TNC is already
+At the moment, the GIANO spectrograph installed at \textbf{TNG} is already
 available \citep{GIANO}, as well as the IRD spectrograph installed
 at Subaru \citep{IRD}. Three new spectrographs are planned for the
 near future: 1) CARMENES for the \SI{3.5}{m} telescope at Calar Alto
@@ -160,9 +160,11 @@ between $50\,000$ and $100\,000$.
 
 Even though reliable line lists for the derivation of stellar parameters
 using optical spectra exist, the situation is different in the near-IR
-regime. There exists a few, e.g. \citet{Onehag2012,Rhodin2015}
+regime. There exists a few, e.g. \citet{Onehag2012,Origlia2013,Rhodin2015},
 for the synthesis method and the large general compilation by
-\citet{Melendez1999}. Thus, in this paper we want to explore the
+\citet{Melendez1999}. \textbf{Moreover, there are line lists compiled
+in the NIR for the APOGEE survey \citep[see e.g.][]{Smith2013,Shetrone2015}.}
+Thus, in this paper we want to explore the
 possibility to create a line list of iron lines in the NIR which can
 be applied for FGKM stars optimized for the EW method in a consistent
 way as it is currently done for these stars in the optical (FGK
@@ -213,7 +215,7 @@ leads to and over- or underestimation of the EW for the given line.
 Another source of error is contamination with either telluric lines or
 other neighbouring lines. The relative error is typically larger for the
 weak lines. In this work we will focus at the spectral region covered by
-the J, H, and K bands, which covers more than $\SI{15000}{\AA}$.
+the \textbf{Y}, J, H, and K bands, which covers more than $\SI{15000}{\AA}$.
 
 
 
@@ -643,10 +645,10 @@ parameters from the literature are listed in Table~\ref{tab:parameters}.
 
 \begin{table*}[htb!]
     \caption{Selection of literature values for the atmospheric
-    parameters for HD20010. At the end of the table, the mean value of
-    all presented previous results along with a $3 \sigma$ standard
-    deviation from the mean of all the presented results is presented,
-    which we use as a standard for our derived parameters.}
+    parameters for HD20010. \textbf{The mean and a $3 \sigma$ standard
+    deviation is presented at the end of the table from the literature
+    values included,} which we use as a \textbf{reference} for our
+    derived parameters.}
     \label{tab:parameters}
     \centering
     \begin{tabular}{l|llll}
@@ -665,14 +667,18 @@ parameters from the literature are listed in Table~\ref{tab:parameters}.
     \end{tabular}
 \end{table*}
 
-The data available at CRIRES-POP is currently pipeline reduced,
-while three small pieces of the spectra are fully reduced on the web
-page\footnote{\url{http://www.univie.ac.at/crirespop/data.htm}}. We
+The data available at CRIRES-POP \textbf{are} in the \textbf{raw format} and pipeline
+reduced, while three small pieces of the spectra are fully reduced on the web
+page\footnote{\url{http://www.univie.ac.at/crirespop/data.htm}}. \textbf{The data
+are in the standard CRIRES format with each fits file including four
+binary tables with the data from the four detectors. In the future, the finale
+reduced data will be presented. In contrast to the pipeline reduced data, this
+will be of higher quality, a better wavelength calibration, and telluric correction.} We
 measured the EWs of the pipeline reduced spectra, and where there was
 an overlap with the fully reduced spectrum, we measured both as a
-consistency check. The measured EWs from the fully reduced spectra was
+consistency check. The measured EWs from the fully reduced spectra \textbf{were}
 consistent with the measured EWs from the pipeline reduced spectra. As
-mentioned above, we use the J, H, and K bands which are all available
+mentioned above, we use the \textbf{Y}, J, H, and K bands which are all available
 for this star. The spectra come in pieces of $\SI{50}{\angstrom}$
 to $\SI{120}{\angstrom}$. These pieces have overlaps between each
 other, and we were able to measure the EW for a single line up to
@@ -703,7 +709,7 @@ identify the lines. This software does the following:
           page\footnote{\url{http://ether.ipsl.jussieu.fr/tapas/}} \citep{Bertaux2014}.
     \item Overplot vertical lines at the location of lines in the list.
     \item Calculate the cross correlation function (CCF) for the telluric spectrum
-        respect to the observed spectrum, locate the maximum value by a Gaussian fit
+        \textbf{with} respect to the observed spectrum, locate the maximum value by a Gaussian fit
         and use this to shift the telluric spectrum with the found RV.
     \item Do the same as the step above, but for the model.
     \item Shift the lines with the same RV as found for the model/solar spectrum.
@@ -752,7 +758,7 @@ parameters, we make a $3\sigma$ outlier removal in the abundance
 iteratively until there are no more outliers present. Since we could
 only measure 5 \ion{Fe}{ii} lines, for comparison we also decided to
 derive parameters using the same method, but fixing the surface gravity
-to the average literature value. The resulting atmospheric parameters
+to the \textbf{reference} value. The resulting atmospheric parameters
 and iron abundances are presented in Table~\ref{tab:hd20010}. The
 effective temperature, surface gravity, and metallicity agree within the
 errors with the literature values. Similar parameters are obtained by
@@ -770,7 +776,7 @@ fixing $\log g$ to the average literature value or by letting it free.
         Literature   & $6131 \pm 255$       &  $4.01 \pm 0.60$ &    $1.90 \pm 1.08$              & $-0.23 \pm 0.14$ \\
       \hline
                      & $6116 \pm 224$       &  $4.21 \pm 0.58$ &    $2.45 \pm 0.45$              & $-0.14 \pm 0.14$ \\
-                     & $6144 \pm 212$       &  4.01 (fixed)    &    $2.66 \pm 0.42$              & $-0.13 \pm 0.29$ \\
+                     & $6144 \pm 212$       &   4.01 (fixed)   &    $2.66 \pm 0.42$              & $-0.13 \pm 0.29$ \\
       \hline
     \end{tabular}
 \end{table*}
@@ -821,6 +827,19 @@ reason for these large error bars. As the CRIRES-POP team continue their
 great effort in reducing the spectra optimal, it will be interesting to
 re-visit this star, once the entire spectrum is fully reduced.
 
+\subsubsection{Surface gravity}
+\label{subs:surface_gravity}
+\textbf{Although we have derived a consistent value for the surface gravity for
+HD20010, given the small number of \ion{Fe}{ii} lines in the analysis,
+this value should be considered with caution and of low precision. However,
+we emphasize that from our experience in using this method (the ionization
+balance) in the visible, the other atmospheric parameters ($T_\mathrm{eff}$,
+and [Fe/H]) have a low interdependency with the surface gravity. This has
+been shown by \citet{Torres2012} and more recently by \citet{Mortier2014}.
+Furthermore, with the up-coming results from the \emph{Gaia} mission we will
+get precise surface gravity for a large number of stars and thus the best
+option would be to fix this parameter if necessary.}
+
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -862,7 +881,8 @@ IF/00028/2014, respectively, and POPH/FSE (EC) by FEDER funding through
 the program “Programa Operacional de Factores de Competitividade
 - COMPETE”. E.D.M. and B.J.A. acknowledge the support from FCT in
 form of the fellowship SFRH/BPD/76606/2011 and SFRH/BPD/87776/2012,
-respectively.
+respectively. This work also benefit from the collaboration of a
+cooperation project FCT/CAPES - 2014/2015 (FCT Proc 4.4.1.00 CAPES).
 
 This research has made use of the SIMBAD database operated at CDS,
 Strasbourg (France).
