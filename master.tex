@@ -1,4 +1,5 @@
 \documentclass{aa}
+% \documentclass[referee]{aa}
 \usepackage[varg]{txfonts}
 \usepackage[separate-uncertainty=true]{siunitx}
 \usepackage[version=3]{mhchem}
@@ -360,7 +361,10 @@ solar atmosphere model as described above for synthesis. This step
 allowed us to remove possible outliers based on the assumption that
 errors in the $\log \mathit{gf}$ values from the VALD3 database
 would never lead to variations of the derived iron abundance of more
-than 1 dex. Note that we only removed \ion{Fe}{i} lines here, since
+than 1 dex. \textbf{All the \ion{Fe}{i} lines before recalibration of
+the oscillator strength and removal of lines which deviates more than
+1 dex are presented in Fig.~\ref{fig:fe1_before_recal}}.
+Note that we only removed \ion{Fe}{i} lines here, since
 the \ion{Fe}{ii} lines are sparse and essential to determine the
 surface gravity when we reach ionization balance, as explained in
 Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. After removal
@@ -670,9 +674,9 @@ parameters from the literature are listed in Table~\ref{tab:parameters}.
 The data available at CRIRES-POP \textbf{are} in the \textbf{raw format} and pipeline
 reduced, while three small pieces of the spectra are fully reduced on the web
 page\footnote{\url{http://www.univie.ac.at/crirespop/data.htm}}. \textbf{The data
-are in the standard CRIRES format with each fits file including four
-binary tables with the data from the four detectors. In the future, the finale
-reduced data will be presented. In contrast to the pipeline reduced data, this
+is in the standard CRIRES format with each fits file including four
+binary tables with the data from the four detectors. In the future, the final
+reduced data will be presented by the CRIRES-POP team. In contrast to the pipeline reduced data, this
 will be of higher quality, a better wavelength calibration, and telluric correction.} We
 measured the EWs of the pipeline reduced spectra, and where there was
 an overlap with the fully reduced spectrum, we measured both as a
@@ -894,12 +898,33 @@ of Vienna.
 \end{acknowledgements}
 
 
-
-
-
-
 \bibpunct{(}{)}{;}{a}{}{,}
 \bibliographystyle{aa}
 \bibliography{thesis}
+
+
+\begin{appendix}
+\section{Iron abundances before recalibrated $\log$ gf}
+\label{sec:section label}
+
+It is clear from Fig.~\ref{fig:fe1_before_recal} that most of the lines taken
+from VALD3 has bad $\log\mathit{gf}$ values. This reinforces our need to
+use differential analysis also in the NIR.
+
+\begin{figure*}[tbp!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/Fe1_before_recal.pdf}
+    \caption{This plot shows the abundances of all \ion{Fe}{i} lines before
+    relabration of the $\log\mathit{gf}$ values as a function of the wavelength.
+    All red points deviate more than 1 dex from the expected solar value of
+    7.47 (horizontal line) and are therefore discarded form the line list.}
+    \label{fig:fe1_before_recal}
+\end{figure*}
+
+
+\end{appendix}
+
+
+
 
 \end{document}
