@@ -284,14 +284,34 @@ def fig_synthesis():
     plt.show()
 
 
+def fig_before_recal():
+    """
+    The plot for the appendix as suggested by the referee
+    """
+    d = np.loadtxt('figures/Fe1_before_recal.log', skiprows=1)
+    idx = abs(d[:, 5] - 7.47) < 1
+
+    color = sns.color_palette()
+    plt.plot(d[:, 0], d[:, 5], '.', color=color[2])
+    plt.plot(d[idx, 0], d[idx, 5], '.k')
+    plt.hlines(7.47, d[0, 0], d[-1, 0], linewidth=2)
+    plt.xlim(d[0, 0], d[-1, 0])
+    plt.xlabel(r'Wavelength $\AA$', fontsize=24)
+    plt.ylabel('Abundance', fontsize=24)
+    plt.tight_layout()
+    plt.savefig('figures/Fe1_before_recal.pdf', format='pdf')
+    # plt.show()
+
+
 def main():
     """Main function
     """
     # fig_EWvsEP()
     # fig_solarspectrum()
     # fig_solarparams()
-    fig_HD20010_parameters()
+    # fig_HD20010_parameters()
     # fig_synthesis()
+    fig_before_recal()
 
 
 if __name__ == '__main__':
