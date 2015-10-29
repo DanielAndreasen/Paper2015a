@@ -303,6 +303,37 @@ def fig_before_recal():
     # plt.show()
 
 
+def fig_abundance_error():
+    """Difference in abundance from lowest and highest measured EW for HD20010.
+    when an overlap was observed."""
+    def readmoog(fname):
+        """Read the summary (with abundances) from MOOG abfind"""
+        with open(fname, 'r') as lines:
+            for line in lines:
+                if line.startswith('wavelength'):
+                    break
+            data = []
+            for line in lines:
+                line = line.split(' ')
+                try:
+                    line = map(float, filter(None, line))
+                    data.append(line)
+                except ValueError:
+                    return np.array(data)
+
+    dlow = readmoog('error_low.out')
+    dhigh = readmoog('error_high.out')
+
+    plt.plot(dlow[:, 0], dhigh[:, 5]-dlow[:, 5],  '.')
+    plt.xlabel(r'Wavelength [$\AA$]')
+    plt.ylabel('Difference in abundance [dex]')
+    plt.xlim(9500, 25000)
+    plt.ylim(-0.05, 0.7)
+    plt.tight_layout()
+    plt.show()
+    # plt.savefig('figures/abundance_error.pdf', format='pdf')
+
+
 def main():
     """Main function
     """
@@ -311,7 +342,8 @@ def main():
     # fig_solarparams()
     # fig_HD20010_parameters()
     # fig_synthesis()
-    fig_before_recal()
+    # fig_before_recal()
+    fig_abundance_error()
 
 
 if __name__ == '__main__':
