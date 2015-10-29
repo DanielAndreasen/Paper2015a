@@ -8,6 +8,8 @@
 *.log
 *.pdf
 *.tex.backup
+*.obj
+arxiv.*
 
 # Python/figure stuff
 *.pyc
@@ -15,8 +17,12 @@
 *.dat
 *.par
 *.asc
+hd20010.py
 
 lineStability
+figures/*.moog
+*.txt
+*.moog
 
 # Elisa's stuff
 Li_hot3.tex
