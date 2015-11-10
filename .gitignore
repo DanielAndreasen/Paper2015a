@@ -24,6 +24,5 @@ figures/*.moog
 *.txt
 *.moog
 
-# Elisa's stuff
-Li_hot3.tex
-edm_bibliography.bib
+# Other stuff
+ReadMe
