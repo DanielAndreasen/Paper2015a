@@ -143,7 +143,7 @@ def fig_solarparams():
 
     ax3.grid(True)
     ax3.set_ylabel('[Fe/H]')
-    ax3.set_xlabel('SNR')
+    ax3.set_xlabel('S/N')
     ax3.set_xlim((15, 320))
     ax3.set_ylim(-0.1, 0.1)
     ax3.set_xticks([25, 50, 100, 150, 225, 300])
@@ -152,7 +152,7 @@ def fig_solarparams():
     ax4.yaxis.tick_right()
     ax4.yaxis.set_label_position('right')
     ax4.set_ylabel(r'$\xi_\mathrm{micro}$ [km/s] - 1.0km/s')
-    ax4.set_xlabel('SNR')
+    ax4.set_xlabel('S/N')
     ax4.set_xlim((15, 320))
     ax4.set_ylim(-1, 1)
     ax4.set_xticks([25, 50, 100, 150, 225, 300])
@@ -339,11 +339,11 @@ def main():
     """
     # fig_EWvsEP()
     # fig_solarspectrum()
-    # fig_solarparams()
+    fig_solarparams()
     # fig_HD20010_parameters()
     # fig_synthesis()
     # fig_before_recal()
-    fig_abundance_error()
+    # fig_abundance_error()
 
 
 if __name__ == '__main__':
