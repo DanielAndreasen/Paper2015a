@@ -148,13 +148,16 @@ procedure \citep[see e.g.][]{Valenti2005,Sousa2008a}. With the
 advancement of high resolution near-infrared (NIR) instruments, we will now be able to use a similar
 technique to that used in the optical part of the spectrum
 \citep[see e.g.][]{Melendez1999,Sousa2008a,Tsantaki2013,Mucciarelli2013,Bensby2014}.
-At the moment, the GIANO spectrograph installed at TNG is already
-available \citep{GIANO}, as is the IRD spectrograph installed
-at Subaru \citep{IRD}. Three new spectrographs are planned for the
-near future: 1) CARMENES for the \SI{3.5}{m} telescope at Calar Alto
+At the moment, the GIANO spectrograph installed at \emph{Telescopio Nazionale Galileo} (TNG) is already
+available \citep{GIANO}, as is the \emph{infrered doppler instrument} (IRD) installed
+at the Subaru telescope \citep{IRD}. Three new spectrographs are planned for the
+near future: 1) \emph{Calar Alto high-Resolution search for M dwarfs with Exoearths with
+Near-infrared and optical Échelle Spectrographs} (CARMENES) for the \SI{3.5}{m} telescope at Calar Alto
 Observatory \citep{CARMENES} had first light in December 2014,
-2) CRIRES+ at VLT \citep{CRIRESp} with expected first light in 2017,
-and 3) SPIRou at CFHT \citep{SPIROU1,SPIROU2} with expected first light
+2) The \emph{CRyogenic InfraRed Echelle Spectrograph Upgrade Project} (CRIRES+) at the
+\emph{Very Large Telescope} (VLT) \citep{CRIRESp} with expected first light in 2017,
+and 3) \emph{un SpectroPolarimètre Infra-Rouge
+A Near-InfraRed Spectropolarimeter} (SPIRou) at \emph{The Canada-France-Hawaii Telescope} (CFHT) \citep{SPIROU1,SPIROU2} with expected first light
 in 2017 as well. The spectral resolutions for these spectrographs range
 between $50\,000$ and $100\,000$.
 
@@ -163,11 +166,11 @@ using optical spectra exist, the situation is different in the near-IR
 regime. There are a few for the synthesis method (e.g. \citet{Onehag2012,Origlia2013,Rhodin2015}),
  and there is  the large general compilation by
 \citet{Melendez1999}. Moreover, there are line lists compiled
-in the NIR for the APOGEE survey \citep[see e.g.][]{Smith2013,Shetrone2015}.
+in the NIR for the \emph{Apache Point Observatory Galactic Evolution Experiment} (APOGEE) survey \citep[see e.g.][]{Smith2013,Shetrone2015}.
 Thus, in this paper we want to explore the
 possibility of creating a line list of iron lines in the NIR which can
 be applied for FGKM stars optimized for the EW method in a consistent
-way, as  is currently done for these stars in the optical (FGK
+way, as is currently done for these stars in the optical (FGK
 only). The paper is organized as follows. In Sect.~\ref{sec:method}
 we present how to compile a line list and the method for deriving
 parameters with the equivalent width method for an iron line list.
@@ -180,13 +183,13 @@ Sect.~\ref{sec:conclusion}  we discuss our results.
 \label{sec:method}
 
 The two most widely used methods for deriving stellar atmosphere
-parameters from a spectrum are spectral synthesis and the EW method.
+parameters from a spectrum are spectral synthesis and the equivalent width (EW) method.
 The spectral synthesis method compares synthetic spectra to an observed
 spectrum and finds the best model by a minimization procedure
 \citep[see e.g.][]{Valenti2005,Onehag2012,Blanco2014}. When the minimization
 procedure reaches a minimum, the final atmospheric parameters are found.
 
-The equivalent width (EW) method
+The EW method
 \citep[see e.g.][]{Sousa2008a,Mucciarelli2013,Bensby2014}, which we use
 in this work, is based on the measurements of EWs from a list of lines
 combined with the matching atomic data. The EW for a single line is
@@ -209,8 +212,8 @@ derived from the principles of ionization and excitation equilibrium
 \citep[see][]{Gray2006}.
 
 
-A disadvantage of the EW method may be a miscalculation of the EW. \textbf{For
-example, the placement of the continuum level may be incorrect, which}
+A disadvantage of the EW method may be a miscalculation of the EW. For
+example, the placement of the continuum level may be incorrect, which
 leads to an over- or underestimation of the EW for the given line.
 Another source of error is contamination with either telluric lines or
 other neighbouring lines. The relative error is typically larger for the
@@ -221,7 +224,7 @@ the Y, J, H, and K bands, which covers more than $\SI{15000}{\AA}$.
 
 \subsection{Compiling the line list}
 
-To compile the line list we used the VALD3 database \citep{VALD1,VALD2}.
+To compile the line list we used \emph{The Vienna Atomic Line Database} (VALD3) \citep{VALD1,VALD2}.
 First, we downloaded a list of all iron lines present in the near
 infrared region covering $10\,000\si{\AA}$ to $25\,000\si{\AA}$.
 In total, $78\,537$ iron lines were found in this spectral region
@@ -238,7 +241,7 @@ possible resolution at a given wavelength. The signal-to-noise ratio
 of the spectrum varies from 3000 at $\SI{12000}{\AA}$ down to 1400 at
 $\SI{21400}{\AA}$.
 
-We use the ARES software\footnote{The ARES software can be found
+We use the \emph{Automatic Routine for line Equivalent widths in stellar Spectra} (ARES) software\footnote{The ARES software can be found
 here: \url{http://www.astro.up.pt/~sousasag/ares/}. The following
 settings were used: lambdai=7500, lambdaf=54000, smoothder=4, space=2.0,
 rejt=0.995, lineresol=0.07, and miniline=2.}\citep{Sousa2007,Sousa2015a}
@@ -327,8 +330,8 @@ example of these plots can be seen in Fig.~\ref{fig:synthesis}.
     \includegraphics[width=1.0\linewidth]{figures/synthetic_spectrum.pdf}
     \caption{Top panel: Observed spectra in grey, while the
     coloured curves are synthetic spectra with increasing iron abundance
-    as the two central lines get deeper. The iron abundance \textbf{varies by a total
-    of 0.4 dex}. The vertical lines show all the places where there are
+    as the two central lines get deeper. The iron abundance varies by a total
+    of 0.4 dex. The vertical lines show all the places where there are
     iron lines in the line list. Bottom panel: The two curves show
     the difference between the first synthetic spectrum and the second
     ($\Delta_{21}$) and between the first synthetic
@@ -336,7 +339,6 @@ example of these plots can be seen in Fig.~\ref{fig:synthesis}.
     where the change in iron abundance has an impact.}
     \label{fig:synthesis}
 \end{figure}
-
 
 Sometimes more than one iron line might be present with very similar
 wavelengths so they can no longer be resolved. In order to find the
@@ -367,7 +369,7 @@ of the oscillator strength and removal of lines which deviates
 more than 1 dex are presented in Fig.~\ref{fig:fe1_before_recal}.
 We note that we only removed \ion{Fe}{i} lines here because the
 \ion{Fe}{ii} lines were sparse and essential to determining the
-surface gravity when we \textbf{reach} ionization balance, as explained in
+surface gravity when we reach ionization balance, as explained in
 Sect.~\ref{sec:deriving_parameters_with_the_ew_method}. After removal
 of 1 dex outliers we were down to 319 and 12 lines, for \ion{Fe}{i} and
 \ion{Fe}{ii} respectively.
@@ -401,7 +403,7 @@ Fig~\ref{fig:solarspectrum}.
     \centering
     \includegraphics[width=1.05\linewidth]{figures/solarspectrum.pdf}
     \caption{Distribution of both \ion{Fe}{i} and \ion{Fe}{ii} lines
-    \textbf{plotted on top} of the solar spectrum. The distributions are for the final
+    plotted on top of the solar spectrum. The distributions are for the final
     line list. There are two areas in the spectrum with high telluric
     contamination, which also mark the border between the filters we
     use from J to H around 14000\si{\angstrom} and from H to K around
@@ -684,7 +686,7 @@ consistency check. The measured EWs from the fully reduced spectra were
 consistent with the measured EWs from the pipeline reduced spectra. As
 mentioned above, we use the Y, J, H, and K bands which are all available
 for this star. The spectra come in pieces of $\SI{50}{\angstrom}$
-to $\SI{120}{\angstrom}$. These pieces  overlap  each
+to $\SI{120}{\angstrom}$. These pieces  overlap each
 other, and we were able to measure the EW for a single line up to
 five times. Unfortunately, wavelength calibration is a difficult task
 for CRIRES owing to the rather small spectral regions measured on each
@@ -699,7 +701,7 @@ is generally high for the spectrum of HD20010. The signal-to-noise
 varies between 200 and 400 for different chunks. The pipeline reduced
 spectra for HD20010 contains tellurics and the wavelength is shifted in
 radial velocity. All of these factors make the line identification very
-difficult, and so we developed \textbf{a program}\footnote{The program
+difficult, and so we developed a program\footnote{The program
 (plot\textunderscore{}fits) is open source and can be found here:
 \url{https://github.com/DanielAndreasen/astro_scripts}} to properly
 identify the lines, which  does the following:
@@ -735,7 +737,7 @@ two RVs are part of the title of the plot.
 \end{figure*}
 
 Once the lines were identified, the EWs were measured with the
-\emph{splot} routine in IRAF. The reason not to choose ARES for this
+\emph{splot} routine in \emph{Image Reduction and Analysis Facility} (IRAF). The reason not to choose ARES for this
 task was to visually confirm the identification of the line given the
 relative poor wavelength calibration. We were able to measure 249
 \ion{Fe}{i} lines and 5 \ion{Fe}{ii} lines compared to 344 \ion{Fe}{i}
@@ -766,7 +768,7 @@ to the reference value. The resulting atmospheric parameters
 and iron abundances are presented in Table~\ref{tab:hd20010}. The
 effective temperature, surface gravity, and metallicity agree within the
 errors with the literature values. Similar parameters are obtained by
-fixing $\log g$ to the average literature value or by \textbf{leaving it free}.
+fixing $\log g$ to the average literature value or by leaving it free.
 
 \begin{table*}[htb!]
     \caption{The derived parameters for HD20010 with and without
@@ -813,7 +815,7 @@ be seen clearly, as shown in Fig.~\ref{fig:slopes}.
 \begin{figure}[tpb!]
     \centering
     \includegraphics[width=1.0\linewidth]{figures/slopes.pdf}
-    \caption{Top plot:  \ion{Fe}{i} abundances for all
+    \caption{Top plot: \ion{Fe}{i} abundances for all
     lines are shown as a function of EP. Bottom plot: \ion{Fe}{i} abundances, but against the reduced EW. The high
     dispersion in the abundances leads to high error bars on the derived
     atmospheric parameters. The green lines are the slopes, and the
@@ -834,9 +836,9 @@ re-visit this star once the entire spectrum has been fully reduced.
 \label{subs:surface_gravity}
 Although we have derived a consistent value for the surface gravity for
 HD20010, given the small number of \ion{Fe}{ii} lines in the analysis,
-\textbf{we find this value to be of low precision and it should be considered with caution.}
+we find this value to be of low precision and it should be considered with caution.
 However, we emphasize that from our experience in using this method (the ionization
-balance) in the \textbf{optical}, the other atmospheric parameters ($T_\mathrm{eff}$,
+balance) in the optical, the other atmospheric parameters ($T_\mathrm{eff}$,
 and [Fe/H]) have a low interdependency with the surface gravity. This has
 been shown by \citet{Torres2012} and more recently by \citet{Mortier2014}.
 Furthermore, with the upcoming results from the \emph{Gaia} mission we will
@@ -894,9 +896,9 @@ This work has made use of the VALD database, operated at Uppsala
 University, the Institute of Astronomy RAS in Moscow, and the University
 of Vienna.
 
-\textbf{We thank the anonymous referee for useful comments and suggestions.
-Last a special thanks to Dr. Thomas Lebzelter from the CRIRES-POP
-team for helping with various questions on the spectra of HD20010.}
+We thank the anonymous referee for useful comments and suggestions.
+Finally, a special thanks to Dr. Thomas Lebzelter from the CRIRES-POP
+team for helping with various questions on the spectra of HD20010.
 
 \end{acknowledgements}
 
@@ -918,7 +920,7 @@ use differential analysis also in the NIR.
     \centering
     \includegraphics[width=1.0\linewidth]{figures/Fe1_before_recal.pdf}
     \caption{Abundances of all \ion{Fe}{i} lines before
-    \textbf{recalibration} of the $\log\mathit{gf}$ values as a function of the wavelength.
+    recalibration of the $\log\mathit{gf}$ values as a function of the wavelength.
     All red points deviate more than 1 dex from the expected solar value of
     7.47 (horizontal line) and are therefore discarded from the line list.}
     \label{fig:fe1_before_recal}
